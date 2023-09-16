@@ -1,0 +1,14 @@
+{
+  "profiles": {
+	"DinoKonpeito": {
+	  "commandName": "Project"
+	},
+	"Run Godot": {
+	  "commandName": "Executable",
+	  "executablePath": "E:\\Program Files (x86)\\Godot_v4.1.1-stable_mono_win64\\Godot_v4.1.1-stable_mono_win64.exe",
+	  "commandLineArgs": "--path, --verbose",
+	  "workingDirectory": ".",
+	  "nativeDebugging": true
+	}
+  }
+}
