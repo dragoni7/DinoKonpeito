@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b45pjfj6qagnw"
-path="res://.godot/imported/playerBlue_stand.png-47899784cc05051f6efabb7e86dd1c4e.ctex"
+uid="uid://mxnalxlhikjj"
+path="res://.godot/imported/tilesheet_complete.png-851293c211cda4713b51be3dc333cf78.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/Sprite/playerBlue_stand.png"
-dest_files=["res://.godot/imported/playerBlue_stand.png-47899784cc05051f6efabb7e86dd1c4e.ctex"]
+source_file="res://Assets/Tile/tilesheet_complete.png"
+dest_files=["res://.godot/imported/tilesheet_complete.png-851293c211cda4713b51be3dc333cf78.ctex"]
 
 [params]
 

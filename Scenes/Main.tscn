@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://qshoy8b4cl41"]
 
-[ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Art/Tile/tilesheet_complete.png" id="1_j5rcb"]
-[ext_resource type="Script" path="res://PlayerController.cs" id="2_mlysv"]
-[ext_resource type="Texture2D" uid="uid://b45pjfj6qagnw" path="res://Art/Sprite/playerBlue_stand.png" id="3_whtvx"]
-[ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Art/Sprite/playerBlue_walk1.png" id="4_bec41"]
-[ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Art/Sprite/playerBlue_walk2.png" id="5_n7bbw"]
-[ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Art/Sprite/playerBlue_walk3.png" id="6_3xhla"]
+[ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_cq3ao"]
+[ext_resource type="Texture2D" uid="uid://b45pjfj6qagnw" path="res://Assets/Sprite/playerBlue_stand.png" id="3_r8670"]
+[ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="4_y4ny3"]
+[ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="5_jkiry"]
+[ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="6_7vtwg"]
+[ext_resource type="PackedScene" uid="uid://vgid3yvrgs5r" path="res://Scenes/Component/PlayerMovementComponent.tscn" id="6_wbv2r"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6mhd"]
-texture = ExtResource("1_j5rcb")
+texture = ExtResource("1_cq3ao")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -766,16 +766,16 @@ sources/0 = SubResource("TileSetAtlasSource_j6mhd")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_whtvx")
+"texture": ExtResource("3_r8670")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_bec41")
+"texture": ExtResource("4_y4ny3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_n7bbw")
+"texture": ExtResource("5_jkiry")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_3xhla")
+"texture": ExtResource("6_7vtwg")
 }],
 "loop": true,
 "name": &"default",
@@ -796,7 +796,6 @@ layer_0/tile_data = PackedInt32Array(589824, 65536, 3, 589841, 196608, 3, 589825
 
 [node name="Player" type="CharacterBody2D" parent="."]
 position = Vector2(550, 549)
-script = ExtResource("2_mlysv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_aabba")
@@ -804,3 +803,6 @@ frame_progress = 0.770975
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_1bp7j")
+
+[node name="PlayerMovementComponent" parent="Player" node_paths=PackedStringArray("_characterBody2D") instance=ExtResource("6_wbv2r")]
+_characterBody2D = NodePath("..")
