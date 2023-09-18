@@ -1,9 +1,45 @@
-[gd_scene format=3 uid="uid://8b046ymaphc1"]
+[gd_scene load_steps=3 format=3 uid="uid://8b046ymaphc1"]
+
+[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_1ogt6"]
+
+[sub_resource type="Theme" id="Theme_yd1e2"]
 
 [node name="Menu" type="Control"]
+modulate = Color(0.901961, 0.298039, 0.45098, 1)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -35.0
+offset_top = -101.0
+offset_right = 35.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_yd1e2")
+script = ExtResource("1_1ogt6")
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer" method="OnStartButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="VBoxContainer" method="OnOptionsButtonPressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="VBoxContainer" method="OnQuitButtonPressed"]

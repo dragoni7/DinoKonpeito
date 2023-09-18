@@ -9,16 +9,9 @@ namespace DinoKonpeito.Component
 
         [Export]
         private CharacterBody2D _characterBody2D;
-
-        // Get the gravity from the project settings to be synced with RigidBody nodes.
-        public float gravity = ProjectSettings.GetSetting("physics/2d/default_gravity").AsSingle();
         public override void _PhysicsProcess(double delta)
         {
             Vector2 velocity = _characterBody2D.Velocity;
-
-            // Falling
-            if (!_characterBody2D.IsOnFloor())
-                velocity.Y += gravity * (float)delta;
 
             // Handle Extend.
             if (Input.IsActionPressed("Up"))
