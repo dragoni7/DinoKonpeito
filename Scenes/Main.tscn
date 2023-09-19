@@ -1,11 +1,13 @@
-[gd_scene load_steps=11 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=13 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_cq3ao"]
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="2_sodt5"]
 [ext_resource type="Texture2D" uid="uid://b45pjfj6qagnw" path="res://Assets/Sprite/playerBlue_stand.png" id="3_r8670"]
 [ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="4_y4ny3"]
 [ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="5_jkiry"]
 [ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="6_7vtwg"]
 [ext_resource type="PackedScene" uid="uid://vgid3yvrgs5r" path="res://Scenes/Component/PlayerMovementComponent.tscn" id="6_wbv2r"]
+[ext_resource type="PackedScene" uid="uid://drwtr65cbiuoy" path="res://Scenes/Component/HeadComponent.tscn" id="8_07qof"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6mhd"]
 texture = ExtResource("1_cq3ao")
@@ -783,6 +785,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1bp7j"]
+radius = 18.0
 
 [node name="Main" type="Node2D"]
 
@@ -792,10 +795,11 @@ position = Vector2(576, 324)
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vyi1a")
 format = 2
-layer_0/tile_data = PackedInt32Array(589824, 65536, 3, 589841, 196608, 3, 589825, 131072, 3, 589826, 131072, 3, 589827, 131072, 3, 589828, 131072, 3, 589829, 131072, 3, 589830, 131072, 3, 589831, 131072, 3, 589832, 131072, 3, 589833, 131072, 3, 589834, 131072, 3, 589835, 131072, 3, 589836, 131072, 3, 589837, 131072, 3, 589838, 131072, 3, 589839, 131072, 3, 589840, 131072, 3)
+layer_0/tile_data = PackedInt32Array(851962, 131072, 3, 851963, 131072, 3, 851964, 131072, 3, 851965, 131072, 3, 851966, 131072, 3, 851967, 131072, 3, 786432, 131072, 3, 786433, 131072, 3, 786434, 131072, 3, 786435, 131072, 3, 786436, 131072, 3, 786437, 131072, 3, 786438, 131072, 3, 786439, 131072, 3, 786440, 131072, 3, 786441, 131072, 3, 786442, 131072, 3, 786443, 131072, 3, 786445, 131072, 3, 786444, 131072, 3, 786446, 131072, 3, 786447, 131072, 3, 786448, 131072, 3, 786449, 131072, 3, 786450, 131072, 3, 786451, 131072, 3, 786452, 131072, 3, 786453, 131072, 3, 786454, 131072, 3, 786455, 131072, 3, 917498, 0, 6, 917499, 0, 6, 917500, 0, 6, 917501, 0, 6, 917502, 0, 6, 917503, 0, 6, 851968, 0, 6, 851969, 0, 6, 851970, 0, 6, 851971, 0, 6, 851972, 0, 6, 851973, 0, 6, 851974, 0, 6, 851975, 0, 6, 851976, 0, 6, 851977, 0, 6, 851978, 0, 6, 851979, 0, 6, 851980, 0, 6, 851981, 0, 6, 851982, 0, 6, 851983, 0, 6, 851984, 0, 6, 851985, 0, 6, 851986, 0, 6, 851987, 0, 6, 851988, 0, 6, 851989, 0, 6, 851990, 0, 6, 851991, 0, 6)
 
 [node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(550, 549)
+position = Vector2(550, 740)
+script = ExtResource("2_sodt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_aabba")
@@ -806,3 +810,8 @@ shape = SubResource("CircleShape2D_1bp7j")
 
 [node name="PlayerMovementComponent" parent="Player" node_paths=PackedStringArray("_characterBody2D") instance=ExtResource("6_wbv2r")]
 _characterBody2D = NodePath("..")
+
+[node name="HeadComponent" parent="Player" node_paths=PackedStringArray("_playerMovement") instance=ExtResource("8_07qof")]
+position = Vector2(-16, -8)
+rotation = -1.0472
+_playerMovement = NodePath("../PlayerMovementComponent")
