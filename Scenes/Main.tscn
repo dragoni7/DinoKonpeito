@@ -1,8 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=12 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_cq3ao"]
 [ext_resource type="Script" path="res://Scripts/Player.cs" id="2_sodt5"]
-[ext_resource type="Texture2D" uid="uid://b45pjfj6qagnw" path="res://Assets/Sprite/playerBlue_stand.png" id="3_r8670"]
 [ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="4_y4ny3"]
 [ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="5_jkiry"]
 [ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="6_7vtwg"]
@@ -768,9 +767,6 @@ sources/0 = SubResource("TileSetAtlasSource_j6mhd")
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_r8670")
-}, {
-"duration": 1.0,
 "texture": ExtResource("4_y4ny3")
 }, {
 "duration": 1.0,
@@ -803,13 +799,16 @@ script = ExtResource("2_sodt5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
 sprite_frames = SubResource("SpriteFrames_aabba")
-frame_progress = 0.770975
+frame = 1
+frame_progress = 0.261368
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 shape = SubResource("CircleShape2D_1bp7j")
 
-[node name="PlayerMovementComponent" parent="Player" node_paths=PackedStringArray("_characterBody2D") instance=ExtResource("6_wbv2r")]
+[node name="PlayerMovementComponent" parent="Player" node_paths=PackedStringArray("_characterBody2D", "_animatedSprite2D") instance=ExtResource("6_wbv2r")]
 _characterBody2D = NodePath("..")
+_animatedSprite2D = NodePath("../AnimatedSprite2D")
 
 [node name="HeadComponent" parent="Player" node_paths=PackedStringArray("_playerMovement") instance=ExtResource("8_07qof")]
 position = Vector2(-16, -8)

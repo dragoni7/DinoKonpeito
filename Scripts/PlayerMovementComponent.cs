@@ -4,32 +4,36 @@ namespace DinoKonpeito.Component
 {
     public partial class PlayerMovementComponent : Node2D
     {
-        [Export]
-        public float Speed { get; set; } = 300f;
 
         private bool _movingLeft;
 
-        private bool _extending;
-
-        public bool Extending => _extending;
+        private Vector2 _screenSize;
 
         [Export]
         private CharacterBody2D _characterBody2D;
+
+        [Export]
+        public float Speed { get; set; } = 300f;
+
+        [Export]
+        public bool CanMove { get; set; }
+
+        [Export]
+        public AnimatedSprite2D _animatedSprite2D;
 
         public override void _Ready()
         {
             base._Ready();
             _movingLeft = true;
-            _extending = false;
+            _screenSize = GetViewportRect().Size;
+            CanMove = true;
         }
         public override void _PhysicsProcess(double delta)
         {
             Vector2 velocity = _characterBody2D.Velocity;
 
-            _extending = Input.IsActionPressed("Up");
-
             // only move when not extending
-            if (!_extending)
+            if (CanMove)
             {
                 // Get the input direction and handle the movement/deceleration.
                 float distance = Input.GetAxis("Left", "Right");
@@ -45,9 +49,22 @@ namespace DinoKonpeito.Component
                     velocity.X = Mathf.MoveToward(distance, 0, Speed);
                 }
 
-                _characterBody2D.Velocity = velocity;
-
                 _characterBody2D.MoveAndSlide();
+            }
+            else
+            {
+                velocity = Vector2.Zero;
+            }
+
+            _characterBody2D.Velocity = velocity;
+
+            if (velocity.Length() > 0)
+            {
+                _animatedSprite2D.Play();
+            }
+            else
+            {
+                _animatedSprite2D.Stop();
             }
         }
 
