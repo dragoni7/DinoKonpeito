@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3 uid="uid://bfooajyoc1wuk"]
+
+[ext_resource type="Script" path="res://Scripts/Konpeito.cs" id="1_6oyst"]
+[ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_cahr8"]
+[ext_resource type="PackedScene" uid="uid://da4fe32bxkx3r" path="res://Scenes/Component/HealthComponent.tscn" id="2_xj133"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_jvq5v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tpjje"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8bkjq"]
+
+[node name="Konpeito" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+can_sleep = false
+script = ExtResource("1_6oyst")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.270588, 0.270588, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_cahr8")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tpjje")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_xj133")]
+MaxHealth = 1.0
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("3_jvq5v")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_8bkjq")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]

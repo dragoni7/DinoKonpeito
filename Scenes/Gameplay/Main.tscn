@@ -1,15 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
 
-[ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_cq3ao"]
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="2_sodt5"]
-[ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="4_y4ny3"]
-[ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="5_jkiry"]
-[ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="6_7vtwg"]
-[ext_resource type="PackedScene" uid="uid://vgid3yvrgs5r" path="res://Scenes/Component/PlayerMovementComponent.tscn" id="6_wbv2r"]
-[ext_resource type="PackedScene" uid="uid://drwtr65cbiuoy" path="res://Scenes/Component/HeadComponent.tscn" id="8_07qof"]
+[ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_21xle"]
+[ext_resource type="Script" path="res://Scripts/Main.cs" id="1_hy2k0"]
+[ext_resource type="PackedScene" uid="uid://c30ttu3j2qsk4" path="res://Scenes/Gameplay/Player.tscn" id="2_p07lq"]
+[ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="2_wr0ca"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6mhd"]
-texture = ExtResource("1_cq3ao")
+texture = ExtResource("1_21xle")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
@@ -763,54 +760,42 @@ tile_size = Vector2i(64, 64)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_j6mhd")
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_aabba"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("4_y4ny3")
-}, {
-"duration": 1.0,
-"texture": ExtResource("5_jkiry")
-}, {
-"duration": 1.0,
-"texture": ExtResource("6_7vtwg")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_1bp7j"]
-radius = 18.0
+[sub_resource type="Curve2D" id="Curve2D_lanq6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 64, 8, 0, 0, 0, 0, 128, 8, 0, 0, 0, 0, 192, 8, 0, 0, 0, 0, 256, 8, 0, 0, 0, 0, 320, 8, 0, 0, 0, 0, 384, 8, 0, 0, 0, 0, 448, 8, 0, 0, 0, 0, 512, 8, 0, 0, 0, 0, 576, 8, 0, 0, 0, 0, 640, 8, 0, 0, 0, 0, 704, 8, 0, 0, 0, 0, 768, 8, 0, 0, 0, 0, 832, 8, 0, 0, 0, 0, 896, 8, 0, 0, 0, 0, 960, 8, 0, 0, 0, 0, 1024, 8, 0, 0, 0, 0, 1088, 8, 0, 0, 0, 0, 1152, 8, 0, 0, 0, 0, 1216, 8, 0, 0, 0, 0, 1280, 8, 0, 0, 0, 0, 1344, 8, 0, 0, 0, 0, 1408, 8, 0, 0, 0, 0, 1472, 8, 0, 0, 0, 0, 1536, 8, 0, 0, 0, 0, 1600, 8, 0, 0, 0, 0, 1664, 8, 0, 0, 0, 0, 1728, 8, 0, 0, 0, 0, 1792, 8, 0, 0, 0, 0, 1856, 8, 0, 0, 0, 0, 64, 8)
+}
+point_count = 30
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_hy2k0")
+KonpeitoScene = ExtResource("2_wr0ca")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(576, 324)
+position = Vector2(960, 548)
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vyi1a")
 format = 2
-layer_0/tile_data = PackedInt32Array(851962, 131072, 3, 851963, 131072, 3, 851964, 131072, 3, 851965, 131072, 3, 851966, 131072, 3, 851967, 131072, 3, 786432, 131072, 3, 786433, 131072, 3, 786434, 131072, 3, 786435, 131072, 3, 786436, 131072, 3, 786437, 131072, 3, 786438, 131072, 3, 786439, 131072, 3, 786440, 131072, 3, 786441, 131072, 3, 786442, 131072, 3, 786443, 131072, 3, 786445, 131072, 3, 786444, 131072, 3, 786446, 131072, 3, 786447, 131072, 3, 786448, 131072, 3, 786449, 131072, 3, 786450, 131072, 3, 786451, 131072, 3, 786452, 131072, 3, 786453, 131072, 3, 786454, 131072, 3, 786455, 131072, 3, 917498, 0, 6, 917499, 0, 6, 917500, 0, 6, 917501, 0, 6, 917502, 0, 6, 917503, 0, 6, 851968, 0, 6, 851969, 0, 6, 851970, 0, 6, 851971, 0, 6, 851972, 0, 6, 851973, 0, 6, 851974, 0, 6, 851975, 0, 6, 851976, 0, 6, 851977, 0, 6, 851978, 0, 6, 851979, 0, 6, 851980, 0, 6, 851981, 0, 6, 851982, 0, 6, 851983, 0, 6, 851984, 0, 6, 851985, 0, 6, 851986, 0, 6, 851987, 0, 6, 851988, 0, 6, 851989, 0, 6, 851990, 0, 6, 851991, 0, 6)
+layer_0/tile_data = PackedInt32Array(1048576, 131072, 3, 1048577, 131072, 3, 1048578, 131072, 3, 1048579, 131072, 3, 1048580, 131072, 3, 1048581, 131072, 3, 1048582, 131072, 3, 1048583, 131072, 3, 1048584, 131072, 3, 1048585, 131072, 3, 1048586, 131072, 3, 1048587, 131072, 3, 1048588, 131072, 3, 1048589, 131072, 3, 1048590, 131072, 3, 1048591, 131072, 3, 1048592, 131072, 3, 1048593, 131072, 3, 1048594, 131072, 3, 1048595, 131072, 3, 1048596, 131072, 3, 1048597, 131072, 3, 1048598, 131072, 3, 1048599, 131072, 3, 1048600, 131072, 3, 1048601, 131072, 3, 1048602, 131072, 3, 1048603, 131072, 3, 1048604, 131072, 3, 1048605, 131072, 3)
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(550, 740)
-script = ExtResource("2_sodt5")
+[node name="Player" parent="." instance=ExtResource("2_p07lq")]
+position = Vector2(2, 0)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
-sprite_frames = SubResource("SpriteFrames_aabba")
-frame = 1
-frame_progress = 0.261368
-flip_h = true
+[node name="KonpeitoTimer" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("CircleShape2D_1bp7j")
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
 
-[node name="PlayerMovementComponent" parent="Player" node_paths=PackedStringArray("_characterBody2D", "_animatedSprite2D") instance=ExtResource("6_wbv2r")]
-_characterBody2D = NodePath("..")
-_animatedSprite2D = NodePath("../AnimatedSprite2D")
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(960, 1000)
 
-[node name="HeadComponent" parent="Player" node_paths=PackedStringArray("_playerMovement") instance=ExtResource("8_07qof")]
-position = Vector2(-16, -8)
-rotation = -1.0472
-_playerMovement = NodePath("../PlayerMovementComponent")
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, 100)
+curve = SubResource("Curve2D_lanq6")
+
+[node name="SpawnPoint" type="PathFollow2D" parent="Path2D"]
+position = Vector2(64, 8)
+
+[connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTmerTimeout"]

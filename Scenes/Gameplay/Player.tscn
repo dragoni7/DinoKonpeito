@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://c30ttu3j2qsk4"]
+
+[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_n1k7q"]
+[ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="1_wru74"]
+[ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="2_287sp"]
+[ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="3_woim0"]
+[ext_resource type="PackedScene" uid="uid://vgid3yvrgs5r" path="res://Scenes/Component/PlayerMovementComponent.tscn" id="4_jmt6l"]
+[ext_resource type="PackedScene" uid="uid://drwtr65cbiuoy" path="res://Scenes/Component/HeadComponent.tscn" id="5_bmt7y"]
+[ext_resource type="PackedScene" uid="uid://da4fe32bxkx3r" path="res://Scenes/Component/HealthComponent.tscn" id="6_18ca4"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="7_ddkp8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hefhu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aabba"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wru74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_287sp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_woim0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kh04k"]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(960, 1000)
+script = ExtResource("1_n1k7q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_hefhu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_aabba")
+frame = 1
+frame_progress = 0.261368
+flip_h = true
+
+[node name="PlayerMovementComponent" parent="." node_paths=PackedStringArray("_characterBody", "_animatedSprite2D") instance=ExtResource("4_jmt6l")]
+_characterBody = NodePath("..")
+_animatedSprite2D = NodePath("../AnimatedSprite2D")
+
+[node name="HeadComponent" parent="." node_paths=PackedStringArray("_playerMovement") instance=ExtResource("5_bmt7y")]
+position = Vector2(-16, -8)
+rotation = -1.0472
+_playerMovement = NodePath("../PlayerMovementComponent")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_18ca4")]
+MaxHealth = 3.0
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_ddkp8")]
+_healthComponent = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_kh04k")

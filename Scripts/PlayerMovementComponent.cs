@@ -10,12 +10,10 @@ namespace DinoKonpeito.Component
         private Vector2 _screenSize;
 
         [Export]
-        private CharacterBody2D _characterBody2D;
+        private CharacterBody2D _characterBody;
 
         [Export]
         public float Speed { get; set; } = 300f;
-
-        [Export]
         public bool CanMove { get; set; }
 
         [Export]
@@ -28,9 +26,9 @@ namespace DinoKonpeito.Component
             _screenSize = GetViewportRect().Size;
             CanMove = true;
         }
-        public override void _PhysicsProcess(double delta)
+        public override void _Process(double delta)
         {
-            Vector2 velocity = _characterBody2D.Velocity;
+            Vector2 velocity = Vector2.Zero;
 
             // only move when not extending
             if (CanMove)
@@ -49,14 +47,11 @@ namespace DinoKonpeito.Component
                     velocity.X = Mathf.MoveToward(distance, 0, Speed);
                 }
 
-                _characterBody2D.MoveAndSlide();
+                _characterBody.Position += velocity * (float)delta;
+                _characterBody.Position = new Vector2(
+                    x: Mathf.Clamp(_characterBody.Position.X, 0, _screenSize.X),
+                    y: Mathf.Clamp(_characterBody.Position.Y, 0, _screenSize.Y));
             }
-            else
-            {
-                velocity = Vector2.Zero;
-            }
-
-            _characterBody2D.Velocity = velocity;
 
             if (velocity.Length() > 0)
             {
@@ -73,12 +68,12 @@ namespace DinoKonpeito.Component
             if (distance > 0 && _movingLeft)
             {
                 _movingLeft = false;
-                _characterBody2D.Transform *= Transform2D.FlipX;
+                _characterBody.Transform *= Transform2D.FlipX;
             }
             else if (distance < 0 && !_movingLeft)
             {
                 _movingLeft = true;
-                _characterBody2D.Transform *= Transform2D.FlipX;
+                _characterBody.Transform *= Transform2D.FlipX;
             }
         }
     }
