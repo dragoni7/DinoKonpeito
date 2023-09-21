@@ -1,10 +1,12 @@
 using Godot;
-using System;
 
 namespace DinoKonpeito.Component
 {
     public partial class HealthComponent : Node2D
     {
+        [Signal]
+        public delegate void DeathEventHandler();
+
         [Export]
         public float MaxHealth { get => _maxHealth; private set { _maxHealth = value; } }
 
@@ -20,6 +22,11 @@ namespace DinoKonpeito.Component
         public void TakeDamage(float damage)
         {
             CurrentHealth -= damage;
+
+            if (CurrentHealth <= 0)
+            {
+                EmitSignal(SignalName.Death);
+            }
         }
     }
 }

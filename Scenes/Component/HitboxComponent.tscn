@@ -5,4 +5,7 @@
 [node name="HitboxComponent" type="Area2D"]
 script = ExtResource("1_x4o4m")
 
+[node name="CollisionTimer" type="Timer" parent="."]
+
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="CollisionTimer" to="." method="OnCollisionTimerTimeout"]

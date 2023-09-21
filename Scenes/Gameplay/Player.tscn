@@ -29,6 +29,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kh04k"]
+radius = 20.8
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(960, 1000)
@@ -36,6 +37,7 @@ script = ExtResource("1_n1k7q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hefhu")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aabba")
@@ -53,10 +55,12 @@ rotation = -1.0472
 _playerMovement = NodePath("../PlayerMovementComponent")
 
 [node name="HealthComponent" parent="." instance=ExtResource("6_18ca4")]
-MaxHealth = 3.0
+MaxHealth = 1.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_ddkp8")]
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_kh04k")
+
+[connection signal="Death" from="HealthComponent" to="." method="OnDeath"]

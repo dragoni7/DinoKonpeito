@@ -8,6 +8,7 @@ size = Vector2(15, 15)
 
 [node name="HeadComponent" type="Node2D"]
 script = ExtResource("1_opb8g")
+_step = Vector2(2, -10)
 
 [node name="Area2D" type="Area2D" parent="."]
 

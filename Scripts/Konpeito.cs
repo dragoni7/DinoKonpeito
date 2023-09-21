@@ -11,6 +11,6 @@ public partial class Konpeito : RigidBody2D
 
     public override void _Process(double delta)
 	{
-		this.MoveAndCollide(new Vector2(0, Speed));
+		MoveAndCollide(new Vector2(0, Speed));
 	}
 }

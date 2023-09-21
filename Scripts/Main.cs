@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Main : Node2D
 {
@@ -12,11 +11,9 @@ public partial class Main : Node2D
     public override void _Ready()
     {
         NewGame();
-    }
-
-    public void GameOver()
-    {
-        GetNode<Timer>("KonpeitoTimer").Stop();
+        var hud = GetNode<HUD>("HUD");
+        hud.UpdateScore(_score);
+        hud.ShowMessage("Begin!");
     }
 
     public void NewGame()
@@ -28,10 +25,23 @@ public partial class Main : Node2D
         player.Start(startPosition.Position);
 
         GetNode<Timer>("StartTimer").Start();
-        GetNode<Timer>("KonpeitoTimer").WaitTime = 5f;
+        GetNode<Timer>("KonpeitoTimer").WaitTime = 3f;
     }
 
-    private void OnStartTmerTimeout()
+    public void OnGameOver()
+    {
+        GetTree().CallGroup("Konpeito", Node.MethodName.QueueFree);
+        GetNode<Timer>("KonpeitoTimer").Stop();
+        GetNode<HUD>("HUD").ShowGameOver();
+        GetNode<Timer>("MenuReturnTimer").Start();
+    }
+
+    private void OnReturnTimerTimeout()
+    {
+        GetTree().ChangeSceneToFile("res://Scenes/UI/Menu.tscn");
+    }
+
+    private void OnStartTimerTimeout()
     {
         GetNode<Timer>("KonpeitoTimer").Start();
     }

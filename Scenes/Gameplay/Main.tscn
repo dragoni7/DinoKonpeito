@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=9 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="Texture2D" uid="uid://mxnalxlhikjj" path="res://Assets/Tile/tilesheet_complete.png" id="1_21xle"]
 [ext_resource type="Script" path="res://Scripts/Main.cs" id="1_hy2k0"]
 [ext_resource type="PackedScene" uid="uid://c30ttu3j2qsk4" path="res://Scenes/Gameplay/Player.tscn" id="2_p07lq"]
 [ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="2_wr0ca"]
+[ext_resource type="PackedScene" uid="uid://bd70x47qkkekv" path="res://Scenes/UI/HUD.tscn" id="5_lnr13"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_j6mhd"]
 texture = ExtResource("1_21xle")
@@ -770,20 +771,35 @@ point_count = 30
 script = ExtResource("1_hy2k0")
 KonpeitoScene = ExtResource("2_wr0ca")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.999217, 1)
+color = Color(0.231373, 0.545098, 0.701961, 1)
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 548)
+
+[node name="Player" parent="." instance=ExtResource("2_p07lq")]
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_vyi1a")
 format = 2
 layer_0/tile_data = PackedInt32Array(1048576, 131072, 3, 1048577, 131072, 3, 1048578, 131072, 3, 1048579, 131072, 3, 1048580, 131072, 3, 1048581, 131072, 3, 1048582, 131072, 3, 1048583, 131072, 3, 1048584, 131072, 3, 1048585, 131072, 3, 1048586, 131072, 3, 1048587, 131072, 3, 1048588, 131072, 3, 1048589, 131072, 3, 1048590, 131072, 3, 1048591, 131072, 3, 1048592, 131072, 3, 1048593, 131072, 3, 1048594, 131072, 3, 1048595, 131072, 3, 1048596, 131072, 3, 1048597, 131072, 3, 1048598, 131072, 3, 1048599, 131072, 3, 1048600, 131072, 3, 1048601, 131072, 3, 1048602, 131072, 3, 1048603, 131072, 3, 1048604, 131072, 3, 1048605, 131072, 3)
 
-[node name="Player" parent="." instance=ExtResource("2_p07lq")]
-position = Vector2(2, 0)
-
 [node name="KonpeitoTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MenuReturnTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 
@@ -797,5 +813,9 @@ curve = SubResource("Curve2D_lanq6")
 [node name="SpawnPoint" type="PathFollow2D" parent="Path2D"]
 position = Vector2(64, 8)
 
+[node name="HUD" parent="." instance=ExtResource("5_lnr13")]
+
+[connection signal="GameOver" from="Player" to="." method="OnGameOver"]
 [connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
-[connection signal="timeout" from="StartTimer" to="." method="OnStartTmerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]

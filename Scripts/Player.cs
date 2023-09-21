@@ -2,10 +2,10 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
-
+    [Signal]
+    public delegate void GameOverEventHandler();
     public override void _Ready()
     {
-        base._Ready();
         Hide();
     }
 
@@ -13,5 +13,11 @@ public partial class Player : CharacterBody2D
     {
         Position = position;
         Show();
+    }
+
+    public void OnDeath()
+    {
+        Hide();
+        EmitSignal(SignalName.GameOver);
     }
 }
