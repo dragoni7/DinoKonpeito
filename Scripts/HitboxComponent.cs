@@ -1,5 +1,6 @@
 using DinoKonpeito.Component;
 using Godot;
+using System.Collections.Generic;
 
 public partial class HitboxComponent : Area2D
 {
@@ -12,16 +13,29 @@ public partial class HitboxComponent : Area2D
 	[Export]
 	private Timer _cdTimer;
 
-	private void OnBodyEntered(PhysicsBody2D body)
+	private void OnBodyEntered(Node2D otherNode)
 	{
-		if (body.IsInGroup("Konpeito"))
+		if (otherNode is TileMap)
 		{
-            EmitSignal(SignalName.Hit);
-            _healthComponent?.TakeDamage(1f);
-            GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-            _cdTimer?.Start();
+			TileMap map = (TileMap)otherNode;
+		}
+	}
+
+	private void OnAreaEntered(Area2D otherArea)
+	{
+		if (otherArea is HitboxComponent)
+		{
+            HandleHit();
         }
 	}
+
+	private void HandleHit()
+	{
+        EmitSignal(SignalName.Hit);
+        _healthComponent?.TakeDamage(1f);
+        GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
+        _cdTimer?.Start();
+    }
 
 	private void OnCollisionTimerTimeout()
 	{

@@ -28,8 +28,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_kh04k"]
-radius = 20.8
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hd8o0"]
+radius = 21.0
+height = 54.0
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(960, 1000)
@@ -37,7 +38,6 @@ script = ExtResource("1_n1k7q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hefhu")
-disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aabba")
@@ -50,7 +50,7 @@ _characterBody = NodePath("..")
 _animatedSprite2D = NodePath("../AnimatedSprite2D")
 
 [node name="HeadComponent" parent="." node_paths=PackedStringArray("_playerMovement") instance=ExtResource("5_bmt7y")]
-position = Vector2(-16, -8)
+position = Vector2(-16, 0)
 rotation = -1.0472
 _playerMovement = NodePath("../PlayerMovementComponent")
 
@@ -58,9 +58,14 @@ _playerMovement = NodePath("../PlayerMovementComponent")
 MaxHealth = 1.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_ddkp8")]
+position = Vector2(1, -6)
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 _healthComponent = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("CircleShape2D_kh04k")
+position = Vector2(0, 6)
+shape = SubResource("CapsuleShape2D_hd8o0")
 
 [connection signal="Death" from="HealthComponent" to="." method="OnDeath"]

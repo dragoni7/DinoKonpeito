@@ -1,8 +1,8 @@
 using Godot;
-using System;
 
-public partial class Konpeito : RigidBody2D
+public partial class Konpeito : Node2D
 {
+	[Export]
 	public float Speed { get; set; }
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
@@ -11,6 +11,14 @@ public partial class Konpeito : RigidBody2D
 
     public override void _Process(double delta)
 	{
-		MoveAndCollide(new Vector2(0, Speed));
+		Vector2 newPosition = Position;
+		newPosition.Y += Speed;
+
+		Position = newPosition;
 	}
+
+	public void OnHit()
+	{
+        QueueFree();
+    }
 }

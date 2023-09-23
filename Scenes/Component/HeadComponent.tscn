@@ -1,21 +1,29 @@
-[gd_scene load_steps=4 format=3 uid="uid://drwtr65cbiuoy"]
+[gd_scene load_steps=5 format=3 uid="uid://drwtr65cbiuoy"]
 
 [ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_21mge"]
 [ext_resource type="Script" path="res://Scripts/HeadComponent.cs" id="1_opb8g"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_ocyyq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xtlfk"]
-size = Vector2(15, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8pt1b"]
+size = Vector2(29.5, 31)
 
-[node name="HeadComponent" type="Node2D"]
+[node name="HeadComponent" type="Node2D" node_paths=PackedStringArray("_hitbox") groups=["Head"]]
 script = ExtResource("1_opb8g")
-_step = Vector2(2, -10)
+_hitbox = NodePath("HitboxComponent")
+_step = Vector2(-8, -8)
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-scale = Vector2(1.5, 1.5)
-shape = SubResource("RectangleShape2D_xtlfk")
-
-[node name="Sprite2D" type="Sprite2D" parent="Area2D/CollisionShape2D"]
-scale = Vector2(0.15, 0.15)
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_21mge")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_ocyyq")]
+position = Vector2(-2, 0)
+scale = Vector2(0.96792, 0.956579)
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(2, 0)
+shape = SubResource("RectangleShape2D_8pt1b")
