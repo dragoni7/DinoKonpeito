@@ -2,7 +2,8 @@ using Godot;
 
 public partial class Konpeito : Node2D
 {
-	[Export]
+
+    [Export]
 	public float Speed { get; set; }
 	private void OnVisibleOnScreenNotifier2DScreenExited()
 	{

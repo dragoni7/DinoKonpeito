@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3wqp8oxby4je"]
+
+[ext_resource type="Texture2D" uid="uid://bhip1s1mv88iw" path="res://Assets/Sprite/floor.png" id="1_70lkg"]
+[ext_resource type="Script" path="res://Scripts/Floor.cs" id="1_qqoed"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="1_v3ycb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phse3"]
+size = Vector2(64, 64)
+
+[node name="Floor" type="Node2D"]
+script = ExtResource("1_qqoed")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_70lkg")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("1_v3ycb")]
+collision_layer = 12
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_phse3")
+
+[connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

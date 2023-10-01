@@ -46,6 +46,7 @@ frame_progress = 0.261368
 flip_h = true
 
 [node name="PlayerMovementComponent" parent="." node_paths=PackedStringArray("_characterBody", "_animatedSprite2D") instance=ExtResource("4_jmt6l")]
+position = Vector2(-20, 0)
 _characterBody = NodePath("..")
 _animatedSprite2D = NodePath("../AnimatedSprite2D")
 

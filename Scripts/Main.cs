@@ -1,12 +1,17 @@
 using Godot;
+using System.Collections.Generic;
 
 public partial class Main : Node2D
 {
     [Export]
     public PackedScene KonpeitoScene { get; set; }
 
+    [Export]
+    public PackedScene FloorScene { get; set; }
+
     private int _score;
     private float _spawns;
+    private List<Vector2> _destroyedPositions;
 
     public override void _Ready()
     {
@@ -14,15 +19,25 @@ public partial class Main : Node2D
         var hud = GetNode<HUD>("HUD");
         hud.UpdateScore(_score);
         hud.ShowMessage("Begin!");
+        _destroyedPositions = new();
+    }
+
+    public override void _Process(double delta)
+    {
+        
     }
 
     public void NewGame()
     {
         _score = 0;
 
+        // set up player
         var player = GetNode<Player>("Player");
         var startPosition = GetNode<Marker2D>("StartPosition");
         player.Start(startPosition.Position);
+
+        // set up floor
+        CreateGround();
 
         GetNode<Timer>("StartTimer").Start();
         GetNode<Timer>("KonpeitoTimer").WaitTime = 3f;
@@ -58,5 +73,29 @@ public partial class Main : Node2D
 
         AddChild(konpeito);
         _spawns++;
+    }
+
+    private void CreateGround()
+    {
+
+        for (int x = 0; x < 1920; x+= 64)
+        {
+            Floor floor = FloorScene.Instantiate<Floor>();
+            floor.Position = new Vector2(x + 32, 1048);
+            floor.Destroyed += OnFloorDestroyed;
+            AddChild(floor);
+        }
+    }
+
+    private void OnFloorDestroyed(Vector2 position)
+    {
+        _destroyedPositions.Add(position);
+    }
+
+    private void OnRestoreRandomFloor()
+    {
+        Floor floor = FloorScene.Instantiate<Floor>();
+        floor.Position = _destroyedPositions[GD.RandRange(0, _destroyedPositions.Count)];
+        AddChild(floor);
     }
 }

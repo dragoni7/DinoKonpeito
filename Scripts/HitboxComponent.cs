@@ -1,6 +1,5 @@
 using DinoKonpeito.Component;
 using Godot;
-using System.Collections.Generic;
 
 public partial class HitboxComponent : Area2D
 {
@@ -12,14 +11,6 @@ public partial class HitboxComponent : Area2D
 
 	[Export]
 	private Timer _cdTimer;
-
-	private void OnBodyEntered(Node2D otherNode)
-	{
-		if (otherNode is TileMap)
-		{
-			TileMap map = (TileMap)otherNode;
-		}
-	}
 
 	private void OnAreaEntered(Area2D otherArea)
 	{

@@ -12,6 +12,8 @@ namespace DinoKonpeito.Component
         [Export]
         private CharacterBody2D _characterBody;
 
+        private RayCast2D _rayCast;
+
         [Export]
         public float Speed { get; set; } = 300f;
         public bool CanMove { get; set; }
@@ -22,6 +24,7 @@ namespace DinoKonpeito.Component
         public override void _Ready()
         {
             base._Ready();
+            _rayCast = GetNode<RayCast2D>("RayCast2D");
             _movingLeft = true;
             _screenSize = GetViewportRect().Size;
             CanMove = true;
@@ -47,10 +50,17 @@ namespace DinoKonpeito.Component
                     velocity.X = Mathf.MoveToward(distance, 0, Speed);
                 }
 
-                _characterBody.Position += velocity * (float)delta;
-                _characterBody.Position = new Vector2(
-                    x: Mathf.Clamp(_characterBody.Position.X, 0, _screenSize.X),
-                    y: Mathf.Clamp(_characterBody.Position.Y, 0, _screenSize.Y));
+                Vector2 newPosition = _characterBody.Position;
+                Vector2 movement = velocity * (float)delta;
+                newPosition += movement;
+                newPosition = new Vector2(
+                    x: Mathf.Clamp(newPosition.X, 0, _screenSize.X),
+                    y: Mathf.Clamp(newPosition.Y, 0, _screenSize.Y));
+
+                if (HasGround(movement))
+                {
+                    _characterBody.Position = newPosition;
+                }
             }
 
             if (velocity.Length() > 0)
@@ -61,6 +71,15 @@ namespace DinoKonpeito.Component
             {
                 _animatedSprite2D.Stop();
             }
+        }
+
+        private bool HasGround(Vector2 movement)
+        {
+            bool value;
+            _rayCast.Position += movement;
+            value = _rayCast.IsColliding();
+            _rayCast.Position -= movement;
+            return value;
         }
 
         private void DetermineFlip(float distance)
