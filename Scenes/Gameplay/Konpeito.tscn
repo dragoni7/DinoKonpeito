@@ -33,4 +33,4 @@ debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]
-[connection signal="timeout" from="HitboxComponent/CollisionTimer2" to="HitboxComponent" method="OnCollisionTimerTimeout" flags=18]
+[connection signal="timeout" from="HitboxComponent/CollisionTimer2" to="HitboxComponent" method="OnCollisionTimerTimeout"]

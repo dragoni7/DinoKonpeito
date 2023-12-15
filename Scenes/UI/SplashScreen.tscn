@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckjpbbu1gf8j8"]
+
+[ext_resource type="Script" path="res://Scripts/SplashScreen.cs" id="1_kq0ei"]
+[ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_v5nqo"]
+
+[node name="SplashScreen" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.168627, 0.545098, 1, 1)
+script = ExtResource("1_kq0ei")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Logo" type="TextureRect" parent="CenterContainer"]
+layout_mode = 2
+texture = ExtResource("1_v5nqo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true

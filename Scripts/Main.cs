@@ -53,7 +53,7 @@ public partial class Main : Node2D
 
     private void OnReturnTimerTimeout()
     {
-        GetTree().ChangeSceneToFile("res://Scenes/UI/Menu.tscn");
+        GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("UI/Menu.tscn");
     }
 
     private void OnStartTimerTimeout()
