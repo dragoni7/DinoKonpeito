@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dws343njsyyws"]
+
+[ext_resource type="Script" path="res://Scripts/FloorManager.cs" id="1_8b6re"]
+
+[node name="FloorManager" type="Node"]
+script = ExtResource("1_8b6re")

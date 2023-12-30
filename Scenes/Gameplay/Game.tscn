@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://qshoy8b4cl41"]
+
+[ext_resource type="Script" path="res://Scripts/Game.cs" id="1_h0mx2"]
+[ext_resource type="PackedScene" uid="uid://c30ttu3j2qsk4" path="res://Scenes/Gameplay/Player.tscn" id="2_3sdv8"]
+[ext_resource type="PackedScene" uid="uid://bd70x47qkkekv" path="res://Scenes/UI/HUD.tscn" id="3_xnknf"]
+[ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/FloorManager.tscn" id="4_jqnl6"]
+[ext_resource type="PackedScene" uid="uid://c3wqp8oxby4je" path="res://Scenes/Gameplay/Floor.tscn" id="5_2qdto"]
+[ext_resource type="PackedScene" uid="uid://dl5owtkq6bjvv" path="res://Scenes/Gameplay/KonpeitoManager.tscn" id="6_btuko"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_h0mx2")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+color = Color(0.231373, 0.545098, 0.701961, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(960, 540)
+
+[node name="Player" parent="." instance=ExtResource("2_3sdv8")]
+position = Vector2(0, 0)
+
+[node name="KonpeitoTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MenuReturnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(960, 990)
+
+[node name="HUD" parent="." instance=ExtResource("3_xnknf")]
+
+[node name="FloorManager" parent="." instance=ExtResource("4_jqnl6")]
+FloorScene = ExtResource("5_2qdto")
+
+[node name="KonpeitoManager" parent="." instance=ExtResource("6_btuko")]
+
+[connection signal="GameOver" from="Player" to="." method="OnGameOver"]
+[connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]

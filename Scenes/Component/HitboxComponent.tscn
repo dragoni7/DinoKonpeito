@@ -7,7 +7,7 @@ script = ExtResource("1_x4o4m")
 _cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.8
 
 [connection signal="area_entered" from="." to="." method="OnAreaEntered"]
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bfooajyoc1wuk"]
 
-[ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_cahr8"]
 [ext_resource type="Script" path="res://Scripts/Konpeito.cs" id="1_nkjr5"]
+[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_to6fj"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_gkher"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nsix6"]
@@ -15,7 +15,7 @@ metadata/_edit_group_ = true
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0.270588, 0.270588, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("1_cahr8")
+texture = ExtResource("2_to6fj")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 

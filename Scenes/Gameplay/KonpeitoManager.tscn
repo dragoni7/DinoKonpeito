@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://dl5owtkq6bjvv"]
+
+[ext_resource type="Script" path="res://Scripts/KonpeitoManager.cs" id="1_17ek1"]
+[ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="2_p6ypp"]
+
+[sub_resource type="Curve2D" id="Curve2D_sr8uu"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 64, 8, 0, 0, 0, 0, 128, 8, 0, 0, 0, 0, 192, 8, 0, 0, 0, 0, 256, 8, 0, 0, 0, 0, 320, 8, 0, 0, 0, 0, 384, 8, 0, 0, 0, 0, 448, 8, 0, 0, 0, 0, 512, 8, 0, 0, 0, 0, 576, 8, 0, 0, 0, 0, 640, 8, 0, 0, 0, 0, 704, 8, 0, 0, 0, 0, 768, 8, 0, 0, 0, 0, 832, 8, 0, 0, 0, 0, 896, 8, 0, 0, 0, 0, 960, 8, 0, 0, 0, 0, 1024, 8, 0, 0, 0, 0, 1088, 8, 0, 0, 0, 0, 1152, 8, 0, 0, 0, 0, 1216, 8, 0, 0, 0, 0, 1280, 8, 0, 0, 0, 0, 1344, 8, 0, 0, 0, 0, 1408, 8, 0, 0, 0, 0, 1472, 8, 0, 0, 0, 0, 1536, 8, 0, 0, 0, 0, 1600, 8, 0, 0, 0, 0, 1664, 8, 0, 0, 0, 0, 1728, 8, 0, 0, 0, 0, 1792, 8, 0, 0, 0, 0, 1856, 8, 0, 0, 0, 0, 64, 8)
+}
+point_count = 30
+
+[node name="KonpeitoManager" type="Node"]
+script = ExtResource("1_17ek1")
+KonpeitoScene = ExtResource("2_p6ypp")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(0, 50)
+curve = SubResource("Curve2D_sr8uu")
+
+[node name="SpawnPoint" type="PathFollow2D" parent="Path2D"]
+position = Vector2(64, 8)
