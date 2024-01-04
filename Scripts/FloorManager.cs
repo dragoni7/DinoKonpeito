@@ -33,6 +33,7 @@ partial class FloorManager : Node
     {
         Floor floor = FloorScene.Instantiate<Floor>();
         floor.Position = _destroyedPositions[GD.RandRange(0, _destroyedPositions.Count)];
+        floor.Destroyed += OnDestroyFloor;
         AddChild(floor);
     }
 }

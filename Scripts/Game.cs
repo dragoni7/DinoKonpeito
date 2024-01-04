@@ -6,6 +6,8 @@ public partial class Game : Node2D
 
     private double _spawnTime;
 
+    public int Score => _score;
+
     public override void _Ready()
     {
         NewGame();
@@ -18,7 +20,8 @@ public partial class Game : Node2D
     {
         if (_score != 0 && _score % 15 == 0)
         {
-            _spawnTime -= 0.5;
+            _spawnTime -= 0.25;
+            Mathf.Clamp(_spawnTime, 0.25, 5);
             GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
         }
     }

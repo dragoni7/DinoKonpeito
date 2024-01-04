@@ -28,7 +28,7 @@ partial class KonpeitoManager : Node
         spawnLocation.ProgressRatio = GD.Randf();
 
         konpeito.Position = spawnLocation.Position;
-        konpeito.Speed = GD.RandRange(1, 2) + (_spawns * 0.05f);
+        konpeito.Speed = GD.RandRange(1, 2) + (_spawns * 0.025f);
 
         AddChild(konpeito);
         _spawns++;
@@ -37,6 +37,7 @@ partial class KonpeitoManager : Node
     public void OnKonpeitoDestroyed(Konpeito konpeito)
     {
         konpeito.QueueFree();
+        konpeito.Effect.Execute();
         GetParent<Game>().IncreaseScore();
     }
 

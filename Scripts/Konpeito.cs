@@ -5,6 +5,9 @@ public partial class Konpeito : Node2D
     [Export]
 	public float Speed { get; set; }
 
+	[Export]
+	public KonpeitoEffect Effect { get; set; }
+
     [Signal]
     public delegate void DestroyedEventHandler(Konpeito konpeito);
 
