@@ -8,8 +8,12 @@ public partial class Konpeito : Node2D
 	public KonpeitoEffect Effect { get; set; }
 
     [Export]
-
     private float _baseSpeed;
+
+	[Export]
+	private int _score;
+
+	public int Score => _score;
 
     public float BaseSpeed => _baseSpeed;
 

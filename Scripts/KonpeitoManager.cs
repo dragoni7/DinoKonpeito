@@ -16,6 +16,9 @@ partial class KonpeitoManager : Node
     [Export]
     public PackedScene YellowKonpeitoScene { get; set; }
 
+    [Signal]
+    public delegate void IncreaseScoreEventHandler(int amount);
+
     private float _spawns;
 
     public float Spawns => _spawns;
@@ -75,7 +78,7 @@ partial class KonpeitoManager : Node
             KonpeitoEffect effect = konpeito.Effect;
             effect.Reparent(this);
             effect.Execute();
-            GetParent<Game>().IncreaseScore();
+            EmitSignal(SignalName.IncreaseScore, konpeito.Score);
         }
 
         konpeito.QueueFree();

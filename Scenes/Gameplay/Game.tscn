@@ -46,7 +46,9 @@ FloorScene = ExtResource("5_2qdto")
 [node name="KonpeitoManager" parent="." instance=ExtResource("6_btuko")]
 YellowKonpeitoScene = ExtResource("7_4h5go")
 
+[connection signal="ScoreChanged" from="." to="HUD" method="OnUpdateScore"]
 [connection signal="GameOver" from="Player" to="." method="OnGameOver"]
 [connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
 [connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]
+[connection signal="IncreaseScore" from="KonpeitoManager" to="." method="OnIncreaseScore"]

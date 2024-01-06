@@ -12,6 +12,7 @@ size = Vector2(64, 64)
 script = ExtResource("1_nkjr5")
 Effect = NodePath("NoEffect")
 _baseSpeed = 1.0
+_score = 50
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

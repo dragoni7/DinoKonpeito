@@ -8,34 +8,41 @@ public partial class Game : Node2D
 
     private double _gameSpeed;
 
-    public int Score => _score;
+    private int Score
+    {
+        get => _score;
+        set
+        {
+            _score = value;
+            EmitSignal(SignalName.ScoreChanged, _score);
+        }
+    }
+
+    [Signal]
+    public delegate void ScoreChangedEventHandler(int score);
 
     public override void _Ready()
     {
         NewGame();
         var hud = GetNode<HUD>("HUD");
-        hud.UpdateScore(_score);
         hud.ShowMessage("Begin!"); 
     }
 
-    public void IncreaseScore()
+    public void OnIncreaseScore(int amount)
     {
-        _score += 1;
+        Score += amount;
 
-        if (_score % 15 == 0)
+        if (Score % 15 == 0)
         {
             _spawnTime -= 0.25;
             Mathf.Clamp(_spawnTime, 0.25, 5);
             GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
         }
-
-        var hud = GetNode<HUD>("HUD");
-        hud.UpdateScore(_score);
     }
 
     public void NewGame()
     {
-        _score = 0;
+        Score = 0;
         _spawnTime = 3.5;
 
         // set up player

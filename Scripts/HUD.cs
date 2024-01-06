@@ -12,7 +12,7 @@ public partial class HUD : CanvasLayer
         GetNode<Timer>("MessageTimer").Start();
     }
 
-    public void UpdateScore(int score)
+    public void OnUpdateScore(int score)
     {
         GetNode<Label>("ScoreLabel").Text = _scoreText + score.ToString();
     }
