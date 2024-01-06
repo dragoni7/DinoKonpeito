@@ -16,7 +16,7 @@ _step = Vector2(-8, -8)
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_21mge")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_ocyyq")]
+[node name="HitboxComponent" parent="." groups=["Head"] instance=ExtResource("3_ocyyq")]
 position = Vector2(-2, 0)
 scale = Vector2(0.96792, 0.956579)
 collision_layer = 4

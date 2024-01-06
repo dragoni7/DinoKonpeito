@@ -16,19 +16,17 @@ public partial class Game : Node2D
         hud.ShowMessage("Begin!"); 
     }
 
-    public override void _Process(double delta)
+    public void IncreaseScore()
     {
-        if (_score != 0 && _score % 15 == 0)
+        _score += 1;
+
+        if (_score % 15 == 0)
         {
             _spawnTime -= 0.25;
             Mathf.Clamp(_spawnTime, 0.25, 5);
             GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
         }
-    }
 
-    public void IncreaseScore()
-    {
-        _score += 1;
         var hud = GetNode<HUD>("HUD");
         hud.UpdateScore(_score);
     }

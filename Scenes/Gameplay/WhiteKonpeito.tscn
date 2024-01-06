@@ -1,27 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bfooajyoc1wuk"]
+[gd_scene load_steps=6 format=3 uid="uid://dv6i6oeer1cib"]
 
-[ext_resource type="Script" path="res://Scripts/Konpeito.cs" id="1_nkjr5"]
-[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_to6fj"]
-[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_gkher"]
-[ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Component/NoEffect.tscn" id="4_elirs"]
+[ext_resource type="Script" path="res://Scripts/Konpeito.cs" id="1_lf4h0"]
+[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_remm2"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_mhv5e"]
+[ext_resource type="PackedScene" uid="uid://rjuwp5aka02m" path="res://Scenes/Component/RestoreSingleFloorEffect.tscn" id="4_csnw8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nsix6"]
 size = Vector2(64, 64)
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
-script = ExtResource("1_nkjr5")
-Effect = NodePath("NoEffect")
-_baseSpeed = 1.0
+script = ExtResource("1_lf4h0")
+Effect = NodePath("RestoreSingleFloorEffect")
+_baseSpeed = 0.5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0.270588, 0.270588, 1)
 scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_to6fj")
+texture = ExtResource("2_remm2")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_gkher")]
+[node name="HitboxComponent" parent="." instance=ExtResource("3_mhv5e")]
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 4
@@ -33,7 +32,7 @@ wait_time = 0.5
 shape = SubResource("RectangleShape2D_nsix6")
 debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 
-[node name="NoEffect" parent="." instance=ExtResource("4_elirs")]
+[node name="RestoreSingleFloorEffect" parent="." instance=ExtResource("4_csnw8")]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

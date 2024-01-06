@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsf0difv2a36t"]
+
+[ext_resource type="Script" path="res://Scripts/SlowKonpeitoEffect.cs" id="1_3lyg1"]
+
+[node name="SlowKonpeitoEffect" type="Node" node_paths=PackedStringArray("_timer")]
+script = ExtResource("1_3lyg1")
+_timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="OnDurationTimerTimeout"]

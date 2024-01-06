@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_h0mx2"]
 [ext_resource type="PackedScene" uid="uid://c30ttu3j2qsk4" path="res://Scenes/Gameplay/Player.tscn" id="2_3sdv8"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://c3wqp8oxby4je" path="res://Scenes/Gameplay/Floor.tscn" id="5_2qdto"]
 [ext_resource type="PackedScene" uid="uid://dl5owtkq6bjvv" path="res://Scenes/Gameplay/KonpeitoManager.tscn" id="6_btuko"]
+[ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/YellowKonpeito.tscn" id="7_4h5go"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_h0mx2")
@@ -15,6 +16,7 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 4
 color = Color(0.231373, 0.545098, 0.701961, 1)
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -42,6 +44,7 @@ position = Vector2(960, 990)
 FloorScene = ExtResource("5_2qdto")
 
 [node name="KonpeitoManager" parent="." instance=ExtResource("6_btuko")]
+YellowKonpeitoScene = ExtResource("7_4h5go")
 
 [connection signal="GameOver" from="Player" to="." method="OnGameOver"]
 [connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]

@@ -13,7 +13,7 @@ script = ExtResource("1_qqoed")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_70lkg")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("1_v3ycb")]
+[node name="HitboxComponent" parent="." groups=["Floor"] instance=ExtResource("1_v3ycb")]
 collision_layer = 12
 collision_mask = 2
 

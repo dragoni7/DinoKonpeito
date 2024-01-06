@@ -10,9 +10,28 @@ partial class KonpeitoManager : Node
     [Export]
     public PackedScene KonpeitoScene { get; set; }
 
+    [Export]
+    public PackedScene WhiteKonpeitoScene { get; set; }
+
+    [Export]
+    public PackedScene YellowKonpeitoScene { get; set; }
+
     private float _spawns;
 
     public float Spawns => _spawns;
+
+    private float _speedModifier;
+
+    public float SpeedModifier
+    {
+        get => _speedModifier;
+        set => _speedModifier = value;
+    }
+
+    public override void _Ready()
+    {
+        _speedModifier = 1;
+    }
 
     public override void _Process(double delta)
     {
@@ -21,24 +40,45 @@ partial class KonpeitoManager : Node
 
     public void SpawnKonpeito()
     {
-        Konpeito konpeito = KonpeitoScene.Instantiate<Konpeito>();
+        PackedScene sceneToUse = KonpeitoScene;
+
+        if (GD.RandRange(1, 3) % 3 == 0)
+        {
+            if (GD.RandRange(1, 2) % 2 == 0)
+            {
+                sceneToUse = WhiteKonpeitoScene;
+            }
+            else
+            {
+                sceneToUse = YellowKonpeitoScene;
+            }
+        }
+
+        Konpeito konpeito = sceneToUse.Instantiate<Konpeito>();
         konpeito.Destroyed += OnKonpeitoDestroyed;
 
         var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
         spawnLocation.ProgressRatio = GD.Randf();
 
         konpeito.Position = spawnLocation.Position;
-        konpeito.Speed = GD.RandRange(1, 2) + (_spawns * 0.025f);
+        konpeito.CurrentSpeed += (float)GD.RandRange(0.25f, 1.0f) + (_spawns * 0.03f);
+        konpeito.ModifySpeed(_speedModifier);
 
         AddChild(konpeito);
         _spawns++;
     }
 
-    public void OnKonpeitoDestroyed(Konpeito konpeito)
+    public void OnKonpeitoDestroyed(Konpeito konpeito, bool hitFloor)
     {
+        if (!hitFloor)
+        {
+            KonpeitoEffect effect = konpeito.Effect;
+            effect.Reparent(this);
+            effect.Execute();
+            GetParent<Game>().IncreaseScore();
+        }
+
         konpeito.QueueFree();
-        konpeito.Effect.Execute();
-        GetParent<Game>().IncreaseScore();
     }
 
     public void ClearKonpeito()

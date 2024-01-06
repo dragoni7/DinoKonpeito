@@ -1,5 +1,4 @@
 ﻿using Godot;
-using System;
 using System.Collections.Generic;
 partial class FloorManager : Node
 {
@@ -31,9 +30,12 @@ partial class FloorManager : Node
 
     public void RestoreRandomFloor()
     {
-        Floor floor = FloorScene.Instantiate<Floor>();
-        floor.Position = _destroyedPositions[GD.RandRange(0, _destroyedPositions.Count)];
-        floor.Destroyed += OnDestroyFloor;
-        AddChild(floor);
+        if (_destroyedPositions.Count > 0)
+        {
+            Floor floor = FloorScene.Instantiate<Floor>();
+            floor.Position = _destroyedPositions[GD.RandRange(0, _destroyedPositions.Count)];
+            floor.Destroyed += OnDestroyFloor;
+            AddChild(floor);
+        }
     }
 }

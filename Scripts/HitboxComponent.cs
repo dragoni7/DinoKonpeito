@@ -1,10 +1,11 @@
 using DinoKonpeito.Component;
 using Godot;
+using Godot.Collections;
 
 public partial class HitboxComponent : Area2D
 {
 	[Signal]
-	public delegate void HitEventHandler();
+	public delegate void HitEventHandler(Array<StringName> groups);
 
 	[Export]
 	private HealthComponent _healthComponent;
@@ -16,13 +17,13 @@ public partial class HitboxComponent : Area2D
 	{
 		if (otherArea is HitboxComponent)
 		{
-            HandleHit();
+            HandleHit(otherArea);
         }
 	}
 
-	private void HandleHit()
+	private void HandleHit(Area2D otherArea)
 	{
-        EmitSignal(SignalName.Hit);
+        EmitSignal(SignalName.Hit, otherArea.GetGroups());
         _healthComponent?.TakeDamage(1f);
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
         _cdTimer?.Start();
