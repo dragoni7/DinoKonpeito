@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=9 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="Script" path="res://Scripts/Game.cs" id="1_h0mx2"]
 [ext_resource type="PackedScene" uid="uid://c30ttu3j2qsk4" path="res://Scenes/Gameplay/Player.tscn" id="2_3sdv8"]
 [ext_resource type="PackedScene" uid="uid://bd70x47qkkekv" path="res://Scenes/UI/HUD.tscn" id="3_xnknf"]
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/FloorManager.tscn" id="4_jqnl6"]
+[ext_resource type="PackedScene" uid="uid://4qy4ogcm74ki" path="res://Scenes/UI/FloatingText.tscn" id="4_lvc04"]
 [ext_resource type="PackedScene" uid="uid://c3wqp8oxby4je" path="res://Scenes/Gameplay/Floor.tscn" id="5_2qdto"]
 [ext_resource type="PackedScene" uid="uid://dl5owtkq6bjvv" path="res://Scenes/Gameplay/KonpeitoManager.tscn" id="6_btuko"]
 [ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/YellowKonpeito.tscn" id="7_4h5go"]
@@ -39,6 +40,7 @@ one_shot = true
 position = Vector2(960, 990)
 
 [node name="HUD" parent="." instance=ExtResource("3_xnknf")]
+FloatingTextScene = ExtResource("4_lvc04")
 
 [node name="FloorManager" parent="." instance=ExtResource("4_jqnl6")]
 FloorScene = ExtResource("5_2qdto")
@@ -51,4 +53,5 @@ YellowKonpeitoScene = ExtResource("7_4h5go")
 [connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
 [connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]
+[connection signal="DisplayScoreText" from="KonpeitoManager" to="HUD" method="OnDisplayScoreText"]
 [connection signal="IncreaseScore" from="KonpeitoManager" to="." method="OnIncreaseScore"]

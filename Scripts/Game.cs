@@ -32,7 +32,7 @@ public partial class Game : Node2D
     {
         Score += amount;
 
-        if (Score % 15 == 0)
+        if (Score % 100 == 0)
         {
             _spawnTime -= 0.25;
             Mathf.Clamp(_spawnTime, 0.25, 5);

@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://4qy4ogcm74ki"]
+
+[ext_resource type="Script" path="res://Scripts/FloatingText.cs" id="1_e26i6"]
+
+[node name="FloatingText" type="Marker2D" node_paths=PackedStringArray("_label")]
+script = ExtResource("1_e26i6")
+_label = NodePath("Label")
+
+[node name="Label" type="Label" parent="."]
+modulate = Color(0.0352941, 0.290196, 0.619608, 1)
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 16
+text = "0"

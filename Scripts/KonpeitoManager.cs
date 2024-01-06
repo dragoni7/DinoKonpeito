@@ -8,16 +8,19 @@ using System.Threading.Tasks;
 partial class KonpeitoManager : Node
 {
     [Export]
-    public PackedScene KonpeitoScene { get; set; }
+    public PackedScene KonpeitoScene;
 
     [Export]
-    public PackedScene WhiteKonpeitoScene { get; set; }
+    public PackedScene WhiteKonpeitoScene;
 
     [Export]
-    public PackedScene YellowKonpeitoScene { get; set; }
+    public PackedScene YellowKonpeitoScene;
 
     [Signal]
     public delegate void IncreaseScoreEventHandler(int amount);
+
+    [Signal]
+    public delegate void DisplayScoreTextEventHandler(int amount, Vector2 position);
 
     private float _spawns;
 
@@ -79,6 +82,7 @@ partial class KonpeitoManager : Node
             effect.Reparent(this);
             effect.Execute();
             EmitSignal(SignalName.IncreaseScore, konpeito.Score);
+            EmitSignal(SignalName.DisplayScoreText, konpeito.Score, konpeito.Position);
         }
 
         konpeito.QueueFree();

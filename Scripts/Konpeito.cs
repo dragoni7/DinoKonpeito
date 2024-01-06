@@ -49,7 +49,6 @@ public partial class Konpeito : Node2D
 	public void ModifySpeed(float modifier)
 	{
         _currentSpeed *= modifier;
-		GD.Print("Speed modified to " + _currentSpeed);
 	}
 
 	public void ResetSpeed()

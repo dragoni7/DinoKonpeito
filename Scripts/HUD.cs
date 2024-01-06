@@ -2,6 +2,9 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
+    [Export]
+    public PackedScene FloatingTextScene;
+
     private const string _scoreText = "Score ";
     public void ShowMessage(string text)
     {
@@ -15,6 +18,14 @@ public partial class HUD : CanvasLayer
     public void OnUpdateScore(int score)
     {
         GetNode<Label>("ScoreLabel").Text = _scoreText + score.ToString();
+    }
+
+    public void OnDisplayScoreText(int amount, Vector2 position)
+    {
+        FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
+        text.SetText(amount.ToString());
+        text.Position = position;
+        AddChild(text);
     }
     async public void ShowGameOver()
     {
