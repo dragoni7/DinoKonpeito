@@ -2,6 +2,7 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
+    private const string _scoreText = "Score ";
     public void ShowMessage(string text)
     {
         var message = GetNode<Label>("Message");
@@ -13,7 +14,7 @@ public partial class HUD : CanvasLayer
 
     public void UpdateScore(int score)
     {
-        GetNode<Label>("ScoreLabel").Text = score.ToString();
+        GetNode<Label>("ScoreLabel").Text = _scoreText + score.ToString();
     }
     async public void ShowGameOver()
     {

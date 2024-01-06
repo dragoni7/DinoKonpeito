@@ -6,6 +6,8 @@ public partial class Game : Node2D
 
     private double _spawnTime;
 
+    private double _gameSpeed;
+
     public int Score => _score;
 
     public override void _Ready()
