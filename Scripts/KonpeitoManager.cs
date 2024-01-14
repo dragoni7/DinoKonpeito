@@ -41,7 +41,7 @@ partial class KonpeitoManager : Node
 
     public override void _Process(double delta)
     {
-        GetTree().CallGroup("Konpeito", Konpeito.MethodName.Move);
+        GetTree().CallGroup("Konpeito", Konpeito.MethodName.Move, SpeedModifier);
     }
 
     public void SpawnKonpeito()
@@ -67,8 +67,7 @@ partial class KonpeitoManager : Node
         spawnLocation.ProgressRatio = GD.Randf();
 
         konpeito.Position = spawnLocation.Position;
-        konpeito.CurrentSpeed += (float)GD.RandRange(0.25f, 1.0f) + (_spawns * 0.03f);
-        konpeito.ModifySpeed(_speedModifier);
+        konpeito.Speed += (float)GD.RandRange(0.25f, 1.0f) + (_spawns * 0.03f);
 
         AddChild(konpeito);
         _spawns++;
@@ -78,6 +77,8 @@ partial class KonpeitoManager : Node
     {
         if (!hitFloor)
         {
+            konpeito.sound.Play();
+
             KonpeitoEffect effect = konpeito.Effect;
             effect.Reparent(this);
             effect.Execute();

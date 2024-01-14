@@ -35,8 +35,7 @@ public partial class Game : Node2D
         if (Score % 100 == 0)
         {
             _spawnTime -= 0.25;
-            Mathf.Clamp(_spawnTime, 0.25, 5);
-            GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
+            GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.25, 5);
         }
     }
 

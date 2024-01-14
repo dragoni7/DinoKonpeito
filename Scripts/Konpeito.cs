@@ -4,56 +4,31 @@ using Godot.Collections;
 public partial class Konpeito : Node2D
 {
 
-    [Export]
-	public KonpeitoEffect Effect { get; set; }
+	[Export]
+	public KonpeitoEffect Effect;
+
+	[Export]
+	public AudioStreamPlayer2D sound;
 
     [Export]
-    private float _baseSpeed;
+    public float Speed { get; set; }
 
 	[Export]
 	private int _score;
 
 	public int Score => _score;
 
-    public float BaseSpeed => _baseSpeed;
-
-    private float _currentSpeed;
-
-    public float CurrentSpeed
-	{
-		get => _currentSpeed;
-		set => _currentSpeed = value;
-	}
-
     [Signal]
     public delegate void DestroyedEventHandler(Konpeito konpeito, bool hitFloor);
-
-    public override void _EnterTree()
-    {
-		_currentSpeed = _baseSpeed;
-    }
 
     private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
 		QueueFree();
 	}
 
-    public void Move()
+    public void Move(float modifier)
 	{
-		Vector2 newPosition = Position;
-		newPosition.Y += _currentSpeed;
-
-		Position = newPosition;
-	}
-
-	public void ModifySpeed(float modifier)
-	{
-        _currentSpeed *= modifier;
-	}
-
-	public void ResetSpeed()
-	{
-		_currentSpeed = _baseSpeed;
+		Position += Vector2.Down * Speed * modifier;
 	}
 
 	public void OnHit(Array<StringName> groups)
