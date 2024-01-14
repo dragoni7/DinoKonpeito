@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c30ttu3j2qsk4"]
 
-[ext_resource type="Script" path="res://Scripts/Player.cs" id="1_n1k7q"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/Player.cs" id="1_n1k7q"]
 [ext_resource type="Texture2D" uid="uid://3q56i7x42ucd" path="res://Assets/Sprite/playerBlue_walk1.png" id="1_wru74"]
 [ext_resource type="Texture2D" uid="uid://bobphrelyf13e" path="res://Assets/Sprite/playerBlue_walk2.png" id="2_287sp"]
 [ext_resource type="Texture2D" uid="uid://dqw4i5x33fkrs" path="res://Assets/Sprite/playerBlue_walk3.png" id="3_woim0"]

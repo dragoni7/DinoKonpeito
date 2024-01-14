@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://drwtr65cbiuoy"]
 
 [ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_21mge"]
-[ext_resource type="Script" path="res://Scripts/HeadComponent.cs" id="1_opb8g"]
+[ext_resource type="Script" path="res://Scripts/Component/HeadComponent.cs" id="1_opb8g"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_ocyyq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pt1b"]

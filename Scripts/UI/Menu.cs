@@ -4,7 +4,7 @@ public partial class Menu : Node
 {
 	public void OnStartButtonPressed()
 	{
-		GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("Gameplay/Game.tscn");
+        SceneLoader.GetInstance<SceneLoader>(this).ChangeToScene("Gameplay/Game.tscn");
 	}
 
 	public void OnOptionsButtonPressed()

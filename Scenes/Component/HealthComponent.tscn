@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://da4fe32bxkx3r"]
 
-[ext_resource type="Script" path="res://Scripts/HealthComponent.cs" id="1_5ymcl"]
+[ext_resource type="Script" path="res://Scripts/Component/HealthComponent.cs" id="1_5ymcl"]
 
 [node name="HealthComponent" type="Node2D"]
 visible = false

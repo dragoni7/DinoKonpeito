@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://vgid3yvrgs5r"]
 
-[ext_resource type="Script" path="res://Scripts/PlayerMovementComponent.cs" id="1_dmajk"]
+[ext_resource type="Script" path="res://Scripts/Component/PlayerMovementComponent.cs" id="1_dmajk"]
 
 [node name="PlayerMovementComponent" type="Node2D"]
 visible = false

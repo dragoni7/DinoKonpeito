@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://8b046ymaphc1"]
 
-[ext_resource type="Script" path="res://Scripts/Menu.cs" id="1_1ogt6"]
+[ext_resource type="Script" path="res://Scripts/UI/Menu.cs" id="1_1ogt6"]
 
 [sub_resource type="Theme" id="Theme_yd1e2"]
 

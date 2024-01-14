@@ -7,19 +7,14 @@ public partial class SlowKonpeitoEffect : KonpeitoEffect
 
     public override void Execute()
     {
-        GetNode<KonpeitoManager>("/root/Game/KonpeitoManager").SpeedModifier = 0.5f;
+        KonpeitoManager.GetInstance<KonpeitoManager>(this).SpeedModifier = 0.5f;
 
         _timer.Start();
     }
 
     private void OnDurationTimerTimeout()
     {
-        Undo();
-    }
-
-    private void Undo()
-    {
-        GetNode<KonpeitoManager>("/root/Game/KonpeitoManager").SpeedModifier = 1f;
+        KonpeitoManager.GetInstance<KonpeitoManager>(this).SpeedModifier = 1f;
         QueueFree();
     }
 }

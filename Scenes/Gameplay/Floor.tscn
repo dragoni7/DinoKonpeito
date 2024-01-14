@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c3wqp8oxby4je"]
 
 [ext_resource type="Texture2D" uid="uid://bhip1s1mv88iw" path="res://Assets/Sprite/floor.png" id="1_70lkg"]
-[ext_resource type="Script" path="res://Scripts/Floor.cs" id="1_qqoed"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/Floor.cs" id="1_qqoed"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="1_v3ycb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_phse3"]

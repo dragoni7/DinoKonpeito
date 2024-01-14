@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bogdln1mxn7gf"]
 
-[ext_resource type="Script" path="res://Scripts/Konpeito.cs" id="1_fdm7k"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_fdm7k"]
 [ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_72l6u"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_t5yov"]
 [ext_resource type="PackedScene" uid="uid://dsf0difv2a36t" path="res://Scenes/Component/SlowKonpeitoEffect.tscn" id="4_p43k8"]

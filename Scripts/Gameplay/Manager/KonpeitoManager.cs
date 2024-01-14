@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-partial class KonpeitoManager : Node
+partial class KonpeitoManager : Node, ISingletonNode
 {
     [Export]
     public PackedScene KonpeitoScene;
@@ -32,6 +32,11 @@ partial class KonpeitoManager : Node
     {
         get => _speedModifier;
         set => _speedModifier = value;
+    }
+
+    public static T GetInstance<T>(Node from) where T : Node
+    {
+        return from.GetNode<T>("/root/Game/KonpeitoManager");
     }
 
     public override void _Ready()

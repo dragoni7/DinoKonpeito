@@ -35,7 +35,7 @@ public partial class Game : Node2D
         if (Score % 100 == 0)
         {
             _spawnTime -= 0.25;
-            GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.25, 5);
+            GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.75, 5);
         }
     }
 
@@ -45,12 +45,13 @@ public partial class Game : Node2D
         _spawnTime = 3.5;
 
         // set up player
-        var player = GetNode<Player>("Player");
-        var startPosition = GetNode<Marker2D>("StartPosition");
-        player.Start(startPosition.Position);
+        Vector2 startPosition = GetNode<Marker2D>("StartPosition").Position;
+        PlayerManager playerManager = PlayerManager.GetInstance<PlayerManager>(this);
+        playerManager.SpawnPlayer(startPosition);
+        playerManager.Player.GameOver += OnGameOver;
 
         // set up floor
-        GetNode<FloorManager>("FloorManager").CreateFloor();
+        FloorManager.GetInstance<FloorManager>(this).CreateFloor();
 
         // start timer
         GetNode<Timer>("StartTimer").Start();
@@ -59,7 +60,7 @@ public partial class Game : Node2D
 
     public void OnGameOver()
     {
-        GetNode<KonpeitoManager>("KonpeitoManager").ClearKonpeito();
+        KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
         GetNode<Timer>("KonpeitoTimer").Stop();
         GetNode<HUD>("HUD").ShowGameOver();
         GetNode<Timer>("MenuReturnTimer").Start();
@@ -67,7 +68,7 @@ public partial class Game : Node2D
 
     private void OnReturnTimerTimeout()
     {
-        GetNode<SceneLoader>("/root/SceneLoader").ChangeToScene("UI/Menu.tscn");
+        SceneLoader.GetInstance<SceneLoader>(this).ChangeToScene("UI/Menu.tscn");
     }
 
     private void OnStartTimerTimeout()
@@ -77,6 +78,6 @@ public partial class Game : Node2D
 
     private void OnKonpeitoTimerTimeout()
     {
-        GetNode<KonpeitoManager>("KonpeitoManager").SpawnKonpeito();
+        KonpeitoManager.GetInstance<KonpeitoManager>(this).SpawnKonpeito();
     }
 }
