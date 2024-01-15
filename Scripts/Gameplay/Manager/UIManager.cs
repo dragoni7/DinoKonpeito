@@ -30,7 +30,18 @@ public partial class UIManager : Node, ISingletonNode
     {
         FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
         text.SetText(amount.ToString());
+        text.SetColor(GameColors.FromScore(amount));
         text.Position = position;
+
+        if (amount >= 300)
+        {
+            var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
+            FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
+            flashComponent.FlashColor = GameColors.ScoreFlashColor(amount);
+            flashComponent.Target = text;
+            text.AddChild(flashComponent);
+        }
+
         AddChild(text);
     }
 

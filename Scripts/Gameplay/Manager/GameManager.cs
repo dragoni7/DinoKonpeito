@@ -8,6 +8,8 @@ public partial class GameManager : Node, ISingletonNode
 
     private double _gameSpeed;
 
+    private DifficultyTracker _difficulty;
+
     private int Score
     {
         get => _score;
@@ -28,20 +30,9 @@ public partial class GameManager : Node, ISingletonNode
 
     public override void _Ready()
     {
+        _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
         NewGame();
         UIManager.GetInstance<UIManager>(this).ShowMessage("Begin!");
-    }
-
-    public void OnIncreaseScore(int amount)
-    {
-        Score += amount;
-
-        if (Score % 100 == 0)
-        {
-            GD.Print("Difficulty increase");
-            _spawnTime -= 0.25;
-            GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.75, 5);
-        }
     }
 
     public void NewGame()
@@ -61,6 +52,23 @@ public partial class GameManager : Node, ISingletonNode
         // start timer
         GetNode<Timer>("StartTimer").Start();
         GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
+    }
+
+    public void OnIncreaseScore(int amount)
+    {
+        Score += amount;
+
+        if (Score % 5000 == 0)
+        {
+            GD.Print("Difficulty increase");
+            _difficulty.NextStage();
+        }
+    }
+
+    public void OnDifficultyIncreased(DifficultyStage stage)
+    {
+        _spawnTime -= 0.25;
+        GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.75, 5);
     }
 
     public void OnGameOver()

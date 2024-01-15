@@ -13,11 +13,6 @@ public partial class Konpeito : Node2D
     [Export]
     public float Speed { get; set; }
 
-	[Export]
-	private int _score;
-
-	public int Score => _score;
-
     [Signal]
     public delegate void DestroyedEventHandler(Konpeito konpeito, bool hitFloor);
 

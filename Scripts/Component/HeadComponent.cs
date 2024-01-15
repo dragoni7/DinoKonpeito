@@ -37,7 +37,7 @@ public partial class HeadComponent : Node2D
             _tween = GetTree().CreateTween();
             _tween.Finished += OnHeadReturned;
             _tween.SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Back);
-            _tween.TweenProperty(this, "position", origin, 0.5f);
+            _tween.TweenProperty(this, "position", origin, 0.3f);
             _hitbox.Monitorable = false;
         }
     }

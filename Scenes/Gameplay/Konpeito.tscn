@@ -6,8 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Component/NoEffect.tscn" id="4_elirs"]
 [ext_resource type="AudioStream" uid="uid://c6qelfjsu226" path="res://Assets/Sounds/Suck 2.wav" id="5_ahf4n"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nsix6"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_hiefn"]
+radius = 27.0
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect", "sound") groups=["Konpeito"]]
 script = ExtResource("1_hi2qw")
@@ -29,11 +29,8 @@ scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 4
 
-[node name="CollisionTimer2" type="Timer" parent="HitboxComponent"]
-wait_time = 0.5
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("RectangleShape2D_nsix6")
+shape = SubResource("CircleShape2D_hiefn")
 debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 
 [node name="NoEffect" parent="." instance=ExtResource("4_elirs")]
@@ -43,4 +40,3 @@ stream = ExtResource("5_ahf4n")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]
-[connection signal="timeout" from="HitboxComponent/CollisionTimer2" to="HitboxComponent" method="OnCollisionTimerTimeout"]

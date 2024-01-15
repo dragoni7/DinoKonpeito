@@ -87,11 +87,41 @@ partial class KonpeitoManager : Node, ISingletonNode
             KonpeitoEffect effect = konpeito.Effect;
             effect.Reparent(this);
             effect.Execute();
-            EmitSignal(SignalName.IncreaseScore, konpeito.Score);
-            EmitSignal(SignalName.DisplayScoreText, konpeito.Score, konpeito.Position);
+            int score = GetKonpeitoScore(konpeito.Position);
+            EmitSignal(SignalName.IncreaseScore, score);
+            EmitSignal(SignalName.DisplayScoreText, score, konpeito.Position);
         }
 
         konpeito.QueueFree();
+    }
+
+    private int GetKonpeitoScore(Vector2 pos)
+    {
+        float distance = pos.Y;
+
+        switch(distance) {
+
+            case < 200:
+                {
+                    return 1000;
+                }
+            case < 400:
+                {
+                    return 300;
+                }
+            case < 600:
+                {
+                    return 100;
+                }
+            case < 800:
+                {
+                    return 50;
+                }
+            default:
+                {
+                    return 10;
+                }
+        }
     }
 
     public void ClearKonpeito()
