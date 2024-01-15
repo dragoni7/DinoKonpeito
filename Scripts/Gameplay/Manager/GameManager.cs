@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class Game : Node2D
+public partial class GameManager : Node, ISingletonNode
 {
     private int _score;
 
@@ -21,11 +21,15 @@ public partial class Game : Node2D
     [Signal]
     public delegate void ScoreChangedEventHandler(int score);
 
+    public static T GetInstance<T>(Node from) where T : Node
+    {
+        return from.GetNode<T>("/root/Game/GameManager");
+    }
+
     public override void _Ready()
     {
         NewGame();
-        var hud = GetNode<HUD>("HUD");
-        hud.ShowMessage("Begin!"); 
+        UIManager.GetInstance<UIManager>(this).ShowMessage("Begin!");
     }
 
     public void OnIncreaseScore(int amount)
@@ -34,6 +38,7 @@ public partial class Game : Node2D
 
         if (Score % 100 == 0)
         {
+            GD.Print("Difficulty increase");
             _spawnTime -= 0.25;
             GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.75, 5);
         }
@@ -62,7 +67,7 @@ public partial class Game : Node2D
     {
         KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
         GetNode<Timer>("KonpeitoTimer").Stop();
-        GetNode<HUD>("HUD").ShowGameOver();
+        UIManager.GetInstance<UIManager>(this).ShowGameOver();
         GetNode<Timer>("MenuReturnTimer").Start();
     }
 

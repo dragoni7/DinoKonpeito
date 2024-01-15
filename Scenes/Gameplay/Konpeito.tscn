@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bfooajyoc1wuk"]
 
-[ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_nkjr5"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_hi2qw"]
 [ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_to6fj"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_gkher"]
 [ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Component/NoEffect.tscn" id="4_elirs"]
@@ -10,7 +10,7 @@
 size = Vector2(64, 64)
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect", "sound") groups=["Konpeito"]]
-script = ExtResource("1_nkjr5")
+script = ExtResource("1_hi2qw")
 Effect = NodePath("NoEffect")
 sound = NodePath("AudioStreamPlayer2D")
 Speed = 0.5

@@ -2,8 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_u4my6"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("MessageLabel", "MessageTimer", "ScoreLabel")]
 script = ExtResource("1_u4my6")
+MessageLabel = NodePath("Message")
+MessageTimer = NodePath("MessageTimer")
+ScoreLabel = NodePath("ScoreLabel")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
