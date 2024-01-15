@@ -1,29 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://8b046ymaphc1"]
+[gd_scene load_steps=3 format=3 uid="uid://8b046ymaphc1"]
 
 [ext_resource type="Script" path="res://Scripts/UI/Menu.cs" id="1_1ogt6"]
-
-[sub_resource type="Theme" id="Theme_yd1e2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e8qg3"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnlgx"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06m46"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hlbcq"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jypl2"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gcan7"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5qhq"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_np1qc"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pgjcd"]
+[ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="2_ym8gw"]
 
 [node name="Menu" type="ColorRect"]
-modulate = Color(0.901961, 0.298039, 0.45098, 1)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,45 +13,28 @@ color = Color(0.34902, 1, 0.976471, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -35.0
-offset_top = -50.5
-offset_right = 35.0
-offset_bottom = 50.5
+anchors_preset = -1
+anchor_left = 0.445833
+anchor_top = 0.503704
+anchor_right = 0.555208
+anchor_bottom = 0.583333
+offset_top = -3.05176e-05
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_yd1e2")
+theme = ExtResource("2_ym8gw")
 script = ExtResource("1_1ogt6")
+metadata/_edit_use_anchors_ = true
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 75
-theme_override_styles/normal = SubResource("StyleBoxFlat_e8qg3")
-theme_override_styles/hover = SubResource("StyleBoxFlat_rnlgx")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_06m46")
 text = "Start"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 75
-theme_override_styles/normal = SubResource("StyleBoxFlat_hlbcq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jypl2")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_gcan7")
 text = "Options"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 75
-theme_override_styles/normal = SubResource("StyleBoxFlat_b5qhq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_np1qc")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_pgjcd")
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="VBoxContainer" method="OnStartButtonPressed"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://4qy4ogcm74ki"]
+[gd_scene load_steps=3 format=3 uid="uid://4qy4ogcm74ki"]
 
 [ext_resource type="Script" path="res://Scripts/UI/FloatingText.cs" id="1_e26i6"]
+[ext_resource type="FontFile" uid="uid://bero7s4kt0lmk" path="res://Assets/Fonts/PeaberryDoublespace.ttf" id="2_8afar"]
 
 [node name="FloatingText" type="Marker2D" node_paths=PackedStringArray("_label")]
 script = ExtResource("1_e26i6")
@@ -10,5 +11,6 @@ _label = NodePath("Label")
 modulate = Color(0.0352941, 0.290196, 0.619608, 1)
 offset_right = 40.0
 offset_bottom = 23.0
-theme_override_font_sizes/font_size = 16
+theme_override_fonts/font = ExtResource("2_8afar")
+theme_override_font_sizes/font_size = 24
 text = "0"

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bd70x47qkkekv"]
+[gd_scene load_steps=3 format=3 uid="uid://bd70x47qkkekv"]
 
 [ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_u4my6"]
+[ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="2_px2sv"]
 
 [node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("MessageLabel", "MessageTimer", "ScoreLabel")]
 script = ExtResource("1_u4my6")
@@ -17,6 +18,7 @@ offset_right = 168.0
 offset_bottom = 88.0
 grow_horizontal = 2
 size_flags_vertical = 0
+theme = ExtResource("2_px2sv")
 theme_override_font_sizes/font_size = 64
 text = "Score 0000"
 horizontal_alignment = 1
@@ -34,6 +36,7 @@ offset_right = 20.0
 offset_bottom = 44.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_px2sv")
 theme_override_font_sizes/font_size = 64
 
 [node name="MessageTimer" type="Timer" parent="."]

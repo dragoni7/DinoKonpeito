@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://db2xapvyluoki"]
+
+[ext_resource type="FontFile" uid="uid://bero7s4kt0lmk" path="res://Assets/Fonts/PeaberryDoublespace.ttf" id="1_2pk6u"]
+[ext_resource type="StyleBox" uid="uid://dbqmnsltsvoqs" path="res://Assets/Themes/ButtonHover.tres" id="1_bss48"]
+[ext_resource type="StyleBox" uid="uid://ckayw3340dl2i" path="res://Assets/Themes/ButtonNormal.tres" id="1_ct0lr"]
+[ext_resource type="StyleBox" uid="uid://idurg1w2vwd3" path="res://Assets/Themes/ButtonPressed.tres" id="4_nx51k"]
+
+[resource]
+Button/constants/h_separation = 4
+Button/font_sizes/font_size = 22
+Button/fonts/font = ExtResource("1_2pk6u")
+Button/styles/hover = ExtResource("1_bss48")
+Button/styles/normal = ExtResource("1_ct0lr")
+Button/styles/pressed = ExtResource("4_nx51k")
+Label/colors/font_color = Color(0.929412, 0.439216, 0.392157, 1)
+Label/colors/font_outline_color = Color(0, 0, 0, 1)
+Label/constants/outline_size = 1
+Label/fonts/font = ExtResource("1_2pk6u")
