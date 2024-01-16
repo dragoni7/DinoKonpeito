@@ -89,7 +89,7 @@ public partial class GameManager : Node, ISingletonNode
 
     public void OnGameOver()
     {
-        KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
+        //KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
         _konpeitoTimer.Stop();
         UIManager.GetInstance<UIManager>(this).ShowGameOver();
         _menuTimer.Start();

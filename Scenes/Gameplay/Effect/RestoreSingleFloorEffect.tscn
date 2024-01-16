@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://rjuwp5aka02m"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Effect/RestoreSingleFloorEffect.cs" id="1_8eyko"]
+
+[node name="RestoreSingleFloorEffect" type="Node" groups=["Effect"]]
+script = ExtResource("1_8eyko")

@@ -1,4 +1,6 @@
 ﻿using Godot;
+using Godot.Collections;
+using static System.Formats.Asn1.AsnWriter;
 
 partial class KonpeitoManager : Node, ISingletonNode
 {
@@ -10,6 +12,9 @@ partial class KonpeitoManager : Node, ISingletonNode
 
     [Export]
     public PackedScene YellowKonpeitoScene;
+
+    [Export]
+    public PackedScene FlashingKonpeitoScene;
 
     [Signal]
     public delegate void IncreaseScoreEventHandler(int amount);
@@ -86,13 +91,13 @@ partial class KonpeitoManager : Node, ISingletonNode
                     {
                         return WhiteKonpeitoScene;
                     }
-                case > 0.25f:
+                case > 0.3f:
                     {
                         return YellowKonpeitoScene;
                     }
                 default:
                     {
-                        return KonpeitoScene;
+                        return FlashingKonpeitoScene;
                     }
             }
         }
@@ -100,19 +105,35 @@ partial class KonpeitoManager : Node, ISingletonNode
         return sceneToUse;
     }
 
-    public void OnKonpeitoDestroyed(Konpeito konpeito, bool hitFloor)
+    public void OnKonpeitoDestroyed(Konpeito konpeito, Array<StringName> groups)
     {
-        if (!hitFloor)
+        bool noPoints = groups.Contains("Floor");
+
+        if (!noPoints)
         {
             KonpeitoEffect effect = konpeito.Effect;
             effect.Reparent(this);
             effect.Execute();
+
             int score = GetKonpeitoScore(konpeito.Position);
-            EmitSignal(SignalName.IncreaseScore, score);
-            EmitSignal(SignalName.DisplayScoreText, score, konpeito.Position);
+
+            EmitKonpeitoScore(konpeito, score);
         }
 
         konpeito.QueueFree();
+    }
+
+    public void HitAllKonpeito()
+    {
+        GD.Print("hit all konpeito");
+        var konpeitos = GetTree().GetNodesInGroup("Konpeito");
+        
+        foreach (Konpeito k in konpeitos)
+        {
+            EmitKonpeitoScore(k, 10);
+        }
+
+        GetTree().CallGroup("Konpeito", Node.MethodName.QueueFree);
     }
 
     private int GetKonpeitoScore(Vector2 pos)
@@ -144,9 +165,10 @@ partial class KonpeitoManager : Node, ISingletonNode
         }
     }
 
-    public void ClearKonpeito()
+    private void EmitKonpeitoScore(Konpeito konpeito, int score)
     {
-        GetTree().CallGroup("Konpeito", Node.MethodName.QueueFree);
+        EmitSignal(SignalName.IncreaseScore, score);
+        EmitSignal(SignalName.DisplayScoreText, score, konpeito.Position);
     }
 
 }

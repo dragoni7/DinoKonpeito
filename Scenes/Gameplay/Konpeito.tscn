@@ -3,15 +3,14 @@
 [ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_hi2qw"]
 [ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_to6fj"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_gkher"]
-[ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Component/NoEffect.tscn" id="4_elirs"]
+[ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Gameplay/Effect/NoEffect.tscn" id="4_elirs"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hiefn"]
 radius = 27.0
 
-[node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect", "sound") groups=["Konpeito"]]
+[node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
 script = ExtResource("1_hi2qw")
 Effect = NodePath("NoEffect")
-sound = NodePath("AudioStreamPlayer2D")
 Speed = 0.5
 metadata/_edit_group_ = true
 
@@ -32,8 +31,6 @@ shape = SubResource("CircleShape2D_hiefn")
 debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 
 [node name="NoEffect" parent="." instance=ExtResource("4_elirs")]
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

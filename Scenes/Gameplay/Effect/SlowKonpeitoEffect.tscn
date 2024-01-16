@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://dsf0difv2a36t"]
 
-[ext_resource type="Script" path="res://Scripts/Gameplay/Effect/SlowKonpeitoEffect.cs" id="1_3lyg1"]
+[ext_resource type="Script" path="res://Scripts/Gameplay/Effect/SlowKonpeitoEffect.cs" id="1_rj4he"]
 
-[node name="SlowKonpeitoEffect" type="Node" node_paths=PackedStringArray("_timer")]
-script = ExtResource("1_3lyg1")
+[node name="SlowKonpeitoEffect" type="Node" node_paths=PackedStringArray("_timer") groups=["Effect"]]
+script = ExtResource("1_rj4he")
 _timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]

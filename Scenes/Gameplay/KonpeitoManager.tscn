@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dl5owtkq6bjvv"]
+[gd_scene load_steps=7 format=3 uid="uid://dl5owtkq6bjvv"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Manager/KonpeitoManager.cs" id="1_17ek1"]
 [ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="2_p6ypp"]
 [ext_resource type="PackedScene" uid="uid://dv6i6oeer1cib" path="res://Scenes/Gameplay/WhiteKonpeito.tscn" id="3_3dhow"]
+[ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/YellowKonpeito.tscn" id="4_krpxv"]
+[ext_resource type="PackedScene" uid="uid://blygjwrljuk21" path="res://Scenes/Gameplay/FlashingKonpeito.tscn" id="5_s23ib"]
 
 [sub_resource type="Curve2D" id="Curve2D_sr8uu"]
 _data = {
@@ -14,6 +16,8 @@ point_count = 30
 script = ExtResource("1_17ek1")
 KonpeitoScene = ExtResource("2_p6ypp")
 WhiteKonpeitoScene = ExtResource("3_3dhow")
+YellowKonpeitoScene = ExtResource("4_krpxv")
+FlashingKonpeitoScene = ExtResource("5_s23ib")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(0, 50)

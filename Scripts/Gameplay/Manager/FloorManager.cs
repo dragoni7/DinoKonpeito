@@ -30,11 +30,6 @@ partial class FloorManager : Node, ISingletonNode
         }
     }
 
-    private void OnDestroyFloor(Vector2 position)
-    {
-        _destroyedPositions.Add(position);
-    }
-
     public void RestoreFloor()
     {
         if (_destroyedPositions.Count > 0)
@@ -44,6 +39,22 @@ partial class FloorManager : Node, ISingletonNode
             _destroyedPositions.Remove(closestPos);
             SpawnFloor(closestPos);
         }
+    }
+
+    public void RestoreAllFloor()
+    {
+        while (_destroyedPositions.Count > 0)
+        {
+            Vector2 playerPos = PlayerManager.GetInstance<PlayerManager>(this).Player.Position;
+            Vector2 closestPos = _destroyedPositions.Aggregate((v1, v2) => v1.DistanceSquaredTo(playerPos) < v2.DistanceSquaredTo(playerPos) ? v1 : v2);
+            _destroyedPositions.Remove(closestPos);
+            SpawnFloor(closestPos);
+        }
+    }
+
+    private void OnDestroyFloor(Vector2 position)
+    {
+        _destroyedPositions.Add(position);
     }
 
     private void SpawnFloor(Vector2 position)

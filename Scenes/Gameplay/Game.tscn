@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=7 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/UIManager.tscn" id="6_3b3v2"]
 [ext_resource type="PackedScene" uid="uid://dl5owtkq6bjvv" path="res://Scenes/Gameplay/KonpeitoManager.tscn" id="6_btuko"]
 [ext_resource type="PackedScene" uid="uid://bbrnsrx6glk43" path="res://Scenes/Gameplay/GameManager.tscn" id="7_1bjrj"]
-[ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/YellowKonpeito.tscn" id="7_4h5go"]
 [ext_resource type="PackedScene" uid="uid://cdmaej2io2yv8" path="res://Scenes/Gameplay/DifficultyTracker.tscn" id="7_wkgae"]
 [ext_resource type="PackedScene" uid="uid://dc24hn1s7eiad" path="res://Scenes/Gameplay/PlayerManager.tscn" id="8_e6wcl"]
 
@@ -28,7 +27,6 @@ position = Vector2(960, 540)
 [node name="FloorManager" parent="." instance=ExtResource("4_jqnl6")]
 
 [node name="KonpeitoManager" parent="." instance=ExtResource("6_btuko")]
-YellowKonpeitoScene = ExtResource("7_4h5go")
 
 [node name="UIManager" parent="." instance=ExtResource("6_3b3v2")]
 

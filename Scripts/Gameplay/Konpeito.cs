@@ -7,14 +7,11 @@ public partial class Konpeito : Node2D
 	[Export]
 	public KonpeitoEffect Effect;
 
-	[Export]
-	public AudioStreamPlayer2D sound;
-
     [Export]
     public float Speed { get; set; }
 
     [Signal]
-    public delegate void DestroyedEventHandler(Konpeito konpeito, bool hitFloor);
+    public delegate void DestroyedEventHandler(Konpeito konpeito, Array<StringName> groups);
 
     private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
@@ -28,13 +25,6 @@ public partial class Konpeito : Node2D
 
 	public void OnHit(Array<StringName> groups)
 	{
-		bool hitFloor = false;
-
-		if (groups.Contains("Floor"))
-		{
-			hitFloor = true;
-		}
-
-        EmitSignal(SignalName.Destroyed, this, hitFloor);
+        EmitSignal(SignalName.Destroyed, this, groups);
     }
 }
