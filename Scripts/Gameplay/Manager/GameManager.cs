@@ -4,11 +4,21 @@ public partial class GameManager : Node, ISingletonNode
 {
     private int _score;
 
-    private double _spawnTime;
+    private float _spawnTime;
 
     private double _gameSpeed;
 
     private DifficultyTracker _difficulty;
+
+    private Timer _konpeitoTimer;
+
+    private Timer _startTimer;
+
+    private Timer _menuTimer;
+
+    private Marker2D _startPosition;
+
+    private const float _minSpawnTime = 0.1f;
 
     private int Score
     {
@@ -30,6 +40,12 @@ public partial class GameManager : Node, ISingletonNode
 
     public override void _Ready()
     {
+        _konpeitoTimer = GetNode<Timer>("KonpeitoTimer");
+        _startTimer = GetNode<Timer>("StartTimer");
+        _menuTimer = GetNode<Timer>("MenuReturnTimer");
+        _startPosition = GetNode<Marker2D>("StartPosition");
+        _konpeitoTimer.Timeout += KonpeitoManager.GetInstance<KonpeitoManager>(this).OnSpawnKonpeito;
+
         _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
         NewGame();
         UIManager.GetInstance<UIManager>(this).ShowMessage("Begin!");
@@ -38,10 +54,10 @@ public partial class GameManager : Node, ISingletonNode
     public void NewGame()
     {
         Score = 0;
-        _spawnTime = 3.5;
+        _spawnTime = 3;
 
         // set up player
-        Vector2 startPosition = GetNode<Marker2D>("StartPosition").Position;
+        Vector2 startPosition = _startPosition.Position;
         PlayerManager playerManager = PlayerManager.GetInstance<PlayerManager>(this);
         playerManager.SpawnPlayer(startPosition);
         playerManager.Player.GameOver += OnGameOver;
@@ -50,33 +66,33 @@ public partial class GameManager : Node, ISingletonNode
         FloorManager.GetInstance<FloorManager>(this).CreateFloor();
 
         // start timer
-        GetNode<Timer>("StartTimer").Start();
-        GetNode<Timer>("KonpeitoTimer").WaitTime = _spawnTime;
+        _startTimer.Start();
+        _konpeitoTimer.WaitTime = _spawnTime;
     }
 
     public void OnIncreaseScore(int amount)
     {
         Score += amount;
 
-        if (Score % 5000 == 0)
+        if ((DifficultyTracker.Stage + 1) * 5000 < Score)
         {
-            GD.Print("Difficulty increase");
             _difficulty.NextStage();
         }
     }
 
-    public void OnDifficultyIncreased(DifficultyStage stage)
+    public void OnDifficultyIncreased(int stage)
     {
-        _spawnTime -= 0.25;
-        GetNode<Timer>("KonpeitoTimer").WaitTime = Mathf.Clamp(_spawnTime, 0.75, 5);
+        GD.Print("Difficulty increase");
+        _spawnTime -= 0.5f;
+        _spawnTime = Mathf.Clamp(_spawnTime, 1f, 3f);
     }
 
     public void OnGameOver()
     {
         KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
-        GetNode<Timer>("KonpeitoTimer").Stop();
+        _konpeitoTimer.Stop();
         UIManager.GetInstance<UIManager>(this).ShowGameOver();
-        GetNode<Timer>("MenuReturnTimer").Start();
+        _menuTimer.Start();
     }
 
     private void OnReturnTimerTimeout()
@@ -86,11 +102,11 @@ public partial class GameManager : Node, ISingletonNode
 
     private void OnStartTimerTimeout()
     {
-        GetNode<Timer>("KonpeitoTimer").Start();
+        _konpeitoTimer.Start();
     }
 
     private void OnKonpeitoTimerTimeout()
     {
-        KonpeitoManager.GetInstance<KonpeitoManager>(this).SpawnKonpeito();
+        _konpeitoTimer.WaitTime = Mathf.Clamp(GD.Randfn(_spawnTime, 1f), _minSpawnTime, _spawnTime);
     }
 }

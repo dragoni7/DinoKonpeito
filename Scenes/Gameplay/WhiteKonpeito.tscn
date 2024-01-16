@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dv6i6oeer1cib"]
+[gd_scene load_steps=6 format=3 uid="uid://dv6i6oeer1cib"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_lf4h0"]
 [ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_remm2"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_mhv5e"]
 [ext_resource type="PackedScene" uid="uid://rjuwp5aka02m" path="res://Scenes/Component/RestoreSingleFloorEffect.tscn" id="4_csnw8"]
-[ext_resource type="AudioStream" uid="uid://c6qelfjsu226" path="res://Assets/Sounds/Suck 2.wav" id="5_1f0w2"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_u7hgu"]
 radius = 27.0
@@ -35,7 +34,6 @@ debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 [node name="RestoreSingleFloorEffect" parent="." instance=ExtResource("4_csnw8")]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_1f0w2")
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

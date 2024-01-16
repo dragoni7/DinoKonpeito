@@ -6,7 +6,7 @@
 script = ExtResource("1_f8vsv")
 
 [node name="KonpeitoTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 3.0
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 2.0

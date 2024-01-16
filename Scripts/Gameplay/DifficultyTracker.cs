@@ -2,36 +2,24 @@
 
 public partial class DifficultyTracker : Node
 {
-    private DifficultyStage _stage;
+    public static int Stage { get; private set; }
 
     [Signal]
-    public delegate void DifficultyChangedEventHandler(DifficultyStage stage);
+    public delegate void DifficultyChangedEventHandler(int stage);
+
+    private const int MaxStage = 9;
 
     public DifficultyTracker()
     {
-        _stage = DifficultyStage.One;
+        Stage = 0;
     }
 
     public void NextStage()
     {
-        if (_stage != DifficultyStage.Ten)
+        if (Stage != MaxStage)
         {
-            _stage++;
-            EmitSignal(SignalName.DifficultyChanged, (int)_stage);
+            Stage++;
+            EmitSignal(SignalName.DifficultyChanged, Stage);
         }
     }
-}
-
-public enum DifficultyStage
-{
-    One,
-    Two,
-    Three,
-    Four,
-    Five,
-    Six,
-    Seven,
-    Eight,
-    Nine,
-    Ten
 }

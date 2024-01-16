@@ -15,7 +15,6 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 size_flags_horizontal = 4
 color = Color(0.231373, 0.545098, 0.701961, 1)
-metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)

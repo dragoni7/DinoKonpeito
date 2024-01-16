@@ -1,9 +1,4 @@
 ﻿using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 partial class KonpeitoManager : Node, ISingletonNode
 {
@@ -21,10 +16,6 @@ partial class KonpeitoManager : Node, ISingletonNode
 
     [Signal]
     public delegate void DisplayScoreTextEventHandler(int amount, Vector2 position);
-
-    private float _spawns;
-
-    public float Spawns => _spawns;
 
     private float _speedModifier;
 
@@ -49,41 +40,70 @@ partial class KonpeitoManager : Node, ISingletonNode
         GetTree().CallGroup("Konpeito", Konpeito.MethodName.Move, SpeedModifier);
     }
 
-    public void SpawnKonpeito()
+    public void OnSpawnKonpeito()
+    {
+
+        var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
+
+        SpawnKonpeito(spawnLocation);
+
+        double doubleSpawnChance = DifficultyTracker.Stage / 4D;
+
+        if (doubleSpawnChance > GD.RandRange(0, 1.5D))
+        {
+            GD.Print("double spawn");
+            SpawnKonpeito(spawnLocation);
+        }
+    }
+
+    private void SpawnKonpeito(PathFollow2D location)
+    {
+        location.ProgressRatio = GD.Randf();
+
+        Konpeito konpeito = PickScene().Instantiate<Konpeito>();
+        konpeito.Destroyed += OnKonpeitoDestroyed;
+
+        konpeito.Position = location.Position;
+        konpeito.Speed += (float)GD.RandRange(0.25f, 0.75f) + (DifficultyTracker.Stage * 0.4f);
+
+        AddChild(konpeito);
+    }
+
+
+    private PackedScene PickScene()
     {
         PackedScene sceneToUse = KonpeitoScene;
 
-        if (GD.RandRange(1, 3) % 3 == 0)
+        double specialKonpeitoChance = (DifficultyTracker.Stage + 1) / 16D;
+
+        if (specialKonpeitoChance > GD.RandRange(0, 1D))
         {
-            if (GD.RandRange(1, 2) % 2 == 0)
+            float rand = GD.Randf();
+
+            switch (rand)
             {
-                sceneToUse = WhiteKonpeitoScene;
-            }
-            else
-            {
-                sceneToUse = YellowKonpeitoScene;
+                case > 0.5f:
+                    {
+                        return WhiteKonpeitoScene;
+                    }
+                case > 0.25f:
+                    {
+                        return YellowKonpeitoScene;
+                    }
+                default:
+                    {
+                        return KonpeitoScene;
+                    }
             }
         }
 
-        Konpeito konpeito = sceneToUse.Instantiate<Konpeito>();
-        konpeito.Destroyed += OnKonpeitoDestroyed;
-
-        var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
-        spawnLocation.ProgressRatio = GD.Randf();
-
-        konpeito.Position = spawnLocation.Position;
-        konpeito.Speed += (float)GD.RandRange(0.25f, 1.0f) + (_spawns * 0.03f);
-
-        AddChild(konpeito);
-        _spawns++;
+        return sceneToUse;
     }
 
     public void OnKonpeitoDestroyed(Konpeito konpeito, bool hitFloor)
     {
         if (!hitFloor)
         {
-            konpeito.sound.Play();
-
             KonpeitoEffect effect = konpeito.Effect;
             effect.Reparent(this);
             effect.Execute();
