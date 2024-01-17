@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://bbrnsrx6glk43"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Manager/GameManager.cs" id="1_f8vsv"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_f8vsv")
+
+[node name="KonpeitoTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="MenuReturnTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(960, 990)
+
+[connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
+[connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
+[connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]

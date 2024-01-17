@@ -1,13 +1,12 @@
 using Godot;
-using System;
 
-public partial class SceneLoader : Node, ISingletonNode
+public partial class SceneLoader : Node, ISingletonNode<SceneLoader>
 {
     [Export] private string _sceneFolder;
 
-    public static T GetInstance<T>(Node from) where T : Node
+    public static SceneLoader GetInstance(Node from)
     {
-        return from.GetNode<T>("/root/SceneLoader");
+        return from.GetNode<SceneLoader>("/root/SceneLoader");
     }
 
     public void ChangeToScene(string sceneName)

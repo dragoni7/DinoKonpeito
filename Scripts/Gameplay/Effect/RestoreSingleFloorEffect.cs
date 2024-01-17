@@ -2,8 +2,7 @@
 {
     public override void Execute()
     {
-        var floorManager = FloorManager.GetInstance<FloorManager>(this);
-        floorManager.CallDeferred(FloorManager.MethodName.RestoreFloor);
+        FloorManager.GetInstance(this).CallDeferred(FloorManager.MethodName.RestoreFloor);
         QueueFree();
     }
 }

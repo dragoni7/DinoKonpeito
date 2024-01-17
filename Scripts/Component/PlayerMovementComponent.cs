@@ -4,7 +4,6 @@ namespace DinoKonpeito.Component
 {
     public partial class PlayerMovementComponent : Node2D
     {
-
         private bool _movingLeft;
 
         private Vector2 _screenSize;

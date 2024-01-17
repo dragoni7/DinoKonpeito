@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UIManager : Node, ISingletonNode
+public partial class UIManager : Node, ISingletonNode<UIManager>
 {
     [Export]
     public PackedScene FloatingTextScene;
@@ -8,9 +8,9 @@ public partial class UIManager : Node, ISingletonNode
     [Export]
     private HUD _hud;
 
-    public static T GetInstance<T>(Node from) where T : Node
+    public static UIManager GetInstance(Node from)
     {
-        return from.GetNode<T>("/root/Game/UIManager");
+        return from.GetNode<UIManager>("/root/Game/UIManager");
     }
 
     public void ShowMessage(string message)

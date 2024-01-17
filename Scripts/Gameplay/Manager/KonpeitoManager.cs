@@ -1,8 +1,7 @@
 ﻿using Godot;
 using Godot.Collections;
-using static System.Formats.Asn1.AsnWriter;
 
-partial class KonpeitoManager : Node, ISingletonNode
+partial class KonpeitoManager : Node, ISingletonNode<KonpeitoManager>
 {
     [Export]
     public PackedScene KonpeitoScene;
@@ -22,32 +21,25 @@ partial class KonpeitoManager : Node, ISingletonNode
     [Signal]
     public delegate void DisplayScoreTextEventHandler(int amount, Vector2 position);
 
-    private float _speedModifier;
+    public float SpeedModifier { get; set; }
 
-    public float SpeedModifier
+    public static KonpeitoManager GetInstance(Node from)
     {
-        get => _speedModifier;
-        set => _speedModifier = value;
-    }
-
-    public static T GetInstance<T>(Node from) where T : Node
-    {
-        return from.GetNode<T>("/root/Game/KonpeitoManager");
+        return from.GetNode<KonpeitoManager>("/root/Game/KonpeitoManager");
     }
 
     public override void _Ready()
     {
-        _speedModifier = 1;
+        SpeedModifier = 1;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
     {
         GetTree().CallGroup("Konpeito", Konpeito.MethodName.Move, SpeedModifier);
     }
 
     public void OnSpawnKonpeito()
     {
-
         var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
 
         SpawnKonpeito(spawnLocation);
@@ -91,7 +83,7 @@ partial class KonpeitoManager : Node, ISingletonNode
                     {
                         return WhiteKonpeitoScene;
                     }
-                case > 0.3f:
+                case > 0.2f:
                     {
                         return YellowKonpeitoScene;
                     }

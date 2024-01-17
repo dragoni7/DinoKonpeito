@@ -1,7 +1,7 @@
 using Godot;
 using Godot.Collections;
 
-public partial class Konpeito : Node2D
+public partial class Konpeito : Node2D, ITakesHits
 {
 
 	[Export]

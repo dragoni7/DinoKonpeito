@@ -1,15 +1,15 @@
 ﻿using Godot;
 
-partial class PlayerManager : Node, ISingletonNode
+partial class PlayerManager : Node, ISingletonNode<PlayerManager>
 {
     [Export]
     private PackedScene _playerScene;
 
     public Player Player { get; private set; }
 
-    public static T GetInstance<T>(Node from) where T : Node
+    public static PlayerManager GetInstance(Node from)
     {
-        return from.GetNode<T>("/root/Game/PlayerManager");
+        return from.GetNode<PlayerManager>("/root/Game/PlayerManager");
     }
 
     public void SpawnPlayer(Vector2 position)

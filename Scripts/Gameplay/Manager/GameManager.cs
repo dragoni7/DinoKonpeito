@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class GameManager : Node, ISingletonNode
+public partial class GameManager : Node, ISingletonNode<GameManager>
 {
     private int _score;
 
@@ -44,11 +44,11 @@ public partial class GameManager : Node, ISingletonNode
         _startTimer = GetNode<Timer>("StartTimer");
         _menuTimer = GetNode<Timer>("MenuReturnTimer");
         _startPosition = GetNode<Marker2D>("StartPosition");
-        _konpeitoTimer.Timeout += KonpeitoManager.GetInstance<KonpeitoManager>(this).OnSpawnKonpeito;
-
+        _konpeitoTimer.Timeout += KonpeitoManager.GetInstance(this).OnSpawnKonpeito;
         _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
+
         NewGame();
-        UIManager.GetInstance<UIManager>(this).ShowMessage("Begin!");
+        UIManager.GetInstance(this).ShowMessage("Begin!");
     }
 
     public void NewGame()
@@ -58,12 +58,12 @@ public partial class GameManager : Node, ISingletonNode
 
         // set up player
         Vector2 startPosition = _startPosition.Position;
-        PlayerManager playerManager = PlayerManager.GetInstance<PlayerManager>(this);
+        PlayerManager playerManager = PlayerManager.GetInstance(this);
         playerManager.SpawnPlayer(startPosition);
         playerManager.Player.GameOver += OnGameOver;
 
         // set up floor
-        FloorManager.GetInstance<FloorManager>(this).CreateFloor();
+        FloorManager.GetInstance(this).CreateFloor();
 
         // start timer
         _startTimer.Start();
@@ -82,22 +82,20 @@ public partial class GameManager : Node, ISingletonNode
 
     public void OnDifficultyIncreased(int stage)
     {
-        GD.Print("Difficulty increase");
         _spawnTime -= 0.5f;
         _spawnTime = Mathf.Clamp(_spawnTime, 1f, 3f);
     }
 
     public void OnGameOver()
     {
-        //KonpeitoManager.GetInstance<KonpeitoManager>(this).ClearKonpeito();
         _konpeitoTimer.Stop();
-        UIManager.GetInstance<UIManager>(this).ShowGameOver();
+        UIManager.GetInstance(this).ShowGameOver();
         _menuTimer.Start();
     }
 
     private void OnReturnTimerTimeout()
     {
-        SceneLoader.GetInstance<SceneLoader>(this).ChangeToScene("UI/Menu.tscn");
+        SceneLoader.GetInstance(this).ChangeToScene("UI/Menu.tscn");
     }
 
     private void OnStartTimerTimeout()
