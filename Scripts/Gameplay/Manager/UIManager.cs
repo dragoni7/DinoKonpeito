@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UIManager : Node, ISingletonNode<UIManager>
+public partial class UIManager : Node, IManagerNode<UIManager>
 {
     [Export]
     public PackedScene FloatingTextScene;

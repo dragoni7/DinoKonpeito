@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class GameManager : Node, ISingletonNode<GameManager>
+public partial class GameManager : Node, IManagerNode<GameManager>
 {
     private int _score;
 

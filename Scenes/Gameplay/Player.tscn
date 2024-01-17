@@ -54,12 +54,11 @@ position = Vector2(-16, 0)
 rotation = -1.0472
 _playerMovement = NodePath("../PlayerMovementComponent")
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_healthComponent") instance=ExtResource("7_ddkp8")]
+[node name="HitboxComponent" parent="." instance=ExtResource("7_ddkp8")]
 position = Vector2(1, -6)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
-_healthComponent = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 6)

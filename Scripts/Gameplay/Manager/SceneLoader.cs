@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class SceneLoader : Node, ISingletonNode<SceneLoader>
+public partial class SceneLoader : Node, IManagerNode<SceneLoader>
 {
     [Export] private string _sceneFolder;
 

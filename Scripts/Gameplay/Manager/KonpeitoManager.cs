@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Godot.Collections;
 
-partial class KonpeitoManager : Node, ISingletonNode<KonpeitoManager>
+partial class KonpeitoManager : Node, IManagerNode<KonpeitoManager>
 {
     [Export]
     public PackedScene KonpeitoScene;
