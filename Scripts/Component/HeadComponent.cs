@@ -22,9 +22,10 @@ public partial class HeadComponent : Node2D
         _hitbox.Monitorable = false;
     }
 
-    public override void _Process(double delta)
+    public override void _PhysicsProcess(double delta)
 	{
-		if (Input.IsActionPressed("Up"))
+
+		if (Input.IsActionPressed("Up") && GetViewportRect().HasPoint(GlobalPosition))
 		{
             // extend head position
             Position += _step;

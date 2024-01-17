@@ -18,7 +18,7 @@ namespace DinoKonpeito.Component
         public bool CanMove { get; set; }
 
         [Export]
-        public AnimatedSprite2D _animatedSprite2D;
+        public AnimatedSprite2D AnimatedSprite2D;
 
         public override void _Ready()
         {
@@ -64,11 +64,11 @@ namespace DinoKonpeito.Component
 
             if (velocity.Length() > 0)
             {
-                _animatedSprite2D.Play();
+                AnimatedSprite2D.Play();
             }
             else
             {
-                _animatedSprite2D.Stop();
+                AnimatedSprite2D.Stop();
             }
         }
 
