@@ -53,7 +53,6 @@ public partial class GameManager : Node, IManagerNode<GameManager>
 
     public void NewGame()
     {
-        Score = 0;
         _spawnTime = 3;
 
         // set up player

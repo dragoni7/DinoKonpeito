@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://d4fmexdbvc8sw"
+path="res://.godot/imported/Milk Mango.ttf-a1fe91f5b4be399ca008d43d6ab20c0b.fontdata"
+
+[deps]
+
+source_file="res://Assets/Fonts/Milk Mango.ttf"
+dest_files=["res://.godot/imported/Milk Mango.ttf-a1fe91f5b4be399ca008d43d6ab20c0b.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

@@ -3,24 +3,25 @@
 [ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_u4my6"]
 [ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="2_px2sv"]
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("MessageLabel", "MessageTimer", "ScoreLabel")]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("ScoreLabel", "MessageLabel", "MessageTimer")]
 script = ExtResource("1_u4my6")
+ScoreLabel = NodePath("ScoreLabel")
 MessageLabel = NodePath("Message")
 MessageTimer = NodePath("MessageTimer")
-ScoreLabel = NodePath("ScoreLabel")
 
 [node name="ScoreLabel" type="Label" parent="."]
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -168.0
-offset_right = 168.0
-offset_bottom = 88.0
+offset_left = -204.0
+offset_top = 23.0
+offset_right = 204.0
+offset_bottom = 111.0
 grow_horizontal = 2
 size_flags_vertical = 0
 theme = ExtResource("2_px2sv")
 theme_override_font_sizes/font_size = 64
-text = "Score 0000"
+text = "Score 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
