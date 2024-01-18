@@ -1,10 +1,12 @@
 ﻿using Godot;
 using System;
 
-public interface IManagerNode<T>
+public interface ISingleInstance<T> where T : Node
 {
+    public const string _defaultPath = "/root/Game/";
+
     /// <summary>
-    /// Gets an instance of the node in the tree. Nodes that are frequently called upon (like managers) should implement this interface.
+    /// Gets an instance of the node in the tree. Assumes the node only has one instance (like autoloads).
     /// </summary>
     /// <typeparam name="T">The node type</typeparam>
     /// <param name="from">Node to call from</param>

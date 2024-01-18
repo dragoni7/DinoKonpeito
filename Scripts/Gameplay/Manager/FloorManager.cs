@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-partial class FloorManager : Node, IManagerNode<FloorManager>
+partial class FloorManager : Node, ISingleInstance<FloorManager>
 {
     [Export]
     private PackedScene _floorScene;

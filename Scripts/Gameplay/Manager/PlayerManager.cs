@@ -1,6 +1,6 @@
 ﻿using Godot;
 
-partial class PlayerManager : Node, IManagerNode<PlayerManager>
+partial class PlayerManager : Node, ISingleInstance<PlayerManager>
 {
     [Export]
     private PackedScene _playerScene;

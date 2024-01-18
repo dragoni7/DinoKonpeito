@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class UIManager : Node, IManagerNode<UIManager>
+public partial class UIManager : Node, ISingleInstance<UIManager>
 {
     [Export]
     public PackedScene FloatingTextScene;
@@ -30,14 +30,14 @@ public partial class UIManager : Node, IManagerNode<UIManager>
     {
         FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
         text.SetText(amount.ToString());
-        text.SetColor(GameColors.FromScore(amount));
+        text.SetColor(GameConsts.ScoreColors.Get((GameConsts.Scores)amount));
         text.Position = position;
 
-        if (amount >= 300)
+        if (amount >= (int)GameConsts.Scores.High)
         {
             var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
             FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
-            flashComponent.FlashColor = GameColors.ScoreFlashColor(amount);
+            flashComponent.FlashColor = GameConsts.ScoreColors.Get((GameConsts.Scores)amount);
             flashComponent.Target = text;
             text.AddChild(flashComponent);
         }

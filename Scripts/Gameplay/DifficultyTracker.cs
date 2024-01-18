@@ -7,8 +7,6 @@ public partial class DifficultyTracker : Node
     [Signal]
     public delegate void DifficultyChangedEventHandler(int stage);
 
-    private const int MaxStage = 9;
-
     public DifficultyTracker()
     {
         Stage = 0;
@@ -16,7 +14,7 @@ public partial class DifficultyTracker : Node
 
     public void NextStage()
     {
-        if (Stage != MaxStage)
+        if (Stage != GameConsts.Difficulty.MaxDifficultyStages)
         {
             Stage++;
             EmitSignal(SignalName.DifficultyChanged, Stage);

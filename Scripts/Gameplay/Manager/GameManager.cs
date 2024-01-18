@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class GameManager : Node, IManagerNode<GameManager>
+public partial class GameManager : Node, ISingleInstance<GameManager>
 {
     private int _score;
 
@@ -18,8 +18,6 @@ public partial class GameManager : Node, IManagerNode<GameManager>
 
     private Marker2D _startPosition;
 
-    private const float _minSpawnTime = 0.1f;
-
     private int Score
     {
         get => _score;
@@ -33,9 +31,9 @@ public partial class GameManager : Node, IManagerNode<GameManager>
     [Signal]
     public delegate void ScoreChangedEventHandler(int score);
 
-    public static T GetInstance<T>(Node from) where T : Node
+    public static GameManager GetInstance(Node from)
     {
-        return from.GetNode<T>("/root/Game/GameManager");
+        return from.GetNode<GameManager>("/root/Game/GameManager");
     }
 
     public override void _Ready()
@@ -44,7 +42,7 @@ public partial class GameManager : Node, IManagerNode<GameManager>
         _startTimer = GetNode<Timer>("StartTimer");
         _menuTimer = GetNode<Timer>("MenuReturnTimer");
         _startPosition = GetNode<Marker2D>("StartPosition");
-        _konpeitoTimer.Timeout += KonpeitoManager.GetInstance(this).OnSpawnKonpeito;
+        _konpeitoTimer.Timeout += GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").OnSpawnKonpeito;
         _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
 
         NewGame();
@@ -53,7 +51,7 @@ public partial class GameManager : Node, IManagerNode<GameManager>
 
     public void NewGame()
     {
-        _spawnTime = 3;
+        _spawnTime = GameConsts.Konpeito.MaxSpawnTime;
 
         // set up player
         Vector2 startPosition = _startPosition.Position;
@@ -73,16 +71,17 @@ public partial class GameManager : Node, IManagerNode<GameManager>
     {
         Score += amount;
 
-        if ((DifficultyTracker.Stage + 1) * 5000 < Score)
+        if ((DifficultyTracker.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
         {
+            GD.Print("difficulty increased");
             _difficulty.NextStage();
         }
     }
 
     public void OnDifficultyIncreased(int stage)
     {
-        _spawnTime -= 0.5f;
-        _spawnTime = Mathf.Clamp(_spawnTime, 1f, 3f);
+        _spawnTime -= GameConsts.Konpeito.SpawnTimeReduction;
+        _spawnTime = Mathf.Clamp(_spawnTime, 1f, GameConsts.Konpeito.MaxSpawnTime);
     }
 
     public void OnGameOver()
@@ -94,7 +93,7 @@ public partial class GameManager : Node, IManagerNode<GameManager>
 
     private void OnReturnTimerTimeout()
     {
-        SceneLoader.GetInstance(this).ChangeToScene("UI/Menu.tscn");
+        SceneLoader.GetInstance(this);
     }
 
     private void OnStartTimerTimeout()
@@ -104,6 +103,6 @@ public partial class GameManager : Node, IManagerNode<GameManager>
 
     private void OnKonpeitoTimerTimeout()
     {
-        _konpeitoTimer.WaitTime = Mathf.Clamp(GD.Randfn(_spawnTime, 1f), _minSpawnTime, _spawnTime);
+        _konpeitoTimer.WaitTime = Mathf.Clamp(GD.Randfn(_spawnTime, 1f), GameConsts.Konpeito.MinSpawnTime, _spawnTime);
     }
 }
