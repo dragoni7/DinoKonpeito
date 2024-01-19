@@ -1,3 +1,6 @@
+using Godot;
+
+[Tool]
 public partial class RestoreAndClearEffect : KonpeitoEffect
 {
     public override void Execute()

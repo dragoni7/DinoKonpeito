@@ -1,4 +1,7 @@
-﻿public partial class RestoreSingleFloorEffect : KonpeitoEffect
+﻿using Godot;
+
+[Tool]
+public partial class RestoreSingleFloorEffect : KonpeitoEffect
 {
     public override void Execute()
     {

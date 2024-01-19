@@ -27,9 +27,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hd8o0"]
-radius = 21.0
-height = 54.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1pmr8"]
+size = Vector2(86, 40)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(960, 1000)
@@ -37,6 +36,7 @@ script = ExtResource("1_n1k7q")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_hefhu")
+debug_color = Color(0.937255, 0, 0.635294, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_aabba")
@@ -55,15 +55,15 @@ rotation = -1.0472
 _playerMovement = NodePath("../PlayerMovementComponent")
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") instance=ExtResource("7_ddkp8")]
-position = Vector2(1, -6)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
 _cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, 6)
-shape = SubResource("CapsuleShape2D_hd8o0")
+position = Vector2(0, -7)
+shape = SubResource("RectangleShape2D_1pmr8")
+debug_color = Color(0, 0.647059, 0.2, 0.54902)
 
 [node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
 wait_time = 0.8

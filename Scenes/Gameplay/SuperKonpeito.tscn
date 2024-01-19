@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://p6f65nbmo0aa" path="res://Scenes/Gameplay/Effect/RestoreAndClearEffect.tscn" id="5_58kak"]
 [ext_resource type="PackedScene" uid="uid://nigr3lx2f5k8" path="res://Scenes/Component/FlashingComponent.tscn" id="5_sneuy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_hiefn"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_mlwnf"]
 radius = 27.0
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
@@ -22,14 +22,13 @@ texture = ExtResource("2_bwxd0")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") instance=ExtResource("3_13uii")]
-visible = false
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 4
 _cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-shape = SubResource("CircleShape2D_hiefn")
+shape = SubResource("CircleShape2D_mlwnf")
 debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 
 [node name="CollisionTimer" type="Timer" parent="HitboxComponent"]

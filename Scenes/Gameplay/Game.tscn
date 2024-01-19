@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=9 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/Manager/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/Manager/UIManager.tscn" id="6_3b3v2"]
@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://cdmaej2io2yv8" path="res://Scenes/Gameplay/DifficultyTracker.tscn" id="7_wkgae"]
 [ext_resource type="PackedScene" uid="uid://dc24hn1s7eiad" path="res://Scenes/Gameplay/Manager/PlayerManager.tscn" id="8_e6wcl"]
 [ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="8_ovjhs"]
-[ext_resource type="PackedScene" uid="uid://dv6i6oeer1cib" path="res://Scenes/Gameplay/RestoringKonpeito.tscn" id="9_q5cto"]
-[ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/SlowingKonpeito.tscn" id="10_s7d1l"]
-[ext_resource type="PackedScene" uid="uid://blygjwrljuk21" path="res://Scenes/Gameplay/SuperKonpeito.tscn" id="11_yo1o1"]
 
 [node name="Game" type="Node2D"]
 
@@ -37,9 +34,6 @@ position = Vector2(960, 540)
 
 [node name="KonpeitoSpawner" parent="." instance=ExtResource("7_inrg0")]
 KonpeitoScene = ExtResource("8_ovjhs")
-RestoringKonpeitoScene = ExtResource("9_q5cto")
-SlowingKonpeitoScene = ExtResource("10_s7d1l")
-SuperKonpeitoScene = ExtResource("11_yo1o1")
 
 [connection signal="DifficultyChanged" from="DifficultyTracker" to="GameManager" method="OnDifficultyIncreased"]
 [connection signal="ScoreChanged" from="GameManager" to="UIManager" method="OnUpdateScore"]

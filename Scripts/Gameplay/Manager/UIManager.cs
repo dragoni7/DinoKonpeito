@@ -35,7 +35,6 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
 
         if (amount >= (int)GameConsts.Scores.High)
         {
-            GD.Print("flashing text");
             var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
             FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
             flashComponent.FlashColor = GameConsts.ScoreColors.Get((GameConsts.Scores)amount);

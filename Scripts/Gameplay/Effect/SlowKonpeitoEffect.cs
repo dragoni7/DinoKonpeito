@@ -1,5 +1,6 @@
 ﻿using Godot;
 
+[Tool]
 public partial class SlowKonpeitoEffect : KonpeitoEffect
 {
     [Export]

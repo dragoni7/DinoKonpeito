@@ -1,6 +1,11 @@
 ﻿using Godot;
 using Godot.Collections;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using static GameConsts;
 
+[Tool]
 partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 {
 
@@ -39,7 +44,7 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 
             int score = GetKonpeitoScore(konpeito.Position);
 
-            EmitKonpeitoScore(konpeito, score);
+            EmitKonpeitoScore(konpeito.Position, score);
         }
 
         konpeito.QueueFree();
@@ -47,14 +52,37 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 
     public void HitAllKonpeito()
     {
-        var konpeitos = GetTree().GetNodesInGroup("Konpeito");
-        
+        var konpeitos = GetTree().GetNodesInGroup("Konpeito")
+            .Where(n => n is Konpeito)
+            .Select(n => n).Cast<Konpeito>()
+            .OrderByDescending(k => k.Position.Y);
+
+        float count = 0;
+
         foreach (Konpeito k in konpeitos)
         {
-            EmitKonpeitoScore(k, 10);
+            if (k != null)
+            {
+                count += 0.1f;
+                DelayHit(k, count);
+            }
         }
+    
+    }
 
-        GetTree().CallGroup("Konpeito", Node.MethodName.QueueFree);
+    private async void DelayHit(Konpeito k, float time)
+    {
+        await ToSignal(GetTree().CreateTimer(time), "timeout");
+
+        try
+        {
+            EmitKonpeitoScore(k.Position, 10);
+            k.CallDeferred(Node.MethodName.QueueFree);
+        }
+        catch (ObjectDisposedException)
+        {
+            return;
+        }
     }
 
     private int GetKonpeitoScore(Vector2 pos)
@@ -86,10 +114,10 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
         }
     }
 
-    private void EmitKonpeitoScore(Konpeito konpeito, int score)
+    private void EmitKonpeitoScore(Vector2 position, int score)
     {
         EmitSignal(SignalName.IncreaseScore, score);
-        EmitSignal(SignalName.DisplayScoreText, score, konpeito.Position);
+        EmitSignal(SignalName.DisplayScoreText, score, position);
     }
 
 }

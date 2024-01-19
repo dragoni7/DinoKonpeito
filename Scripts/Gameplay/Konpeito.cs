@@ -1,6 +1,7 @@
 using Godot;
 using Godot.Collections;
 
+[Tool]
 public partial class Konpeito : Node2D, ITakesHits
 {
 

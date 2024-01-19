@@ -60,8 +60,8 @@ public partial class HeadComponent : Node2D, ITakesHits
             _tween = GetTree().CreateTween();
             _tween.Finished += OnHeadReturned;
             _tween.SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Expo);
+            _tween.TweenProperty(_hitbox, "monitorable", false, 0.01f);
             _tween.TweenProperty(this, "position", origin, 0.15f);
-            _tween.TweenProperty(_hitbox, "monitorable", false, 0.15f);
         }
     }
 }
