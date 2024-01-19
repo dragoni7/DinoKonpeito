@@ -20,15 +20,19 @@ texture = ExtResource("2_v14rc")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_53jyk")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") instance=ExtResource("3_53jyk")]
 scale = Vector2(1.2, 1.2)
 collision_layer = 2
 collision_mask = 4
+_cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0.416666, -0.416666)
 shape = SubResource("CircleShape2D_u7hgu")
 debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
+
+[node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.8
 
 [node name="RestoreSingleFloorEffect" parent="." instance=ExtResource("4_qu3ky")]
 

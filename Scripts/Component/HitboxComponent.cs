@@ -13,7 +13,12 @@ public partial class HitboxComponent : Area2D
 	[Export]
 	private Timer _cdTimer;
 
-	private void OnAreaEntered(Area2D otherArea)
+    public override void _Ready()
+    {
+        _cdTimer.Timeout += OnCollisionTimerTimeout;
+    }
+
+    private void OnAreaEntered(Area2D otherArea)
 	{
 		if (otherArea is HitboxComponent)
 		{
@@ -26,7 +31,7 @@ public partial class HitboxComponent : Area2D
         EmitSignal(SignalName.Hit, otherArea.GetGroups());
         _healthComponent?.TakeDamage(1f);
         GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred(CollisionShape2D.PropertyName.Disabled, true);
-        _cdTimer?.Start();
+        _cdTimer.Start();
     }
 
 	private void OnCollisionTimerTimeout()

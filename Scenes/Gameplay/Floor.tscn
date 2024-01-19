@@ -13,11 +13,15 @@ script = ExtResource("1_qqoed")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_70lkg")
 
-[node name="HitboxComponent" parent="." groups=["Floor"] instance=ExtResource("1_v3ycb")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") groups=["Floor"] instance=ExtResource("1_v3ycb")]
 collision_layer = 12
 collision_mask = 2
+_cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("RectangleShape2D_phse3")
+
+[node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.8
 
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

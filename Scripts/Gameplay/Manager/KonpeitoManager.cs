@@ -47,7 +47,6 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 
     public void HitAllKonpeito()
     {
-        GD.Print("hit all konpeito");
         var konpeitos = GetTree().GetNodesInGroup("Konpeito");
         
         foreach (Konpeito k in konpeitos)

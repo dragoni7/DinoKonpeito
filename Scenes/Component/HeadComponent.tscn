@@ -7,23 +7,24 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8pt1b"]
 size = Vector2(29.5, 31)
 
-[node name="HeadComponent" type="Node2D" node_paths=PackedStringArray("_hitbox") groups=["Head"]]
+[node name="HeadComponent" type="Node2D" groups=["Head"]]
 script = ExtResource("1_opb8g")
-_hitbox = NodePath("HitboxComponent")
 _step = Vector2(-8, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.225, 0.225)
 texture = ExtResource("1_21mge")
 
-[node name="HitboxComponent" parent="." groups=["Head"] instance=ExtResource("3_ocyyq")]
-position = Vector2(-2, 0)
-scale = Vector2(0.96792, 0.956579)
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") groups=["Head"] instance=ExtResource("3_ocyyq")]
 collision_layer = 4
-collision_mask = 0
-monitoring = false
+collision_mask = 2
 monitorable = false
+_cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(2, 0)
 shape = SubResource("RectangleShape2D_8pt1b")
+
+[node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.1
+
+[connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

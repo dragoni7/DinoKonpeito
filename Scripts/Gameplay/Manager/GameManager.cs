@@ -73,7 +73,6 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
         if ((DifficultyTracker.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
         {
-            GD.Print("difficulty increased");
             _difficulty.NextStage();
         }
     }
@@ -81,7 +80,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
     public void OnDifficultyIncreased(int stage)
     {
         _spawnTime -= GameConsts.Konpeito.SpawnTimeReduction;
-        _spawnTime = Mathf.Clamp(_spawnTime, 1f, GameConsts.Konpeito.MaxSpawnTime);
+        _spawnTime = Mathf.Clamp(_spawnTime, 0.75f, GameConsts.Konpeito.MaxSpawnTime);
     }
 
     public void OnGameOver()
@@ -93,7 +92,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     private void OnReturnTimerTimeout()
     {
-        SceneLoader.GetInstance(this);
+        SceneLoader.GetInstance(this).ChangeToScene("UI/Menu.tscn");
     }
 
     private void OnStartTimerTimeout()

@@ -24,7 +24,6 @@ public partial class KonpeitoSpawner : Node
 
         if (doubleSpawnChance > GD.RandRange(0, 1.5D))
         {
-            GD.Print("double spawn");
             KonpeitoManager.GetInstance(this).AddChild(BuildKonpeito(spawnLocation));
         }
     }

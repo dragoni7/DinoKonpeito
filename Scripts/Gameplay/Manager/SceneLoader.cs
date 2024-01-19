@@ -4,9 +4,9 @@ public partial class SceneLoader : Node, ISingleInstance<SceneLoader>
 {
     [Export] private string _sceneFolder;
 
-    public static UIManager GetInstance(Node from)
+    public static SceneLoader GetInstance(Node from)
     {
-        return from.GetNode<UIManager>("/root/SceneLoader");
+        return from.GetNode<SceneLoader>("/root/SceneLoader");
     }
 
     public void ChangeToScene(string sceneName)

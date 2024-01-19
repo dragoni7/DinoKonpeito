@@ -4,9 +4,9 @@ public static class GameConsts
 {
     public static class Konpeito
     {
-        public const float RestoringChance = 0.3f;
+        public const float RestoringChance = 0.4f;
 
-        public const float SlowingChance = 0.2f;
+        public const float SlowingChance = 0.25f;
 
         public const float SuperChance = 0.1f;
 
@@ -14,11 +14,11 @@ public static class GameConsts
 
         public const float SpeedAddMin = 0.25f;
 
-        public const float SpeedAddMax = 0.75f;
+        public const float SpeedAddMax = 1.0f;
 
         public const float SpeedPercentPerStage = 0.35f;
 
-        public const float DoubleSpawnChance = 0.25f;
+        public const float DoubleSpawnChance = 0.3f;
 
         public const float MinSpawnTime = 0.1f;
 
@@ -29,7 +29,7 @@ public static class GameConsts
 
     public static class Difficulty
     {
-        public const int MaxDifficultyStages = 9;
+        public const int MaxDifficultyStages = 11;
 
         public const int StageInterval = 5000;
     }
@@ -51,11 +51,11 @@ public static class GameConsts
             {
                 case Scores.Highest:
                     {
-                        return Colors.White;
+                        return Colors.Gold;
                     }
                 case Scores.High:
                     {
-                        return Colors.White;
+                        return Colors.Violet;
                     }
                 case Scores.Mid:
                     {

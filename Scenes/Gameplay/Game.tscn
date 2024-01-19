@@ -40,3 +40,8 @@ KonpeitoScene = ExtResource("8_ovjhs")
 RestoringKonpeitoScene = ExtResource("9_q5cto")
 SlowingKonpeitoScene = ExtResource("10_s7d1l")
 SuperKonpeitoScene = ExtResource("11_yo1o1")
+
+[connection signal="DifficultyChanged" from="DifficultyTracker" to="GameManager" method="OnDifficultyIncreased"]
+[connection signal="ScoreChanged" from="GameManager" to="UIManager" method="OnUpdateScore"]
+[connection signal="DisplayScoreText" from="KonpeitoManager" to="UIManager" method="OnDisplayScoreText"]
+[connection signal="IncreaseScore" from="KonpeitoManager" to="GameManager" method="OnIncreaseScore"]

@@ -54,14 +54,18 @@ position = Vector2(-16, 0)
 rotation = -1.0472
 _playerMovement = NodePath("../PlayerMovementComponent")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("7_ddkp8")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") instance=ExtResource("7_ddkp8")]
 position = Vector2(1, -6)
 collision_layer = 0
 collision_mask = 2
 monitorable = false
+_cdTimer = NodePath("CollisionTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0, 6)
 shape = SubResource("CapsuleShape2D_hd8o0")
+
+[node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.8
 
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

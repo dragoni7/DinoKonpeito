@@ -37,8 +37,6 @@ public partial class HUD : CanvasLayer
 
     private void OnTweenFinished()
     {
-        _tween.Finished -= OnTweenFinished;
-
         _tween = GetTree().CreateTween();
         _tween.SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Linear);
         _tween.TweenProperty(ScoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize, TweenDuration);
