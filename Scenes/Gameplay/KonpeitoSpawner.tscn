@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://cdkyi4sre6166"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/KonpeitoSpawner.cs" id="1_pw5ko"]
-[ext_resource type="PackedScene" uid="uid://qshoy8b4cl41" path="res://Scenes/Gameplay/Game.tscn" id="2_cmgqe"]
+[ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="2_cmgqe"]
 [ext_resource type="PackedScene" uid="uid://dv6i6oeer1cib" path="res://Scenes/Gameplay/RestoringKonpeito.tscn" id="3_klpyd"]
 [ext_resource type="PackedScene" uid="uid://bogdln1mxn7gf" path="res://Scenes/Gameplay/SlowingKonpeito.tscn" id="4_080w0"]
 [ext_resource type="PackedScene" uid="uid://blygjwrljuk21" path="res://Scenes/Gameplay/SuperKonpeito.tscn" id="5_x85ln"]

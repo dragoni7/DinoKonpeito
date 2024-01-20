@@ -27,6 +27,19 @@ public static class GameConsts
         public const float SpawnTimeReduction = 0.5f;
     }
 
+    public static class Player
+    {
+        public const float BaseSpeed = 260f;
+
+        public const float DifficultySpeedIncrease = 40f;
+
+        public const float BaseHeadStepX = -8f;
+
+        public const float BaseHeadStepY = -8f;
+
+        public const float DifficultyHeadStepMultiplier = 1.05f;
+    }
+
     public static class Difficulty
     {
         public const int MaxDifficultyStages = 11;

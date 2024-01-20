@@ -8,7 +8,7 @@ public partial class HeadComponent : Node2D, ITakesHits
 	private PlayerMovementComponent _playerMovement;
 
 	[Export]
-	private Vector2 _step = new Vector2(2f, -8f);
+	public Vector2 Step { get; set; } = new Vector2(GameConsts.Player.BaseHeadStepX, GameConsts.Player.BaseHeadStepY);
 
     private HitboxComponent _hitbox;
 
@@ -32,7 +32,7 @@ public partial class HeadComponent : Node2D, ITakesHits
 		{
             // extend head position
             _hitbox.Monitorable = true;
-            Position += _step;
+            Position += Step;
             _playerMovement.CanMove = false;
         }
 		else if (Position.Y < 0)

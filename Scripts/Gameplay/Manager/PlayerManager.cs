@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using DinoKonpeito.Component;
+using Godot;
 
 partial class PlayerManager : Node, ISingleInstance<PlayerManager>
 {
@@ -17,5 +18,11 @@ partial class PlayerManager : Node, ISingleInstance<PlayerManager>
         Player = _playerScene.Instantiate<Player>();
         Player.Position = position;
         AddChild(Player);
+    }
+
+    public void OnDifficultyIncreased()
+    {
+        Player.GetNode<PlayerMovementComponent>("PlayerMovementComponent").Speed += GameConsts.Player.DifficultySpeedIncrease;
+        Player.GetNode<HeadComponent>("HeadComponent").Step *= GameConsts.Player.DifficultyHeadStepMultiplier;
     }
 }

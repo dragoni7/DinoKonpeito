@@ -14,7 +14,7 @@ namespace DinoKonpeito.Component
         private RayCast2D _rayCast;
 
         [Export]
-        public float Speed { get; set; } = 300f;
+        public float Speed { get; set; } = GameConsts.Player.BaseSpeed;
         public bool CanMove { get; set; }
 
         [Export]

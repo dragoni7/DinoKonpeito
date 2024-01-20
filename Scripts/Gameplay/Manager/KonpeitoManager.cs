@@ -2,8 +2,6 @@
 using Godot.Collections;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
-using static GameConsts;
 
 [Tool]
 partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
@@ -63,7 +61,7 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
         {
             if (k != null)
             {
-                count += 0.1f;
+                count += 0.05f;
                 DelayHit(k, count);
             }
         }

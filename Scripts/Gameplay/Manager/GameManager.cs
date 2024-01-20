@@ -77,7 +77,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         }
     }
 
-    public void OnDifficultyIncreased(int stage)
+    public void OnDifficultyIncreased()
     {
         _spawnTime -= GameConsts.Konpeito.SpawnTimeReduction;
         _spawnTime = Mathf.Clamp(_spawnTime, 0.75f, GameConsts.Konpeito.MaxSpawnTime);

@@ -14,17 +14,22 @@ public partial class KonpeitoSpawner : Node
     [Export]
     public PackedScene SuperKonpeitoScene;
 
+    public bool CanSpawn { get; set; } = true;
+
     public void OnSpawnKonpeito()
     {
-        var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
-
-        KonpeitoManager.GetInstance(this).AddChild(BuildKonpeito(spawnLocation));
-
-        double doubleSpawnChance = DifficultyTracker.Stage * GameConsts.Konpeito.DoubleSpawnChance;
-
-        if (doubleSpawnChance > GD.RandRange(0, 1.5D))
+        if (CanSpawn)
         {
+            var spawnLocation = GetNode<PathFollow2D>("Path2D/SpawnPoint");
+
             KonpeitoManager.GetInstance(this).AddChild(BuildKonpeito(spawnLocation));
+
+            double doubleSpawnChance = DifficultyTracker.Stage * GameConsts.Konpeito.DoubleSpawnChance;
+
+            if (doubleSpawnChance > GD.RandRange(0, 1.5D))
+            {
+                KonpeitoManager.GetInstance(this).AddChild(BuildKonpeito(spawnLocation));
+            }
         }
     }
 

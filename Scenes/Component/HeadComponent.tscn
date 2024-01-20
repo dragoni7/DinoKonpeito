@@ -9,7 +9,6 @@ size = Vector2(29.5, 31)
 
 [node name="HeadComponent" type="Node2D" groups=["Head"]]
 script = ExtResource("1_opb8g")
-_step = Vector2(-8, -8)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.225, 0.225)
