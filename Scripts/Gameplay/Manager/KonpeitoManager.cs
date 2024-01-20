@@ -62,6 +62,9 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
             if (k != null)
             {
                 count += 0.05f;
+                HitboxComponent hitbox = k.GetNode<HitboxComponent>("HitboxComponent");
+                hitbox.SetDeferred(Area2D.PropertyName.Monitoring, false);
+                hitbox.SetDeferred(Area2D.PropertyName.Monitorable, false);
                 DelayHit(k, count);
             }
         }
@@ -74,7 +77,7 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 
         try
         {
-            EmitKonpeitoScore(k.Position, 10);
+            EmitKonpeitoScore(k.Position, 50);
             k.CallDeferred(Node.MethodName.QueueFree);
         }
         catch (ObjectDisposedException)
@@ -89,25 +92,25 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
 
         switch(distance) {
 
-            case < 200:
+            case < 250:
                 {
-                    return 1000;
+                    return (int)GameConsts.Scores.Highest;
                 }
-            case < 400:
+            case < 450:
                 {
-                    return 300;
+                    return (int)GameConsts.Scores.High;
                 }
             case < 600:
                 {
-                    return 100;
+                    return (int)GameConsts.Scores.Mid;
                 }
             case < 800:
                 {
-                    return 50;
+                    return (int)GameConsts.Scores.Low;
                 }
             default:
                 {
-                    return 10;
+                    return (int)GameConsts.Scores.Lowest;
                 }
         }
     }

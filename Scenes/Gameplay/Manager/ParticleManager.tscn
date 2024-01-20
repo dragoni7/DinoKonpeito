@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://vtmlf6ygjvdo"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Manager/ParticleManager.cs" id="1_knjrn"]
+[ext_resource type="PackedScene" uid="uid://dbv0pdwa502aa" path="res://Scenes/Gameplay/DestroyKonpeitoParticles.tscn" id="2_mncj4"]
+
+[node name="ParticleManager" type="Node"]
+script = ExtResource("1_knjrn")
+_konpeitoDestroyScene = ExtResource("2_mncj4")

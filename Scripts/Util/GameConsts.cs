@@ -4,19 +4,19 @@ public static class GameConsts
 {
     public static class Konpeito
     {
-        public const float RestoringChance = 0.4f;
+        public const float RestoringChance = 0.5f;
 
-        public const float SlowingChance = 0.25f;
+        public const float SlowingChance = 0.3f;
 
-        public const float SuperChance = 0.1f;
+        public const float SuperChance = 0.2f;
 
-        public const float SpecialChance = 0.05f;
+        public const float SpecialChance = 0.06f;
 
         public const float SpeedAddMin = 0.25f;
 
-        public const float SpeedAddMax = 1.0f;
+        public const float SpeedAddMax = 1.2f;
 
-        public const float SpeedPercentPerStage = 0.35f;
+        public const float SpeedPercentPerStage = 0.45f;
 
         public const float DoubleSpawnChance = 0.3f;
 
@@ -31,11 +31,11 @@ public static class GameConsts
     {
         public const float BaseSpeed = 260f;
 
-        public const float DifficultySpeedIncrease = 40f;
+        public const float DifficultySpeedIncrease = 30f;
 
-        public const float BaseHeadStepX = -8f;
+        public const float BaseHeadStepX = -12f;
 
-        public const float BaseHeadStepY = -8f;
+        public const float BaseHeadStepY = -12f;
 
         public const float DifficultyHeadStepMultiplier = 1.05f;
     }
@@ -50,8 +50,8 @@ public static class GameConsts
     public enum Scores
     {
         Highest = 1000,
-        High = 300,
-        Mid = 100,
+        High = 400,
+        Mid = 200,
         Low = 50,
         Lowest = 10
     }

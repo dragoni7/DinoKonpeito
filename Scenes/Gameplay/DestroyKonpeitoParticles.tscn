@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://dbv0pdwa502aa"]
+
+[sub_resource type="Curve" id="Curve_jagay"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.749311, 0.499465), 0.0, 0.0, 0, 0, Vector2(1, 0.151872), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iw1c0"]
+curve = SubResource("Curve_jagay")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_avovb"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+angle_max = 90.0
+direction = Vector3(0, 0, 0)
+spread = 100.0
+initial_velocity_min = -500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 98, 0)
+scale_min = 8.0
+scale_max = 8.0
+scale_curve = SubResource("CurveTexture_iw1c0")
+
+[node name="DestroyKonpeitoParticles" type="GPUParticles2D"]
+emitting = false
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_avovb")
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.78
+randomness = 0.2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=9 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/Manager/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/Manager/UIManager.tscn" id="6_3b3v2"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bbrnsrx6glk43" path="res://Scenes/Gameplay/Manager/GameManager.tscn" id="7_1bjrj"]
 [ext_resource type="PackedScene" uid="uid://cdkyi4sre6166" path="res://Scenes/Gameplay/KonpeitoSpawner.tscn" id="7_inrg0"]
 [ext_resource type="PackedScene" uid="uid://cdmaej2io2yv8" path="res://Scenes/Gameplay/DifficultyTracker.tscn" id="7_wkgae"]
+[ext_resource type="PackedScene" uid="uid://vtmlf6ygjvdo" path="res://Scenes/Gameplay/Manager/ParticleManager.tscn" id="8_e2cqb"]
 [ext_resource type="PackedScene" uid="uid://dc24hn1s7eiad" path="res://Scenes/Gameplay/Manager/PlayerManager.tscn" id="8_e6wcl"]
 
 [node name="Game" type="Node2D"]
@@ -32,6 +33,8 @@ position = Vector2(960, 540)
 [node name="UIManager" parent="." instance=ExtResource("6_3b3v2")]
 
 [node name="KonpeitoSpawner" parent="." instance=ExtResource("7_inrg0")]
+
+[node name="ParticleManager" parent="." instance=ExtResource("8_e2cqb")]
 
 [connection signal="DifficultyChanged" from="DifficultyTracker" to="GameManager" method="OnDifficultyIncreased"]
 [connection signal="DifficultyChanged" from="DifficultyTracker" to="PlayerManager" method="OnDifficultyIncreased"]
