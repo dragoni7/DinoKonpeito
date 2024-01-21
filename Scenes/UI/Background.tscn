@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyblkad7fofrf"]
+
+[ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_bmk8o"]
+[ext_resource type="Script" path="res://Scripts/UI/Background.cs" id="1_o3dx1"]
+
+[node name="Background" type="ParallaxBackground" node_paths=PackedStringArray("ColorLayer", "Layers")]
+script = ExtResource("1_o3dx1")
+ColorLayer = NodePath("ColorLayer")
+Layers = [NodePath("ParallaxLayer"), NodePath("ParallaxLayer2"), NodePath("ParallaxLayer3")]
+
+[node name="ColorLayer" type="ParallaxLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="ColorLayer"]
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 4
+color = Color(0.545098, 0.592157, 0.968627, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(198, 494)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
+texture = ExtResource("1_bmk8o")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(642, 489)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+texture = ExtResource("1_bmk8o")
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(1044, 494)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+texture = ExtResource("1_bmk8o")

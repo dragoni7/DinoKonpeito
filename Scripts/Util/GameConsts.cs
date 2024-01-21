@@ -46,7 +46,7 @@ public static class GameConsts
     {
         public const int MaxDifficultyStages = 29;
 
-        public const int StageInterval = 5000;
+        public const int StageInterval = 200;
     }
 
     public enum Scores
