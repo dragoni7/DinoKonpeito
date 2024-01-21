@@ -35,9 +35,3 @@ position = Vector2(960, 540)
 [node name="KonpeitoSpawner" parent="." instance=ExtResource("7_inrg0")]
 
 [node name="ParticleManager" parent="." instance=ExtResource("8_e2cqb")]
-
-[connection signal="DifficultyChanged" from="DifficultyTracker" to="GameManager" method="OnDifficultyIncreased"]
-[connection signal="DifficultyChanged" from="DifficultyTracker" to="PlayerManager" method="OnDifficultyIncreased"]
-[connection signal="ScoreChanged" from="GameManager" to="UIManager" method="OnUpdateScore"]
-[connection signal="DisplayScoreText" from="KonpeitoManager" to="UIManager" method="OnDisplayScoreText"]
-[connection signal="IncreaseScore" from="KonpeitoManager" to="GameManager" method="OnIncreaseScore"]

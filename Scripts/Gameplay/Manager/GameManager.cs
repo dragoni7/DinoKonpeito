@@ -1,4 +1,5 @@
 using Godot;
+using System;
 
 public partial class GameManager : Node, ISingleInstance<GameManager>
 {
@@ -24,12 +25,9 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         set
         {
             _score = value;
-            EmitSignal(SignalName.ScoreChanged, _score);
+            EventBus.Instance.Raise(new ScoreChangeEvent(_score));
         }
     }
-
-    [Signal]
-    public delegate void ScoreChangedEventHandler(int score);
 
     public static GameManager GetInstance(Node from)
     {
@@ -45,6 +43,12 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _konpeitoTimer.Timeout += GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").OnSpawnKonpeito;
         _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
 
+        EventBus eventBus = EventBus.Instance;
+
+        eventBus.Subscribe<DifficultyChangeEvent>(OnDifficultyIncreased);
+        eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
+        eventBus.Subscribe<GameOverEvent>(OnGameOver);
+
         NewGame();
         UIManager.GetInstance(this).ShowMessage("Begin!");
     }
@@ -57,7 +61,6 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         Vector2 startPosition = _startPosition.Position;
         PlayerManager playerManager = PlayerManager.GetInstance(this);
         playerManager.SpawnPlayer(startPosition);
-        playerManager.Player.GameOver += OnGameOver;
 
         // set up floor
         FloorManager.GetInstance(this).CreateFloor();
@@ -67,27 +70,32 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _konpeitoTimer.WaitTime = _spawnTime;
     }
 
-    public void OnIncreaseScore(int amount)
+    public void OnKonpeitoHit(KonpeitoHitEvent e)
     {
-        Score += amount;
+        bool floorCollision = e.GroupsHit.Contains("Floor");
 
-        if ((DifficultyTracker.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
+        if (!floorCollision)
         {
-            _difficulty.NextStage();
+            Score += e.ScoreOnHit;
+
+            if ((DifficultyTracker.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
+            {
+                _difficulty.NextStage();
+            }
         }
     }
 
-    public void OnDifficultyIncreased()
+    public void OnDifficultyIncreased(DifficultyChangeEvent e)
     {
         _spawnTime -= GameConsts.Konpeito.SpawnTimeReduction;
         _spawnTime = Mathf.Clamp(_spawnTime, 0.75f, GameConsts.Konpeito.MaxSpawnTime);
     }
 
-    public void OnGameOver()
+    public void OnGameOver(GameOverEvent e)
     {
         _konpeitoTimer.Stop();
-        UIManager.GetInstance(this).ShowGameOver();
         _menuTimer.Start();
+        EventBus.Instance.UnsubscribeAll();
     }
 
     private void OnReturnTimerTimeout()

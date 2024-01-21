@@ -17,8 +17,8 @@ spread = 100.0
 initial_velocity_min = -500.0
 initial_velocity_max = 500.0
 gravity = Vector3(0, 98, 0)
-scale_min = 8.0
-scale_max = 8.0
+scale_min = 20.0
+scale_max = 20.0
 scale_curve = SubResource("CurveTexture_iw1c0")
 
 [node name="DestroyKonpeitoParticles" type="GPUParticles2D"]

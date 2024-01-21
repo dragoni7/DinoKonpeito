@@ -11,9 +11,6 @@ public partial class Konpeito : Node2D, ITakesHits
     [Export]
     public float Speed { get; set; }
 
-    [Signal]
-    public delegate void DestroyedEventHandler(Konpeito konpeito, Array<StringName> groups);
-
     private void OnVisibleOnScreenNotifier2DScreenExited()
 	{
 		QueueFree();
@@ -26,6 +23,6 @@ public partial class Konpeito : Node2D, ITakesHits
 
 	public void OnHit(Array<StringName> groups)
 	{
-        EmitSignal(SignalName.Destroyed, this, groups);
+		EventBus.Instance.Raise(new KonpeitoHitEvent(this, groups));
     }
 }

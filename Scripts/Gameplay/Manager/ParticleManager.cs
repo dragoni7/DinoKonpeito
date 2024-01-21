@@ -3,18 +3,24 @@ using Godot.Collections;
 
 public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
 {
+
+    [Export]
+    PackedScene _konpeitoDestroyScene;
+
     public static ParticleManager GetInstance(Node from)
     {
         return from.GetNode<ParticleManager>("/root/Game/ParticleManager");
     }
 
-    [Export]
-    PackedScene _konpeitoDestroyScene;
-
-    public void OnKonpeitoDestroyed(Konpeito konpeito, Array<StringName> groups)
+    public override void _Ready()
     {
-        Color color = konpeito.Modulate;
-        Vector2 position = konpeito.Position;
+        EventBus.Instance.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
+    }
+
+    public void OnKonpeitoHit(KonpeitoHitEvent e)
+    {
+        Color color = e.KonpeitoHit.Modulate;
+        Vector2 position = e.KonpeitoHit.Position;
 
         GpuParticles2D particles = _konpeitoDestroyScene.Instantiate<GpuParticles2D>();
         particles.Position = position;

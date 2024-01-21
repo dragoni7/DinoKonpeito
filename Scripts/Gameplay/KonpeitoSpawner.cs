@@ -38,8 +38,6 @@ public partial class KonpeitoSpawner : Node
         location.ProgressRatio = GD.Randf();
 
         Konpeito konpeito = PickScene().Instantiate<Konpeito>();
-        konpeito.Destroyed += KonpeitoManager.GetInstance(this).OnKonpeitoDestroyed;
-        konpeito.Destroyed += ParticleManager.GetInstance(this).OnKonpeitoDestroyed;
 
         konpeito.Position = location.Position;
         konpeito.Speed += (float)GD.RandRange(GameConsts.Konpeito.SpeedAddMin, GameConsts.Konpeito.SpeedAddMax) + (DifficultyTracker.Stage * GameConsts.Konpeito.SpeedPercentPerStage);

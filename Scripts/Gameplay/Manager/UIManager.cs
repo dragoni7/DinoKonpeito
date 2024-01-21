@@ -13,6 +13,14 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         return from.GetNode<UIManager>("/root/Game/UIManager");
     }
 
+    public override void _Ready()
+    {
+        EventBus eventBus = EventBus.Instance;
+        eventBus.Subscribe<ScoreChangeEvent>(OnScoreChanged);
+        eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
+        eventBus.Subscribe<GameOverEvent>(OnGameOver);
+    }
+
     public void ShowMessage(string message)
     {
         _hud.MessageLabel.Text = message;
@@ -21,28 +29,38 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         _hud.MessageTimer.Start();
     }
 
-    public void OnUpdateScore(int score)
+    public void OnScoreChanged(ScoreChangeEvent e)
     {
-        _hud.UpdateScoreLabel(score);
+        _hud.UpdateScoreLabel(e.NewScore);
     }
 
-    public void OnDisplayScoreText(int amount, Vector2 position)
+    public void OnKonpeitoHit(KonpeitoHitEvent e)
     {
-        FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
-        text.SetText(amount.ToString());
-        text.SetColor(GameConsts.ScoreColors.Get((GameConsts.Scores)amount));
-        text.Position = position;
+        bool floorCollision = e.GroupsHit.Contains("Floor");
 
-        if (amount >= (int)GameConsts.Scores.High)
+        if (!floorCollision)
         {
-            var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
-            FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
-            flashComponent.FlashColor = GameConsts.ScoreColors.Get((GameConsts.Scores)amount);
-            flashComponent.Target = text;
-            text.AddChild(flashComponent);
-        }
+            FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
+            text.SetText(e.ScoreOnHit.ToString());
+            text.SetColor(GameConsts.ScoreColors.Get((GameConsts.Scores)e.ScoreOnHit));
+            text.Position = e.KonpeitoHit.Position;
 
-        AddChild(text);
+            if (e.ScoreOnHit >= (int)GameConsts.Scores.High)
+            {
+                var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
+                FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
+                flashComponent.FlashColor = GameConsts.ScoreColors.Get((GameConsts.Scores)e.ScoreOnHit);
+                flashComponent.Target = text;
+                text.AddChild(flashComponent);
+            }
+
+            AddChild(text);
+        }
+    }
+
+    private void OnGameOver(GameOverEvent e)
+    {
+        ShowGameOver();
     }
 
     async public void ShowGameOver()
