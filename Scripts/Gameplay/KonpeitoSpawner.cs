@@ -49,26 +49,29 @@ public partial class KonpeitoSpawner : Node
     {
         PackedScene sceneToUse = KonpeitoScene;
 
-        double specialKonpeitoChance = (DifficultyTracker.Stage + 1) * GameConsts.Konpeito.SpecialChance;
-
-        if (specialKonpeitoChance > GD.RandRange(0, 1D))
+        if (GameConsts.Konpeito.SpecialSpawnStart <= DifficultyTracker.Stage)
         {
-            float rand = GD.Randf();
+            double specialKonpeitoChance = (DifficultyTracker.Stage + 1) * GameConsts.Konpeito.SpecialChance;
 
-            switch (rand)
+            if (specialKonpeitoChance > GD.RandRange(0, 1D))
             {
-                case < GameConsts.Konpeito.SuperChance:
-                    {
-                        return SuperKonpeitoScene;
-                    }
-                case < GameConsts.Konpeito.SlowingChance:
-                    {
-                        return SlowingKonpeitoScene;
-                    }
-                case < GameConsts.Konpeito.RestoringChance:
-                    {
-                        return RestoringKonpeitoScene;
-                    }
+                float rand = GD.Randf();
+
+                switch (rand)
+                {
+                    case < GameConsts.Konpeito.SuperChance:
+                        {
+                            return SuperKonpeitoScene;
+                        }
+                    case < GameConsts.Konpeito.SlowingChance:
+                        {
+                            return SlowingKonpeitoScene;
+                        }
+                    case < GameConsts.Konpeito.RestoringChance:
+                        {
+                            return RestoringKonpeitoScene;
+                        }
+                }
             }
         }
 

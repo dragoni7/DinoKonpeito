@@ -1,5 +1,4 @@
 using Godot;
-using Godot.Collections;
 
 public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
 {
@@ -19,7 +18,7 @@ public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
 
     public void OnKonpeitoHit(KonpeitoHitEvent e)
     {
-        Color color = e.KonpeitoHit.Modulate;
+        Color color = e.KonpeitoHit.GetNode<Sprite2D>("Sprite2D").Modulate;
         Vector2 position = e.KonpeitoHit.Position;
 
         GpuParticles2D particles = _konpeitoDestroyScene.Instantiate<GpuParticles2D>();
@@ -27,6 +26,6 @@ public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
         particles.Modulate = color;
         AddChild(particles);
         particles.Emitting = true;
-
+        particles.Finished += particles.QueueFree;
     }
 }

@@ -8,9 +8,11 @@ public static class GameConsts
 
         public const float SlowingChance = 0.3f;
 
-        public const float SuperChance = 0.2f;
+        public const float SuperChance = 0.1f;
 
         public const float SpecialChance = 0.06f;
+
+        public const int SpecialSpawnStart = 1;
 
         public const float SpeedAddMin = 0.25f;
 
@@ -44,7 +46,7 @@ public static class GameConsts
     {
         public const int MaxDifficultyStages = 29;
 
-        public const int StageInterval = 1000;
+        public const int StageInterval = 5000;
     }
 
     public enum Scores
