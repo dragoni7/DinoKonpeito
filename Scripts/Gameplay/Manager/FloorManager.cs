@@ -22,7 +22,7 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
 
     public void CreateFloor()
     {
-        for (int x = 0; x < 1920; x += 64)
+        for (int x = 64; x < GameConsts.Bounds.GameAreaX; x += 64)
         {
             Floor floor = _floorScene.Instantiate<Floor>();
             floor.Position = new Vector2(x + 32, 1048);

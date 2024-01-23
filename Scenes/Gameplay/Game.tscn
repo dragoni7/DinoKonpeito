@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=12 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/Manager/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/Manager/UIManager.tscn" id="6_3b3v2"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dc24hn1s7eiad" path="res://Scenes/Gameplay/Manager/PlayerManager.tscn" id="8_e6wcl"]
 [ext_resource type="PackedScene" uid="uid://c0y0ljqef66if" path="res://Scenes/Gameplay/Manager/BackgroundManager.tscn" id="9_n4q5p"]
 [ext_resource type="PackedScene" uid="uid://cyblkad7fofrf" path="res://Scenes/UI/Background.tscn" id="10_4bjy0"]
+[ext_resource type="Texture2D" uid="uid://b8ycpjwi5h4vw" path="res://Assets/Backgrounds/Border.png" id="11_p4ji6"]
 
 [node name="Game" type="Node2D"]
 
@@ -34,3 +35,15 @@ position = Vector2(960, 540)
 
 [node name="BackgroundManager" parent="." instance=ExtResource("9_n4q5p")]
 _backgroundScene = ExtResource("10_4bjy0")
+
+[node name="Border" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="TextureRect" type="TextureRect" parent="Border"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("11_p4ji6")
+metadata/_edit_use_anchors_ = true

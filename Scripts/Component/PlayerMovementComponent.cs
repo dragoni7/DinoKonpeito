@@ -6,8 +6,6 @@ namespace DinoKonpeito.Component
     {
         private bool _movingLeft;
 
-        private Vector2 _screenSize;
-
         [Export]
         private CharacterBody2D _characterBody;
 
@@ -25,7 +23,6 @@ namespace DinoKonpeito.Component
             base._Ready();
             _rayCast = GetNode<RayCast2D>("RayCast2D");
             _movingLeft = true;
-            _screenSize = GetViewportRect().Size;
             CanMove = true;
         }
         public override void _Process(double delta)
@@ -53,8 +50,8 @@ namespace DinoKonpeito.Component
                 Vector2 movement = velocity * (float)delta;
                 newPosition += movement;
                 newPosition = new Vector2(
-                    x: Mathf.Clamp(newPosition.X, 0, _screenSize.X),
-                    y: Mathf.Clamp(newPosition.Y, 0, _screenSize.Y));
+                    x: Mathf.Clamp(newPosition.X, 64, GameConsts.Bounds.GameAreaX),
+                    y: newPosition.Y);
 
                 if (HasGround(movement))
                 {

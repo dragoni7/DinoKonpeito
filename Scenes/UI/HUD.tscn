@@ -4,6 +4,7 @@
 [ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="2_px2sv"]
 
 [node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("ScoreLabel", "MessageLabel", "MessageTimer")]
+layer = 3
 script = ExtResource("1_u4my6")
 ScoreLabel = NodePath("ScoreLabel")
 MessageLabel = NodePath("Message")

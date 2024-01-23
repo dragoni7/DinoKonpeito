@@ -49,6 +49,11 @@ public static class GameConsts
         public const int StageInterval = 200;
     }
 
+    public static class Bounds
+    {
+        public const int GameAreaX = 1856;
+    }
+
     public enum Scores
     {
         Highest = 1000,
