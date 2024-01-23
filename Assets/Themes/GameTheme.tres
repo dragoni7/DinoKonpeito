@@ -6,7 +6,7 @@
 [ext_resource type="StyleBox" uid="uid://idurg1w2vwd3" path="res://Assets/Themes/ButtonPressed.tres" id="4_nx51k"]
 
 [resource]
-Button/constants/h_separation = 4
+BoxContainer/constants/separation = 10
 Button/font_sizes/font_size = 22
 Button/fonts/font = ExtResource("1_1xa5m")
 Button/styles/hover = ExtResource("1_bss48")

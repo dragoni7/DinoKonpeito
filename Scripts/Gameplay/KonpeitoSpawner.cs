@@ -51,7 +51,7 @@ public partial class KonpeitoSpawner : Node
 
         if (GameConsts.Konpeito.SpecialSpawnStart <= DifficultyTracker.Stage)
         {
-            double specialKonpeitoChance = (DifficultyTracker.Stage + 1) * GameConsts.Konpeito.SpecialChance;
+            double specialKonpeitoChance = DifficultyTracker.Stage * GameConsts.Konpeito.SpecialChance;
 
             if (specialKonpeitoChance > GD.RandRange(0, 1D))
             {

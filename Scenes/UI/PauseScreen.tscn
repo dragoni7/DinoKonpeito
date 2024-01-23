@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://brtmnts5rq8dv"]
+
+[ext_resource type="Script" path="res://Scripts/UI/PauseScreen.cs" id="1_b4u2u"]
+[ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="1_dabv5"]
+
+[node name="PauseScreen" type="CanvasLayer"]
+process_mode = 2
+layer = 4
+script = ExtResource("1_b4u2u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.445833
+anchor_top = 0.503704
+anchor_right = 0.555208
+anchor_bottom = 0.583333
+offset_top = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dabv5")
+metadata/_edit_use_anchors_ = true
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Continue
+"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Options"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Quit to Menu"

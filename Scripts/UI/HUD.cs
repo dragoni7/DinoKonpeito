@@ -2,9 +2,9 @@ using Godot;
 
 public partial class HUD : CanvasLayer
 {
+    private Label _scoreLabel;
 
-    [Export]
-    private Label ScoreLabel { get; set; }
+    private Label _highScoreLabel;
 
     private Tween _tween;
 
@@ -22,24 +22,27 @@ public partial class HUD : CanvasLayer
 
     public override void _Ready()
     {
-        _scoreFontSize = ScoreLabel.GetThemeFontSize("font_size");
+        _scoreLabel = GetNode<Label>("ScoreLabel");
+        _highScoreLabel = GetNode<Label>("HighScoreLabel");
+        _highScoreLabel.Text = "HighScore: " + GameData.Instance.HighScore;
+        _scoreFontSize = _scoreLabel.GetThemeFontSize("font_size");
     }
 
     public void UpdateScoreLabel(int score)
     {
-        ScoreLabel.Text = ScoreText + score.ToString();
+        _scoreLabel.Text = ScoreText + score.ToString();
 
         _tween = GetTree().CreateTween();
         _tween.Finished += OnTweenFinished;
         _tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Linear);
-        _tween.TweenProperty(ScoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize + 12f, TweenDuration);
+        _tween.TweenProperty(_scoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize + 12f, TweenDuration);
     }
 
     private void OnTweenFinished()
     {
         _tween = GetTree().CreateTween();
         _tween.SetEase(Tween.EaseType.In).SetTrans(Tween.TransitionType.Linear);
-        _tween.TweenProperty(ScoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize, TweenDuration);
+        _tween.TweenProperty(_scoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize, TweenDuration);
     }
 
     private void OnMessageTimerTimeout()

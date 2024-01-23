@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class GameManager : Node, ISingleInstance<GameManager>
 {
@@ -53,6 +52,15 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         UIManager.GetInstance(this).ShowMessage("Begin!");
     }
 
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustReleased("Escape"))
+        {
+            GetTree().Paused = true;
+            UIManager.GetInstance(this).GetNode<CanvasLayer>("PauseScreen").Show();
+        }
+    }
+
     public void NewGame()
     {
         _spawnTime = GameConsts.Konpeito.MaxSpawnTime;
@@ -96,6 +104,16 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _konpeitoTimer.Stop();
         _menuTimer.Start();
         EventBus.Instance.UnsubscribeAll();
+        UpdateHighScore();
+        GameData.Instance.SaveData();
+    }
+
+    private void UpdateHighScore()
+    {
+        if (Score > GameData.Instance.HighScore)
+        {
+            GameData.Instance.HighScore = Score;
+        }
     }
 
     private void OnReturnTimerTimeout()
