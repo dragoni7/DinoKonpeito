@@ -12,7 +12,7 @@ public partial class PauseScreen : CanvasLayer
     public void OnContinueButtonPress()
     {
         Hide();
-        GetTree().Paused = false;
+        GetTree().Paused = false; 
     }
 
     public void OnOptionsButtonPress()

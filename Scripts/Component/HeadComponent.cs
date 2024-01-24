@@ -28,7 +28,7 @@ public partial class HeadComponent : Node2D, ITakesHits
 	{
         _notTweening = _tween == null || !_tween.IsRunning();
 
-        if (Input.IsActionPressed("Up") && GetViewportRect().HasPoint(GlobalPosition) && _notTweening)
+        if (Input.IsActionPressed(InputActions.ACTION_UP) && GetViewportRect().HasPoint(GlobalPosition) && _notTweening)
 		{
             // extend head position
             _hitbox.Monitorable = true;
@@ -49,7 +49,6 @@ public partial class HeadComponent : Node2D, ITakesHits
     private void OnHeadReturned()
     {
         _playerMovement.CanMove = true;
-        _tween.Finished -= OnHeadReturned;
     }
 
     private void Return()

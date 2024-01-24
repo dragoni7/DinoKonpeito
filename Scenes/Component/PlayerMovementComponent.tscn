@@ -3,11 +3,10 @@
 [ext_resource type="Script" path="res://Scripts/Component/PlayerMovementComponent.cs" id="1_dmajk"]
 
 [node name="PlayerMovementComponent" type="Node2D"]
-visible = false
 script = ExtResource("1_dmajk")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-target_position = Vector2(5, 32)
+target_position = Vector2(-10, 32)
 collision_mask = 8
 collide_with_areas = true
 collide_with_bodies = false

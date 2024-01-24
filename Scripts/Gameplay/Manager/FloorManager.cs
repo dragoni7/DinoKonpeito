@@ -37,7 +37,22 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
             Vector2 playerPos = PlayerManager.GetInstance(this).Player.Position;
             Vector2 closestPos = _destroyedPositions.Aggregate((v1, v2) => v1.DistanceSquaredTo(playerPos) < v2.DistanceSquaredTo(playerPos) ? v1 : v2);
             _destroyedPositions.Remove(closestPos);
-            SpawnFloor(closestPos);
+            //SpawnFloor(closestPos);
+
+            Floor floor = _floorScene.Instantiate<Floor>();
+            floor.Position = new Vector2(closestPos.X, 0);
+
+            var hitbox = floor.GetNode<Area2D>("HitboxComponent");
+            hitbox.Monitorable = false;
+            hitbox.Monitoring = false;
+            
+            AddChild(floor);
+
+            var tween = GetTree().CreateTween();
+            tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+            tween.TweenProperty(floor, "position", closestPos, 0.3);
+            tween.TweenProperty(hitbox, "monitorable", true, 0.3);
+            tween.TweenProperty(hitbox, "monitoring", true, 0.3);
         }
     }
 
@@ -48,7 +63,21 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
             Vector2 playerPos = PlayerManager.GetInstance(this).Player.Position;
             Vector2 closestPos = _destroyedPositions.Aggregate((v1, v2) => v1.DistanceSquaredTo(playerPos) < v2.DistanceSquaredTo(playerPos) ? v1 : v2);
             _destroyedPositions.Remove(closestPos);
-            SpawnFloor(closestPos);
+
+            Floor floor = _floorScene.Instantiate<Floor>();
+            floor.Position = new Vector2(closestPos.X, 0);
+
+            var hitbox = floor.GetNode<Area2D>("HitboxComponent");
+            hitbox.Monitorable = false;
+            hitbox.Monitoring = false;
+
+            AddChild(floor);
+
+            var tween = GetTree().CreateTween();
+            tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Expo);
+            tween.TweenProperty(floor, "position", closestPos, 0.3);
+            tween.TweenProperty(hitbox, "monitorable", true, 0.3);
+            tween.TweenProperty(hitbox, "monitoring", true, 0.3);
         }
     }
 

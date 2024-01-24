@@ -54,7 +54,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustReleased("Escape"))
+        if (Input.IsActionJustPressed(InputActions.ACTION_ESCAPE))
         {
             GetTree().Paused = true;
             UIManager.GetInstance(this).GetNode<CanvasLayer>("PauseScreen").Show();

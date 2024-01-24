@@ -33,7 +33,7 @@ namespace DinoKonpeito.Component
             if (CanMove)
             {
                 // Get the input direction and handle the movement/deceleration.
-                float distance = Input.GetAxis("Left", "Right");
+                float distance = Input.GetAxis(InputActions.ACTION_MOVE_LEFT, InputActions.ACTION_MOVE_RIGHT);
 
                 DetermineFlip(distance);
 

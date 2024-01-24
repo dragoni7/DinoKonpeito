@@ -19,11 +19,8 @@ anchor_top = 0.503704
 anchor_right = 0.555208
 anchor_bottom = 0.583333
 offset_top = -3.05176e-05
-grow_horizontal = 2
-grow_vertical = 2
 theme = ExtResource("2_ym8gw")
 script = ExtResource("1_1ogt6")
-metadata/_edit_use_anchors_ = true
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
