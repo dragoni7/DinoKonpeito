@@ -4,16 +4,6 @@ public static class GameConsts
 {
     public static class Konpeito
     {
-        public const float RestoringChance = 0.5f;
-
-        public const float SlowingChance = 0.3f;
-
-        public const float SuperChance = 0.1f;
-
-        public const float SpecialChance = 0.06f;
-
-        public const int SpecialSpawnStart = 1;
-
         public const float SpeedAddMin = 0.25f;
 
         public const float SpeedAddMax = 1.2f;
@@ -46,7 +36,7 @@ public static class GameConsts
     {
         public const int MaxDifficultyStages = 29;
 
-        public const int StageInterval = 200;
+        public const int StageInterval = 5000;
     }
 
     public static class Bounds

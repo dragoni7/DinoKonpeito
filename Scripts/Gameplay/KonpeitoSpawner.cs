@@ -1,20 +1,19 @@
 using Godot;
+using Godot.Collections;
+using System.Linq;
 
 public partial class KonpeitoSpawner : Node
 {
     [Export]
-    public PackedScene KonpeitoScene;
-
-    [Export]
-    public PackedScene RestoringKonpeitoScene;
-
-    [Export]
-    public PackedScene SlowingKonpeitoScene;
-
-    [Export]
-    public PackedScene SuperKonpeitoScene;
+    Array<RandomKonpeito> SpecialKonpeitos;
 
     public bool CanSpawn { get; set; } = true;
+
+    public override void _Ready()
+    {
+        EventBus.Instance.Subscribe<DifficultyChangeEvent>(OnDifficultyChanged);
+        GD.Print(SpecialKonpeitos[0].Name);
+    }
 
     public void OnSpawnKonpeito()
     {
@@ -37,7 +36,7 @@ public partial class KonpeitoSpawner : Node
     {
         location.ProgressRatio = GD.Randf();
 
-        Konpeito konpeito = PickScene().Instantiate<Konpeito>();
+        Konpeito konpeito = PickRandomKonpeito().Instantiate<Konpeito>();
 
         konpeito.Position = location.Position;
         konpeito.Speed += (float)GD.RandRange(GameConsts.Konpeito.SpeedAddMin, GameConsts.Konpeito.SpeedAddMax) + (DifficultyTracker.Stage * GameConsts.Konpeito.SpeedPercentPerStage);
@@ -45,36 +44,65 @@ public partial class KonpeitoSpawner : Node
         return konpeito;
     }
 
-    private PackedScene PickScene()
+    private PackedScene PickRandomKonpeito()
     {
-        PackedScene sceneToUse = KonpeitoScene;
+        PackedScene chosenScene = SpecialKonpeitos.First(d => d.Name == "Konpeito").KonpeitoScene;
 
-        if (GameConsts.Konpeito.SpecialSpawnStart <= DifficultyTracker.Stage)
+        if (SpecialKonpeitos.Count > 0)
         {
-            double specialKonpeitoChance = DifficultyTracker.Stage * GameConsts.Konpeito.SpecialChance;
+            int overallChance = 0;
 
-            if (specialKonpeitoChance > GD.RandRange(0, 1D))
+            foreach (RandomKonpeito konpeitoData in SpecialKonpeitos)
             {
-                float rand = GD.Randf();
+                overallChance += konpeitoData.PickChance;
+            }
 
-                switch (rand)
+            var rand = GD.Randi() % overallChance;
+            int offset = 0;
+
+            foreach (RandomKonpeito konpeitoData in SpecialKonpeitos)
+            {
+                if (rand < konpeitoData.PickChance + offset)
                 {
-                    case < GameConsts.Konpeito.SuperChance:
-                        {
-                            return SuperKonpeitoScene;
-                        }
-                    case < GameConsts.Konpeito.SlowingChance:
-                        {
-                            return SlowingKonpeitoScene;
-                        }
-                    case < GameConsts.Konpeito.RestoringChance:
-                        {
-                            return RestoringKonpeitoScene;
-                        }
+                    if (konpeitoData.DefaultPicked)
+                    {
+                        chosenScene = konpeitoData.KonpeitoScene;
+                    }
+
+                    break;
+                }
+                else
+                {
+                    offset += konpeitoData.PickChance;
                 }
             }
         }
 
-        return sceneToUse;
+        return chosenScene;
+    }
+
+    private void OnDifficultyChanged(DifficultyChangeEvent e)
+    {
+        switch (e.NewDifficulty)
+        {
+            case 1:
+                {
+                    SpecialKonpeitos.First(d => d.Name == "RestoringKonpeito").DefaultPicked = true;
+                    GD.Print("Restoring enabled");
+                    break;
+                }
+            case 3:
+                {
+                    SpecialKonpeitos.First(d => d.Name == "SlowingKonpeito").DefaultPicked = true;
+                    GD.Print("Slowing enabled");
+                    break;
+                }
+            case 4:
+                {
+                    SpecialKonpeitos.First(d => d.Name == "SuperKonpeito").DefaultPicked = true;
+                    GD.Print("Super enabled");
+                    break;
+                }
+        }
     }
 }

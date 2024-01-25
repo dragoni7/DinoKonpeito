@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=16 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/Manager/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/Manager/UIManager.tscn" id="6_3b3v2"]
@@ -8,8 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://cdmaej2io2yv8" path="res://Scenes/Gameplay/DifficultyTracker.tscn" id="7_wkgae"]
 [ext_resource type="PackedScene" uid="uid://vtmlf6ygjvdo" path="res://Scenes/Gameplay/Manager/ParticleManager.tscn" id="8_e2cqb"]
 [ext_resource type="PackedScene" uid="uid://dc24hn1s7eiad" path="res://Scenes/Gameplay/Manager/PlayerManager.tscn" id="8_e6wcl"]
+[ext_resource type="Resource" uid="uid://cuqnvvkot77u3" path="res://Resources/Konpeito.tres" id="8_i5g0v"]
+[ext_resource type="Resource" uid="uid://bimoj7rcs488i" path="res://Resources/RestoringKonpeito.tres" id="9_h5tod"]
 [ext_resource type="PackedScene" uid="uid://c0y0ljqef66if" path="res://Scenes/Gameplay/Manager/BackgroundManager.tscn" id="9_n4q5p"]
 [ext_resource type="PackedScene" uid="uid://cyblkad7fofrf" path="res://Scenes/UI/Background.tscn" id="10_4bjy0"]
+[ext_resource type="Resource" uid="uid://uqf7qpo7jkna" path="res://Resources/SlowingKonpeito.tres" id="10_u37tp"]
+[ext_resource type="Resource" uid="uid://dh8c3er17ie2x" path="res://Resources/SuperKonpeito.tres" id="11_g64yq"]
 [ext_resource type="Texture2D" uid="uid://b8ycpjwi5h4vw" path="res://Assets/Backgrounds/Border.png" id="11_p4ji6"]
 
 [node name="Game" type="Node2D"]
@@ -30,6 +34,7 @@ position = Vector2(960, 540)
 [node name="UIManager" parent="." instance=ExtResource("6_3b3v2")]
 
 [node name="KonpeitoSpawner" parent="." instance=ExtResource("7_inrg0")]
+SpecialKonpeitos = Array[Object]([ExtResource("8_i5g0v"), ExtResource("9_h5tod"), ExtResource("10_u37tp"), ExtResource("11_g64yq")])
 
 [node name="ParticleManager" parent="." instance=ExtResource("8_e2cqb")]
 

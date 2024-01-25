@@ -37,7 +37,6 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
             Vector2 playerPos = PlayerManager.GetInstance(this).Player.Position;
             Vector2 closestPos = _destroyedPositions.Aggregate((v1, v2) => v1.DistanceSquaredTo(playerPos) < v2.DistanceSquaredTo(playerPos) ? v1 : v2);
             _destroyedPositions.Remove(closestPos);
-            //SpawnFloor(closestPos);
 
             Floor floor = _floorScene.Instantiate<Floor>();
             floor.Position = new Vector2(closestPos.X, 0);

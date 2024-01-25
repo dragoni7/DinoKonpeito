@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3ma17qrewy1u"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_hyppj"]
+[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_fc2b3"]
+[ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_3gfeb"]
+[ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Gameplay/Effect/NoEffect.tscn" id="4_t1vqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hiefn"]
+radius = 27.0
+
+[node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
+script = ExtResource("1_hyppj")
+Effect = NodePath("NoEffect")
+Speed = 0.5
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 1, 0.333333, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_fc2b3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("_cdTimer") instance=ExtResource("3_3gfeb")]
+scale = Vector2(1.2, 1.2)
+collision_layer = 2
+collision_mask = 4
+_cdTimer = NodePath("CollisionTimer")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("CircleShape2D_hiefn")
+debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
+
+[node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
+wait_time = 0.8
+
+[node name="NoEffect" parent="." instance=ExtResource("4_t1vqp")]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
+[connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

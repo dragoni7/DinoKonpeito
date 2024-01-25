@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RandomKonpeito" load_steps=3 format=3 uid="uid://cuqnvvkot77u3"]
+
+[ext_resource type="PackedScene" uid="uid://bfooajyoc1wuk" path="res://Scenes/Gameplay/Konpeito.tscn" id="1_xvsav"]
+[ext_resource type="Script" path="res://Scripts/Resources/RandomKonpeito.cs" id="2_vfqgd"]
+
+[resource]
+script = ExtResource("2_vfqgd")
+Name = "Konpeito"
+KonpeitoScene = ExtResource("1_xvsav")
+PickChance = 40
+DefaultPicked = true

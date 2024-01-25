@@ -32,20 +32,20 @@ public sealed class EventBus
     {
         Type eventType = typeof(T);
 
-        GD.Print("trying to raise event " + eventType.ToString());
+        //GD.Print("trying to raise event " + eventType.ToString());
 
         if (_registeredEventHandlers.TryGetValue(eventType, out SortedList<EventPriority, List<Delegate>> listeners))
         {
             foreach (var entry in listeners)
             {
-                GD.Print(entry.Key);
+                //GD.Print(entry.Key);
 
                 foreach(Delegate listener in entry.Value)
                 {
                     if (listener is not Action<T>)
                         continue;
 
-                    GD.Print(eventType.ToString() + " raised");
+                    //GD.Print(eventType.ToString() + " raised");
                     ((Action<T>)listener).Invoke(e);
                 }
             }
@@ -61,7 +61,7 @@ public sealed class EventBus
     public void Subscribe<T>(Action<T> listener, EventPriority priority) where T : IEvent
     {
         Type eventType = typeof(T);
-        GD.Print("subscribed to " + eventType.ToString());
+        //GD.Print("subscribed to " + eventType.ToString());
 
         if (_registeredEventHandlers.ContainsKey(eventType))
         {
