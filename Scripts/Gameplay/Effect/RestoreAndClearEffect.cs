@@ -10,15 +10,15 @@ public partial class RestoreAndClearEffect : KonpeitoEffect
         KonpeitoSpawner spawner = GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner");
         spawner.CanSpawn = false;
 
-        HitAllKonpeito();
+        float duration = HitAllKonpeito();
         FloorManager.GetInstance(this).CallDeferred(FloorManager.MethodName.RestoreAllFloor);
 
         var tween = GetTree().CreateTween();
         tween.Finished += OnFinished;
-        tween.TweenProperty(spawner, "CanSpawn", true, 2.5);
+        tween.TweenProperty(spawner, "CanSpawn", true, duration + 2f);
     }
 
-    private void HitAllKonpeito()
+    private float HitAllKonpeito()
     {
         var konpeitos = KonpeitoManager.GetInstance(this).GetTree().GetNodesInGroup("Konpeito")
             .Where(n => n is Konpeito)
@@ -39,6 +39,7 @@ public partial class RestoreAndClearEffect : KonpeitoEffect
             }
         }
 
+        return count;
     }
 
     private async void DelayHit(Konpeito k, float time)

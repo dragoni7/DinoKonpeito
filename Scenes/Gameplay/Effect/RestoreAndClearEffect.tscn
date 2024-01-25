@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Effect/RestoreAndClearEffect.cs" id="1_e47mc"]
 
-[node name="RestoreAndClearEffect" type="Node" groups=["Effect"]]
+[node name="RestoreAndClearEffect" type="Node2D" groups=["Effect"]]
 script = ExtResource("1_e47mc")

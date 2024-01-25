@@ -11,7 +11,10 @@ public partial class KonpeitoSpawner : Node
 
     public override void _Ready()
     {
-        EventBus.Instance.Subscribe<DifficultyChangeEvent>(OnDifficultyChanged);
+        EventBus eventBus = EventBus.Instance;
+        eventBus.Subscribe<DifficultyChangeEvent>(OnDifficultyChanged);
+        eventBus.Subscribe<GameOverEvent>(OnGameOver);
+
         GD.Print(SpecialKonpeitos[0].Name);
     }
 
@@ -104,5 +107,12 @@ public partial class KonpeitoSpawner : Node
                     break;
                 }
         }
+    }
+
+    private void OnGameOver(GameOverEvent e)
+    {
+        SpecialKonpeitos.First(d => d.Name == "RestoringKonpeito").DefaultPicked = false;
+        SpecialKonpeitos.First(d => d.Name == "SlowingKonpeito").DefaultPicked = false;
+        SpecialKonpeitos.First(d => d.Name == "SuperKonpeito").DefaultPicked = false;
     }
 }

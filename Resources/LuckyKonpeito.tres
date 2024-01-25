@@ -7,5 +7,5 @@
 script = ExtResource("2_s4fxd")
 Name = "Konpeito"
 KonpeitoScene = ExtResource("1_6v6bx")
-PickChance = 1
+PickChance = 10
 DefaultPicked = true

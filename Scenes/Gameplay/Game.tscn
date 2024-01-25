@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qshoy8b4cl41"]
+[gd_scene load_steps=17 format=3 uid="uid://qshoy8b4cl41"]
 
 [ext_resource type="PackedScene" uid="uid://dws343njsyyws" path="res://Scenes/Gameplay/Manager/FloorManager.tscn" id="4_jqnl6"]
 [ext_resource type="PackedScene" uid="uid://bhobii01u2y3b" path="res://Scenes/Gameplay/Manager/UIManager.tscn" id="6_3b3v2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Resource" uid="uid://uqf7qpo7jkna" path="res://Resources/SlowingKonpeito.tres" id="10_u37tp"]
 [ext_resource type="Resource" uid="uid://dh8c3er17ie2x" path="res://Resources/SuperKonpeito.tres" id="11_g64yq"]
 [ext_resource type="Texture2D" uid="uid://b8ycpjwi5h4vw" path="res://Assets/Backgrounds/Border.png" id="11_p4ji6"]
+[ext_resource type="Resource" uid="uid://d22c4tvmcg78d" path="res://Resources/LuckyKonpeito.tres" id="12_ccaef"]
 
 [node name="Game" type="Node2D"]
 
@@ -34,7 +35,7 @@ position = Vector2(960, 540)
 [node name="UIManager" parent="." instance=ExtResource("6_3b3v2")]
 
 [node name="KonpeitoSpawner" parent="." instance=ExtResource("7_inrg0")]
-SpecialKonpeitos = Array[Object]([ExtResource("8_i5g0v"), ExtResource("9_h5tod"), ExtResource("10_u37tp"), ExtResource("11_g64yq")])
+SpecialKonpeitos = Array[Object]([ExtResource("8_i5g0v"), ExtResource("9_h5tod"), ExtResource("10_u37tp"), ExtResource("11_g64yq"), ExtResource("12_ccaef")])
 
 [node name="ParticleManager" parent="." instance=ExtResource("8_e2cqb")]
 

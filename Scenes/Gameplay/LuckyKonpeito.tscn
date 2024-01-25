@@ -1,23 +1,23 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3ma17qrewy1u"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_hyppj"]
-[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_fc2b3"]
+[ext_resource type="Texture2D" uid="uid://c3h1ssmsjati8" path="res://Assets/Sprite/konpeito_new.png" id="2_tl38u"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_3gfeb"]
-[ext_resource type="PackedScene" uid="uid://dfio5ct8c2ojm" path="res://Scenes/Gameplay/Effect/NoEffect.tscn" id="4_t1vqp"]
+[ext_resource type="PackedScene" uid="uid://ctdv1t4nthuku" path="res://Scenes/Gameplay/Effect/ExtraScoreEffect.tscn" id="4_vhwcm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hiefn"]
-radius = 27.0
+radius = 32.0
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
 script = ExtResource("1_hyppj")
-Effect = NodePath("NoEffect")
+Effect = NodePath("ExtraScoreEffect")
 Speed = 0.5
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0, 1, 0.333333, 1)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_fc2b3")
+modulate = Color(0.890196, 0.92549, 0.592157, 1)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_tl38u")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -34,7 +34,7 @@ debug_color = Color(0.882353, 0.32549, 0.215686, 0.419608)
 [node name="CollisionTimer" type="Timer" parent="HitboxComponent"]
 wait_time = 0.8
 
-[node name="NoEffect" parent="." instance=ExtResource("4_t1vqp")]
+[node name="ExtraScoreEffect" parent="." instance=ExtResource("4_vhwcm")]
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnVisibleOnScreenNotifier2DScreenExited"]
 [connection signal="Hit" from="HitboxComponent" to="." method="OnHit"]

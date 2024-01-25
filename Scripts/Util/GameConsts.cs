@@ -36,7 +36,7 @@ public static class GameConsts
     {
         public const int MaxDifficultyStages = 29;
 
-        public const int StageInterval = 5000;
+        public const int StageInterval = 300;
     }
 
     public static class Bounds
@@ -50,6 +50,7 @@ public static class GameConsts
         High = 400,
         Mid = 200,
         Low = 50,
+        Lower = 25,
         Lowest = 10
     }
 
@@ -69,11 +70,15 @@ public static class GameConsts
                     }
                 case Scores.Mid:
                     {
-                        return Colors.WhiteSmoke;
+                        return Colors.White;
                     }
                 case Scores.Low:
                     {
                         return Colors.Blue;
+                    }
+                case Scores.Lower:
+                    {
+                        return Colors.Green;
                     }
                 default:
                     {

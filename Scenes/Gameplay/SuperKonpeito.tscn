@@ -1,13 +1,13 @@
 [gd_scene load_steps=7 format=3 uid="uid://blygjwrljuk21"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Konpeito.cs" id="1_dpuoj"]
-[ext_resource type="Texture2D" uid="uid://c3adktr1pfd3y" path="res://Assets/Sprite/konpeito.png" id="2_bwxd0"]
+[ext_resource type="Texture2D" uid="uid://c3h1ssmsjati8" path="res://Assets/Sprite/konpeito_new.png" id="2_qhlsc"]
 [ext_resource type="PackedScene" uid="uid://fqdmpfhq2up5" path="res://Scenes/Component/HitboxComponent.tscn" id="3_13uii"]
 [ext_resource type="PackedScene" uid="uid://p6f65nbmo0aa" path="res://Scenes/Gameplay/Effect/RestoreAndClearEffect.tscn" id="5_58kak"]
 [ext_resource type="PackedScene" uid="uid://nigr3lx2f5k8" path="res://Scenes/Component/FlashingComponent.tscn" id="5_sneuy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mlwnf"]
-radius = 27.0
+radius = 32.0
 
 [node name="Konpeito" type="Node2D" node_paths=PackedStringArray("Effect") groups=["Konpeito"]]
 script = ExtResource("1_dpuoj")
@@ -16,8 +16,8 @@ Speed = 0.3
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_bwxd0")
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("2_qhlsc")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
@@ -36,7 +36,7 @@ wait_time = 0.8
 
 [node name="FlashingComponent" parent="." node_paths=PackedStringArray("Target") instance=ExtResource("5_sneuy")]
 Target = NodePath("..")
-FlashColor = Color(1, 1, 0, 1)
+FlashColor = Color(0.807843, 0.580392, 0.768627, 1)
 
 [node name="RestoreAndClearEffect" parent="." instance=ExtResource("5_58kak")]
 

@@ -18,7 +18,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     private Marker2D _startPosition;
 
-    private int Score
+    public int Score
     {
         get => _score;
         set

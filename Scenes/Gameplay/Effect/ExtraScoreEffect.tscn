@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctdv1t4nthuku"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Effect/ExtraScoreEffect.cs" id="1_7r4cf"]
+
+[node name="ExtraScoreEffect" type="Node2D"]
+script = ExtResource("1_7r4cf")

@@ -29,32 +29,37 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         _hud.MessageTimer.Start();
     }
 
-    public void OnScoreChanged(ScoreChangeEvent e)
+    public void SpawnFloatingText(GameConsts.Scores score, Vector2 position)
+    {
+        FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
+        text.SetText(((int)score).ToString());
+        text.SetColor(GameConsts.ScoreColors.Get(score));
+        text.Position = position;
+
+        if (score >= GameConsts.Scores.High)
+        {
+            var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
+            FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
+            flashComponent.FlashColor = GameConsts.ScoreColors.Get(score);
+            flashComponent.Target = text;
+            text.AddChild(flashComponent);
+        }
+
+        AddChild(text);
+    }
+
+    private void OnScoreChanged(ScoreChangeEvent e)
     {
         _hud.UpdateScoreLabel(e.NewScore);
     }
 
-    public void OnKonpeitoHit(KonpeitoHitEvent e)
+    private void OnKonpeitoHit(KonpeitoHitEvent e)
     {
         bool floorCollision = e.GroupsHit.Contains("Floor");
 
         if (!floorCollision)
         {
-            FloatingText text = FloatingTextScene.Instantiate<FloatingText>();
-            text.SetText(e.ScoreOnHit.ToString());
-            text.SetColor(GameConsts.ScoreColors.Get((GameConsts.Scores)e.ScoreOnHit));
-            text.Position = e.KonpeitoHit.Position;
-
-            if (e.ScoreOnHit >= (int)GameConsts.Scores.High)
-            {
-                var scene = GD.Load<PackedScene>("res://Scenes/Component/FlashingComponent.tscn");
-                FlashingComponent flashComponent = scene.Instantiate<FlashingComponent>();
-                flashComponent.FlashColor = GameConsts.ScoreColors.Get((GameConsts.Scores)e.ScoreOnHit);
-                flashComponent.Target = text;
-                text.AddChild(flashComponent);
-            }
-
-            AddChild(text);
+            SpawnFloatingText((GameConsts.Scores)e.ScoreOnHit, e.KonpeitoHit.Position);
         }
     }
 
