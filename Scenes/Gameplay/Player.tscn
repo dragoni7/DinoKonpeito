@@ -28,7 +28,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1pmr8"]
-size = Vector2(86, 40)
+size = Vector2(103, 40)
 
 [node name="Player" type="CharacterBody2D"]
 position = Vector2(960, 1000)

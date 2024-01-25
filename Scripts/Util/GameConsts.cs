@@ -10,13 +10,13 @@ public static class GameConsts
 
         public const float SpeedPercentPerStage = 0.45f;
 
-        public const float DoubleSpawnChance = 0.3f;
+        public const float DoubleSpawnChance = 0.25f;
 
         public const float MinSpawnTime = 0.1f;
 
         public const float MaxSpawnTime = 3f;
 
-        public const float SpawnTimeReduction = 0.5f;
+        public const float SpawnTimeReduction = 0.4f;
     }
 
     public static class Player
@@ -36,7 +36,7 @@ public static class GameConsts
     {
         public const int MaxDifficultyStages = 29;
 
-        public const int StageInterval = 300;
+        public const int StageInterval = 5000;
     }
 
     public static class Bounds

@@ -10,7 +10,7 @@ public partial class ExtraScoreEffect : KonpeitoEffect
 
         for (int i = 0; i < amount; i++)
         {
-            count += 0.25f;
+            count += 0.2f;
             DelayScore(count);
         }
 

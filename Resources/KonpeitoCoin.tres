@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="RandomKonpeito" load_steps=3 format=3 uid="uid://thndvq3k2dcq"]
+
+[ext_resource type="PackedScene" uid="uid://bk8ac7subi415" path="res://Scenes/Gameplay/KonpeitoCoin.tscn" id="1_emjr7"]
+[ext_resource type="Script" path="res://Scripts/Resources/RandomKonpeito.cs" id="2_tgfix"]
+
+[resource]
+script = ExtResource("2_tgfix")
+Name = "KonpeitoCoin"
+KonpeitoScene = ExtResource("1_emjr7")
+PickChance = 1
+DefaultPicked = true
