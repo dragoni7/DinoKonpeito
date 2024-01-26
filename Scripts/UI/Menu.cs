@@ -4,7 +4,7 @@ public partial class Menu : Node
 {
 	public void OnStartButtonPressed()
 	{
-        SceneLoader.GetInstance(this).ChangeToScene("Gameplay/Game.tscn");
+		GameStateManager.GetInstance(this).ChangeToState(GameState.Playing);
 	}
 
 	public void OnOptionsButtonPressed()

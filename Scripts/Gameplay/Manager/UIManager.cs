@@ -5,20 +5,50 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
     [Export]
     public PackedScene FloatingTextScene;
 
-    [Export]
     private HUD _hud;
+
+    private PauseScreen _pauseScreen;
 
     public static UIManager GetInstance(Node from)
     {
-        return from.GetNode<UIManager>("/root/Game/UIManager");
+        return from.GetNode<UIManager>("/root/UiManager");
     }
 
     public override void _Ready()
     {
+        SubscribeEvents();
+
+        _hud = GetNode<HUD>("HUD");
+        _pauseScreen = GetNode<PauseScreen>("PauseScreen");
+        ShowHUD(false);
+    }
+
+    public void SubscribeEvents()
+    {
         EventBus eventBus = EventBus.Instance;
         eventBus.Subscribe<ScoreChangeEvent>(OnScoreChanged);
         eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
-        eventBus.Subscribe<GameOverEvent>(OnGameOver);
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Input.IsActionJustPressed(InputActions.ACTION_ESCAPE) && GameStateManager.GetInstance(this).CurrentState == GameState.Playing)
+        {
+            GetTree().Paused = true;
+            _pauseScreen.Show();
+        }
+    }
+
+    public void ShowHUD(bool value)
+    {
+        if (value)
+        {
+            _hud.Show();
+        }
+        else
+        {
+            _hud.Hide();
+        }
     }
 
     public void ShowMessage(string message)
@@ -61,11 +91,6 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         {
             SpawnFloatingText((GameConsts.Scores)e.ScoreOnHit, e.KonpeitoHit.Position);
         }
-    }
-
-    private void OnGameOver(GameOverEvent e)
-    {
-        ShowGameOver();
     }
 
     async public void ShowGameOver()

@@ -15,9 +15,16 @@ run/main_scene="res://Scenes/UI/SplashScreen.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Resources/default_bus_layout.tres"
+
 [autoload]
 
 SceneLoader="*res://Scenes/Gameplay/Manager/SceneLoader.tscn"
+GameStateManager="*res://Scenes/Gameplay/Manager/GameStateManager.tscn"
+AudioManager="*res://Scenes/Gameplay/Manager/AudioManager.tscn"
+UiManager="*res://Scenes/Gameplay/Manager/UIManager.tscn"
 
 [display]
 

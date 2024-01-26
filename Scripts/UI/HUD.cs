@@ -14,10 +14,8 @@ public partial class HUD : CanvasLayer
 
     private const float TweenDuration = 0.15f;
 
-    [Export]
     public Label MessageLabel { get; private set; }
 
-    [Export]
     public Timer MessageTimer { get; private set; }
 
     public override void _Ready()
@@ -26,6 +24,8 @@ public partial class HUD : CanvasLayer
         _highScoreLabel = GetNode<Label>("HighScoreLabel");
         _highScoreLabel.Text = "HighScore: " + GameData.Instance.HighScore;
         _scoreFontSize = _scoreLabel.GetThemeFontSize("font_size");
+        MessageLabel = GetNode<Label>("MessageLabel");
+        MessageTimer = GetNode<Timer>("MessageTimer");
     }
 
     public void UpdateScoreLabel(int score)

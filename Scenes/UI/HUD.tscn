@@ -3,11 +3,9 @@
 [ext_resource type="Script" path="res://Scripts/UI/HUD.cs" id="1_u4my6"]
 [ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="2_px2sv"]
 
-[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("MessageLabel", "MessageTimer")]
+[node name="HUD" type="CanvasLayer"]
 layer = 3
 script = ExtResource("1_u4my6")
-MessageLabel = NodePath("Message")
-MessageTimer = NodePath("MessageTimer")
 
 [node name="ScoreLabel" type="Label" parent="."]
 offset_right = 149.0
@@ -33,7 +31,7 @@ text = "HighScore: 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Message" type="Label" parent="."]
+[node name="MessageLabel" type="Label" parent="."]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -47,6 +45,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_px2sv")
 theme_override_font_sizes/font_size = 64
+text = "0"
 
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0

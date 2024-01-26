@@ -53,8 +53,9 @@ namespace DinoKonpeito.Component
                     x: Mathf.Clamp(newPosition.X, 64, GameConsts.Bounds.GameAreaX),
                     y: newPosition.Y);
 
-                if (HasGround(movement))
+                if (HasGround(movement) && _characterBody.Position != newPosition)
                 {
+                    EventBus.Instance.Raise(new PlayerPositionChangedEvent(newPosition, _characterBody.Position));
                     _characterBody.Position = newPosition;
                 }
             }

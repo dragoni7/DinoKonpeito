@@ -2,9 +2,8 @@ using Godot;
 
 public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
 {
-
     [Export]
-    PackedScene _konpeitoDestroyScene;
+    private PackedScene _konpeitoDestroyScene;
 
     public static ParticleManager GetInstance(Node from)
     {
@@ -12,6 +11,11 @@ public partial class ParticleManager : Node, ISingleInstance<ParticleManager>
     }
 
     public override void _Ready()
+    {
+        SubscribeEvents();
+    }
+
+    public void SubscribeEvents()
     {
         EventBus.Instance.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
     }

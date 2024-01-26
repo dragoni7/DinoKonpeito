@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://hlagg3otj1gx"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Manager/AudioManager.cs" id="1_frk84"]
+[ext_resource type="AudioStream" uid="uid://dxxrb74ly16ku" path="res://Assets/Sounds/KonpeitoHit.ogg" id="2_hnhcc"]
+[ext_resource type="AudioStream" uid="uid://hc6tgajkaan7" path="res://Assets/Sounds/step.ogg" id="3_v2wyv"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_frk84")
+
+[node name="HitAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_hnhcc")
+volume_db = -10.0
+bus = &"Audio"
+
+[node name="StepAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v2wyv")
+pitch_scale = 0.9
+bus = &"Audio"

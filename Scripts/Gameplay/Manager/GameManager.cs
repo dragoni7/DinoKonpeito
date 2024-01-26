@@ -8,15 +8,11 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     private double _gameSpeed;
 
-    private DifficultyTracker _difficulty;
-
     private Timer _konpeitoTimer;
 
     private Timer _startTimer;
 
     private Timer _menuTimer;
-
-    private Marker2D _startPosition;
 
     public int Score
     {
@@ -38,44 +34,22 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _konpeitoTimer = GetNode<Timer>("KonpeitoTimer");
         _startTimer = GetNode<Timer>("StartTimer");
         _menuTimer = GetNode<Timer>("MenuReturnTimer");
-        _startPosition = GetNode<Marker2D>("StartPosition");
-        _konpeitoTimer.Timeout += GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").OnSpawnKonpeito;
-        _difficulty = GetNode<DifficultyTracker>("/root/Game/DifficultyTracker");
 
         EventBus eventBus = EventBus.Instance;
 
         eventBus.Subscribe<DifficultyChangeEvent>(OnDifficultyIncreased);
         eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
-        eventBus.Subscribe<GameOverEvent>(OnGameOver);
 
-        NewGame();
-        UIManager.GetInstance(this).ShowMessage("Begin!");
+        InitNewGame();
     }
 
-    public override void _Process(double delta)
+    public void InitNewGame()
     {
-        if (Input.IsActionJustPressed(InputActions.ACTION_ESCAPE))
-        {
-            GetTree().Paused = true;
-            UIManager.GetInstance(this).GetNode<CanvasLayer>("PauseScreen").Show();
-        }
-    }
-
-    public void NewGame()
-    {
+        Score = 0;
         _spawnTime = GameConsts.Konpeito.MaxSpawnTime;
-
-        // set up player
-        Vector2 startPosition = _startPosition.Position;
-        PlayerManager playerManager = PlayerManager.GetInstance(this);
-        playerManager.SpawnPlayer(startPosition);
-
-        // set up floor
-        FloorManager.GetInstance(this).CreateFloor();
-
-        // start timer
         _startTimer.Start();
         _konpeitoTimer.WaitTime = _spawnTime;
+        _konpeitoTimer.Timeout += GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").OnSpawnKonpeito;
     }
 
     public void OnKonpeitoHit(KonpeitoHitEvent e)
@@ -84,11 +58,12 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
         if (!floorCollision)
         {
+            DifficultyManager _difficultyManager = DifficultyManager.GetInstance(this);
             Score += e.ScoreOnHit;
 
-            if ((DifficultyTracker.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
+            if ((_difficultyManager.Stage + 1) * GameConsts.Difficulty.StageInterval < Score)
             {
-                _difficulty.NextStage();
+                _difficultyManager.NextStage();
             }
         }
     }
@@ -99,16 +74,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _spawnTime = Mathf.Clamp(_spawnTime, 0.75f, GameConsts.Konpeito.MaxSpawnTime);
     }
 
-    public void OnGameOver(GameOverEvent e)
-    {
-        _konpeitoTimer.Stop();
-        _menuTimer.Start();
-        EventBus.Instance.UnsubscribeAll();
-        UpdateHighScore();
-        GameData.Instance.SaveData();
-    }
-
-    private void UpdateHighScore()
+    public void UpdateHighScore()
     {
         if (Score > GameData.Instance.HighScore)
         {
@@ -118,7 +84,7 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     private void OnReturnTimerTimeout()
     {
-        SceneLoader.GetInstance(this).ChangeToScene("UI/Menu.tscn");
+
     }
 
     private void OnStartTimerTimeout()

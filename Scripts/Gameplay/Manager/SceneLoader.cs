@@ -13,6 +13,6 @@ public partial class SceneLoader : Node, ISingleInstance<SceneLoader>
     {
         string f = "Scenes/";
 
-        GetTree().ChangeSceneToFile($"res://{f}{sceneName}");
+        GetTree().ChangeSceneToFile($"res://{f}{sceneName}.tscn");
     }
 }

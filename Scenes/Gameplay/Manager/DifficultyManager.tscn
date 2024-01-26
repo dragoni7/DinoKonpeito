@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdmaej2io2yv8"]
+
+[ext_resource type="Script" path="res://Scripts/Gameplay/Manager/DifficultyManager.cs" id="1_a2sdk"]
+
+[node name="DifficultyManager" type="Node"]
+script = ExtResource("1_a2sdk")

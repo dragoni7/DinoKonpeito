@@ -13,6 +13,11 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
     public override void _Ready()
     {
         SpeedModifier = 1;
+        SubscribeEvents();
+    }
+
+    public void SubscribeEvents()
+    {
         EventBus.Instance.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit, EventPriority.Low);
     }
 
@@ -33,5 +38,10 @@ partial class KonpeitoManager : Node, ISingleInstance<KonpeitoManager>
         }
 
         e?.KonpeitoHit.QueueFree();
+    }
+
+    public void ClearKonpeito()
+    {
+        GetTree().CallGroup("Konpeito", Node.MethodName.QueueFree);
     }
 }

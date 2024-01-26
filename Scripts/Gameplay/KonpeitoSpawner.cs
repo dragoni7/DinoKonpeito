@@ -13,9 +13,6 @@ public partial class KonpeitoSpawner : Node
     {
         EventBus eventBus = EventBus.Instance;
         eventBus.Subscribe<DifficultyChangeEvent>(OnDifficultyChanged);
-        eventBus.Subscribe<GameOverEvent>(OnGameOver);
-
-        GD.Print(SpecialKonpeitos[0].Name);
     }
 
     public void OnSpawnKonpeito()
@@ -26,7 +23,7 @@ public partial class KonpeitoSpawner : Node
 
             KonpeitoManager.GetInstance(this).AddChild(BuildKonpeito(spawnLocation));
 
-            double doubleSpawnChance = DifficultyTracker.Stage * GameConsts.Konpeito.DoubleSpawnChance;
+            double doubleSpawnChance = DifficultyManager.GetInstance(this).Stage * GameConsts.Konpeito.DoubleSpawnChance;
 
             if (doubleSpawnChance > GD.RandRange(0, 1.5D))
             {
@@ -42,7 +39,7 @@ public partial class KonpeitoSpawner : Node
         Konpeito konpeito = PickRandomKonpeito().Instantiate<Konpeito>();
 
         konpeito.Position = location.Position;
-        konpeito.Speed += (float)GD.RandRange(GameConsts.Konpeito.SpeedAddMin, GameConsts.Konpeito.SpeedAddMax) + (DifficultyTracker.Stage * GameConsts.Konpeito.SpeedPercentPerStage);
+        konpeito.Speed += (float)GD.RandRange(GameConsts.Konpeito.SpeedAddMin, GameConsts.Konpeito.SpeedAddMax) + (DifficultyManager.GetInstance(this).Stage * GameConsts.Konpeito.SpeedPercentPerStage);
 
         return konpeito;
     }
@@ -109,8 +106,9 @@ public partial class KonpeitoSpawner : Node
         }
     }
 
-    private void OnGameOver(GameOverEvent e)
+    public void Reset()
     {
+        CanSpawn = false;
         SpecialKonpeitos.First(d => d.Name == "RestoringKonpeito").DefaultPicked = false;
         SpecialKonpeitos.First(d => d.Name == "SlowingKonpeito").DefaultPicked = false;
         SpecialKonpeitos.First(d => d.Name == "SuperKonpeito").DefaultPicked = false;

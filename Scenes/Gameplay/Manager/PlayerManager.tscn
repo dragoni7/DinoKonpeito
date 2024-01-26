@@ -6,3 +6,6 @@
 [node name="PlayerManager" type="Node"]
 script = ExtResource("1_jx7lx")
 _playerScene = ExtResource("2_xa1ro")
+
+[node name="StartPosition" type="Marker2D" parent="."]
+position = Vector2(960, 990)

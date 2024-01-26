@@ -5,13 +5,12 @@
 [ext_resource type="PackedScene" uid="uid://4qy4ogcm74ki" path="res://Scenes/UI/FloatingText.tscn" id="2_i404o"]
 [ext_resource type="PackedScene" uid="uid://brtmnts5rq8dv" path="res://Scenes/UI/PauseScreen.tscn" id="4_f3b7o"]
 
-[node name="UIManager" type="Node" node_paths=PackedStringArray("_hud")]
+[node name="UIManager" type="Node"]
 script = ExtResource("1_1kku1")
 FloatingTextScene = ExtResource("2_i404o")
-_hud = NodePath("HUD")
 
 [node name="PauseScreen" parent="." instance=ExtResource("4_f3b7o")]
 visible = false
 
 [node name="HUD" parent="." instance=ExtResource("1_dtgib")]
-layer = 3
+visible = false

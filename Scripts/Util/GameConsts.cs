@@ -16,7 +16,7 @@ public static class GameConsts
 
         public const float MaxSpawnTime = 3f;
 
-        public const float SpawnTimeReduction = 0.4f;
+        public const float SpawnTimeReduction = 0.3f;
     }
 
     public static class Player
@@ -34,7 +34,7 @@ public static class GameConsts
 
     public static class Difficulty
     {
-        public const int MaxDifficultyStages = 29;
+        public const int MaxDifficultyStages = 19;
 
         public const int StageInterval = 5000;
     }

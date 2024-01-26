@@ -22,7 +22,9 @@ public partial class PauseScreen : CanvasLayer
 
     public void OnMenuButtonPress()
     {
+        Hide();
         GetTree().Paused = false;
-        SceneLoader.GetInstance(this).ChangeToScene("UI/Menu.tscn");
+        GameStateManager.GetInstance(this).ChangeToState(GameState.ExitingGame);
+
     }
 }

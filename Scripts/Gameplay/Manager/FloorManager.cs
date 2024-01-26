@@ -17,6 +17,12 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
     public override void _Ready()
     {
         _destroyedPositions = new(29);
+        SubscribeEvents();
+        CreateFloor();
+    }
+
+    public void SubscribeEvents()
+    {
         EventBus.Instance.Subscribe<FloorHitEvent>(OnFloorHit);
     }
 
