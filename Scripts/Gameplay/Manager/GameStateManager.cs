@@ -27,17 +27,9 @@ public partial class GameStateManager : Node, ISingleInstance<GameStateManager>
 
                         break;
                     }
-                case GameState.Paused:
-                    {
-                        CurrentState = newState;
-                        break;
-                    }
                 case GameState.Playing:
                     {
                         sceneLoader.ChangeToScene("Gameplay/Game");
-
-                        audioManager.SubscribeEvents();
-                        uiManager.SubscribeEvents();
 
                         uiManager.ShowHUD(true);
                         uiManager.ShowMessage("Begin!");
@@ -48,13 +40,10 @@ public partial class GameStateManager : Node, ISingleInstance<GameStateManager>
                     }
                 case GameState.GameOver:
                     {
-                        uiManager.ShowGameOver();
+                        //GameManager.GetInstance(this).UpdateHighScore();
+                        //CurrentState = newState;
 
-                        GameManager.GetInstance(this).UpdateHighScore();
-                        GameData.Instance.SaveData();
-                        CurrentState = newState;
-
-                        ChangeToState(GameState.ExitingGame);
+                        //ChangeToState(GameState.ExitingGame);
 
                         break;
                     }
@@ -63,8 +52,11 @@ public partial class GameStateManager : Node, ISingleInstance<GameStateManager>
                         GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").Reset();
                         uiManager.ShowHUD(false);
                         KonpeitoManager.GetInstance(this).SpeedModifier = 1;
+                        GameManager.GetInstance(this).Score = 0;
 
                         EventBus.Instance.UnsubscribeAll();
+                        audioManager.SubscribeEvents();
+                        uiManager.SubscribeEvents();
 
                         PlayerManager.GetInstance(this).DespawnPlayer();
                         KonpeitoManager.GetInstance(this).ClearKonpeito();
@@ -85,6 +77,5 @@ public enum GameState
     Playing,
     GameOver,
     ExitingGame,
-    Paused,
     Menu
 }

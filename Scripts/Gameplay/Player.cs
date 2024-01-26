@@ -5,6 +5,7 @@ public partial class Player : CharacterBody2D, ITakesHits
 {
     public void OnHit(Array<StringName> groups)
     {
-        GameStateManager.GetInstance(this).ChangeToState(GameState.GameOver);
+        Hide();
+        EventBus.Instance.Raise(new GameOverEvent());
     }
 }

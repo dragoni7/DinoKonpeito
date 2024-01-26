@@ -8,7 +8,7 @@ public class GameData
 
     private const string _dataPath = "user://konpeito.dat";
 
-    public int HighScore { get; set; } = 0;
+    public int HighScore { get; set; }
 
     public static GameData Instance
     {
@@ -25,9 +25,23 @@ public class GameData
 
     private GameData()
     {
-        if (!ReadData()) {
-            SaveData();
+
+    }
+
+    public void UpdateHighScore(int score)
+    {
+        if (score > HighScore)
+        {
+            HighScore = score;
+            EventBus.Instance.Raise(new GameDataUpdatedEvent(HighScore));
         }
+    }
+
+    public void Reset()
+    {
+        HighScore = 0;
+        EventBus.Instance.Raise(new GameDataUpdatedEvent(HighScore));
+        SaveData();
     }
 
     public void SaveData()
@@ -39,6 +53,7 @@ public class GameData
             { "HighScore", HighScore }
         };
 
+        GD.Print("Saving high score as: " + HighScore);
         var jsonString = Json.Stringify(gameData);
 
         dataFile.StoreLine(jsonString);
@@ -48,6 +63,8 @@ public class GameData
     {
         if (!FileAccess.FileExists(_dataPath))
         {
+            HighScore = 0;
+            SaveData();
             return false;
         }
 
@@ -68,7 +85,7 @@ public class GameData
             }
 
             var data = new Dictionary<string, Variant>((Dictionary)json.Data);
-            HighScore = (int)data["HighScore"];
+            UpdateHighScore((int)data["HighScore"]);
         }
 
         return true;

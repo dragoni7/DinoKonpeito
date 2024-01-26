@@ -28,6 +28,8 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         EventBus eventBus = EventBus.Instance;
         eventBus.Subscribe<ScoreChangeEvent>(OnScoreChanged);
         eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
+        eventBus.Subscribe<GameOverEvent>(OnGameOver, EventPriority.Highest);
+        eventBus.Subscribe<GameDataUpdatedEvent>(OnGameDataUpdated);
     }
 
     public override void _Process(double delta)
@@ -83,6 +85,11 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         _hud.UpdateScoreLabel(e.NewScore);
     }
 
+    private void OnGameDataUpdated(GameDataUpdatedEvent e)
+    {
+        _hud.UpdateHighScore(e.HighScore);
+    }
+
     private void OnKonpeitoHit(KonpeitoHitEvent e)
     {
         bool floorCollision = e.GroupsHit.Contains("Floor");
@@ -91,6 +98,11 @@ public partial class UIManager : Node, ISingleInstance<UIManager>
         {
             SpawnFloatingText((GameConsts.Scores)e.ScoreOnHit, e.KonpeitoHit.Position);
         }
+    }
+
+    private void OnGameOver(GameOverEvent e)
+    {
+        ShowGameOver();
     }
 
     async public void ShowGameOver()

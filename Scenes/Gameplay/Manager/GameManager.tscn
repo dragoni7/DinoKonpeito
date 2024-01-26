@@ -12,10 +12,5 @@ wait_time = 3.0
 wait_time = 2.0
 one_shot = true
 
-[node name="MenuReturnTimer" type="Timer" parent="."]
-wait_time = 2.0
-one_shot = true
-
 [connection signal="timeout" from="KonpeitoTimer" to="." method="OnKonpeitoTimerTimeout"]
 [connection signal="timeout" from="StartTimer" to="." method="OnStartTimerTimeout"]
-[connection signal="timeout" from="MenuReturnTimer" to="." method="OnReturnTimerTimeout"]

@@ -12,8 +12,6 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
 
     private Timer _startTimer;
 
-    private Timer _menuTimer;
-
     public int Score
     {
         get => _score;
@@ -33,12 +31,12 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
     {
         _konpeitoTimer = GetNode<Timer>("KonpeitoTimer");
         _startTimer = GetNode<Timer>("StartTimer");
-        _menuTimer = GetNode<Timer>("MenuReturnTimer");
 
         EventBus eventBus = EventBus.Instance;
 
         eventBus.Subscribe<DifficultyChangeEvent>(OnDifficultyIncreased);
         eventBus.Subscribe<KonpeitoHitEvent>(OnKonpeitoHit);
+        eventBus.Subscribe<GameOverEvent>(OnGameOver, EventPriority.Low);
 
         InitNewGame();
     }
@@ -50,6 +48,15 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
         _startTimer.Start();
         _konpeitoTimer.WaitTime = _spawnTime;
         _konpeitoTimer.Timeout += GetNode<KonpeitoSpawner>("/root/Game/KonpeitoSpawner").OnSpawnKonpeito;
+    }
+
+    public async void OnGameOver(GameOverEvent e)
+    {
+        GameData.Instance.UpdateHighScore(Score);
+
+        await ToSignal(GetTree().CreateTimer(2), "timeout");
+
+        GameStateManager.GetInstance(this).ChangeToState(GameState.ExitingGame);
     }
 
     public void OnKonpeitoHit(KonpeitoHitEvent e)
@@ -72,19 +79,6 @@ public partial class GameManager : Node, ISingleInstance<GameManager>
     {
         _spawnTime -= GameConsts.Konpeito.SpawnTimeReduction;
         _spawnTime = Mathf.Clamp(_spawnTime, 0.75f, GameConsts.Konpeito.MaxSpawnTime);
-    }
-
-    public void UpdateHighScore()
-    {
-        if (Score > GameData.Instance.HighScore)
-        {
-            GameData.Instance.HighScore = Score;
-        }
-    }
-
-    private void OnReturnTimerTimeout()
-    {
-
     }
 
     private void OnStartTimerTimeout()

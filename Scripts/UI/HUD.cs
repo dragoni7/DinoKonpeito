@@ -22,7 +22,6 @@ public partial class HUD : CanvasLayer
     {
         _scoreLabel = GetNode<Label>("ScoreLabel");
         _highScoreLabel = GetNode<Label>("HighScoreLabel");
-        _highScoreLabel.Text = "HighScore: " + GameData.Instance.HighScore;
         _scoreFontSize = _scoreLabel.GetThemeFontSize("font_size");
         MessageLabel = GetNode<Label>("MessageLabel");
         MessageTimer = GetNode<Timer>("MessageTimer");
@@ -32,10 +31,18 @@ public partial class HUD : CanvasLayer
     {
         _scoreLabel.Text = ScoreText + score.ToString();
 
-        _tween = GetTree().CreateTween();
-        _tween.Finished += OnTweenFinished;
-        _tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Linear);
-        _tween.TweenProperty(_scoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize + 12f, TweenDuration);
+        if (score > 0)
+        {
+            _tween = GetTree().CreateTween();
+            _tween.Finished += OnTweenFinished;
+            _tween.SetEase(Tween.EaseType.Out).SetTrans(Tween.TransitionType.Linear);
+            _tween.TweenProperty(_scoreLabel, "theme_override_font_sizes/font_size", _scoreFontSize + 12f, TweenDuration);
+        }
+    }
+
+    public void UpdateHighScore(int score)
+    {
+        _highScoreLabel.Text = "HighScore: " + score;
     }
 
     private void OnTweenFinished()
