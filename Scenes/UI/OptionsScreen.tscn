@@ -22,7 +22,7 @@ offset_top = -3.05176e-05
 theme = ExtResource("1_dyn6c")
 script = ExtResource("2_27njj")
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="ClearDataButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 text = "Clear Data"
 
@@ -31,5 +31,13 @@ layout_mode = 2
 text = "Back
 "
 
-[connection signal="pressed" from="VBoxContainer/Button" to="VBoxContainer" method="OnClearDataPressed"]
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="VBoxContainer"]
+title = "Clear Data?"
+initial_position = 2
+ok_button_text = "Yes"
+dialog_text = "Are you sure you want to clear ALL game data?"
+
+[connection signal="pressed" from="VBoxContainer/ClearDataButton" to="VBoxContainer" method="OnClearDataPressed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="VBoxContainer" method="OnBackButtonPressed"]
+[connection signal="canceled" from="VBoxContainer/ConfirmationDialog" to="VBoxContainer" method="OnClearDataCancel"]
+[connection signal="confirmed" from="VBoxContainer/ConfirmationDialog" to="VBoxContainer" method="OnClearDataConfirm"]

@@ -7,12 +7,12 @@
 [node name="AudioManager" type="Node"]
 script = ExtResource("1_frk84")
 
-[node name="HitAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="HitAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_hnhcc")
 volume_db = -10.0
 bus = &"Audio"
 
-[node name="StepAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="StepAudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_v2wyv")
 pitch_scale = 0.9
 bus = &"Audio"

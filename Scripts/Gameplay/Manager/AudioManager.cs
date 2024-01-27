@@ -2,9 +2,9 @@ using Godot;
 
 public partial class AudioManager : Node, ISingleInstance<AudioManager>
 {
-    private AudioStreamPlayer2D _hitAudioPlayer;
+    private AudioStreamPlayer _hitAudioPlayer;
 
-    private AudioStreamPlayer2D _stepAudioPlayer;
+    private AudioStreamPlayer _stepAudioPlayer;
 
     public static AudioManager GetInstance(Node from)
     {
@@ -13,8 +13,8 @@ public partial class AudioManager : Node, ISingleInstance<AudioManager>
 
     public override void _Ready()
     {
-        _hitAudioPlayer = GetNode<AudioStreamPlayer2D>("HitAudioPlayer");
-        _stepAudioPlayer = GetNode<AudioStreamPlayer2D>("StepAudioPlayer");
+        _hitAudioPlayer = GetNode<AudioStreamPlayer>("HitAudioPlayer");
+        _stepAudioPlayer = GetNode<AudioStreamPlayer>("StepAudioPlayer");
 
         SubscribeEvents();
     }
@@ -28,7 +28,6 @@ public partial class AudioManager : Node, ISingleInstance<AudioManager>
 
     private void OnKonpeitoHit(KonpeitoHitEvent e)
     {
-        _hitAudioPlayer.Position = e.KonpeitoHit.Position;
         _hitAudioPlayer.PitchScale = (float)GD.RandRange(0.8f, 1.2f);
         _hitAudioPlayer.Play();
     }
@@ -37,7 +36,6 @@ public partial class AudioManager : Node, ISingleInstance<AudioManager>
     {
         if (!_stepAudioPlayer.Playing)
         {
-            _stepAudioPlayer.Position = e.NewPosition;
             _stepAudioPlayer.Play();
         }
     }
