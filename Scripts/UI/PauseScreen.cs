@@ -5,7 +5,6 @@ public partial class PauseScreen : CanvasLayer
     public override void _Ready()
     {
         GetNode<Button>("VBoxContainer/ContinueButton").Pressed += OnContinueButtonPress;
-        GetNode<Button>("VBoxContainer/OptionsButton").Pressed += OnOptionsButtonPress;
         GetNode<Button>("VBoxContainer/MenuButton").Pressed += OnMenuButtonPress;
     }
 
@@ -13,11 +12,6 @@ public partial class PauseScreen : CanvasLayer
     {
         Hide();
         GetTree().Paused = false; 
-    }
-
-    public void OnOptionsButtonPress()
-    {
-
     }
 
     public void OnMenuButtonPress()

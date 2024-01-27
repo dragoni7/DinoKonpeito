@@ -10,6 +10,10 @@ public class GameData
 
     public int HighScore { get; set; }
 
+    public double MusicVolume { get; set; }
+
+    public double SFXVolume { get; set; }
+
     public static GameData Instance
     {
         get
@@ -50,10 +54,11 @@ public class GameData
 
         Dictionary<string, Variant> gameData = new()
         {
-            { "HighScore", HighScore }
+            { "HighScore", HighScore },
+            { "MusicVolume", MusicVolume },
+            { "SFXVolume", SFXVolume }
         };
 
-        GD.Print("Saving high score as: " + HighScore);
         var jsonString = Json.Stringify(gameData);
 
         dataFile.StoreLine(jsonString);
@@ -64,6 +69,8 @@ public class GameData
         if (!FileAccess.FileExists(_dataPath))
         {
             HighScore = 0;
+            MusicVolume = 50;
+            SFXVolume = 50;
             SaveData();
             return false;
         }
@@ -85,6 +92,8 @@ public class GameData
             }
 
             var data = new Dictionary<string, Variant>((Dictionary)json.Data);
+            MusicVolume = (double)data["MusicVolume"];
+            SFXVolume = (double)data["SFXVolume"];
             UpdateHighScore((int)data["HighScore"]);
         }
 

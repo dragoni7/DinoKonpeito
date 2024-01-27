@@ -2,11 +2,6 @@ using Godot;
 
 public partial class Menu : Node
 {
-    public override void _Ready()
-    {
-		GameData.Instance.ReadData();
-    }
-
     public void OnStartButtonPressed()
 	{
 		GameStateManager.GetInstance(this).ChangeToState(GameState.Playing);

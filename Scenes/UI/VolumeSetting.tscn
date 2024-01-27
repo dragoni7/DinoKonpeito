@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3 uid="uid://co48e48x1v6v4"]
+
+[ext_resource type="Script" path="res://Scripts/UI/VolumeSetting.cs" id="1_dqxeu"]
+
+[node name="VolumeSetting" type="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = -1
+anchor_right = 0.0598958
+anchor_bottom = 0.0212963
+script = ExtResource("1_dqxeu")
+metadata/_edit_use_anchors_ = true
+
+[node name="BusNameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 20
+text = "<Bus Name>"
+
+[node name="VolumeHSlider" type="HSlider" parent="."]
+custom_minimum_size = Vector2(300, 10)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+value = 50.0
+rounded = true
+
+[node name="VolumePercentageLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "50%"

@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://byx66ea046t0v"]
+[gd_scene load_steps=7 format=3 uid="uid://byx66ea046t0v"]
 
 [ext_resource type="Theme" uid="uid://db2xapvyluoki" path="res://Assets/Themes/GameTheme.tres" id="1_dyn6c"]
 [ext_resource type="Script" path="res://Scripts/UI/OptionsScreen.cs" id="2_27njj"]
+[ext_resource type="PackedScene" uid="uid://co48e48x1v6v4" path="res://Scenes/UI/VolumeSetting.tscn" id="3_caaqu"]
+[ext_resource type="StyleBox" uid="uid://b1ovfb5s77465" path="res://Assets/Themes/AlertButtonNormal.tres" id="4_mvwmf"]
+[ext_resource type="StyleBox" uid="uid://dy5hkygs35cea" path="res://Assets/Themes/AlertButtonHover.tres" id="5_5b8uy"]
+[ext_resource type="StyleBox" uid="uid://dw5fwv06vwl6m" path="res://Assets/Themes/AlertButtonPressed.tres" id="6_3r7nu"]
 
 [node name="Menu" type="ColorRect"]
 anchors_preset = 15
@@ -14,16 +18,37 @@ color = Color(0.34902, 1, 0.976471, 1)
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.445833
-anchor_top = 0.503704
-anchor_right = 0.555208
-anchor_bottom = 0.583333
-offset_top = -3.05176e-05
+anchor_left = 0.388802
+anchor_top = 0.389815
+anchor_right = 0.611198
+anchor_bottom = 0.610185
+grow_horizontal = 2
+grow_vertical = 2
 theme = ExtResource("1_dyn6c")
+theme_override_constants/separation = 50
 script = ExtResource("2_27njj")
+metadata/_edit_use_anchors_ = true
+
+[node name="VolumeSettings" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="MusicSetting" parent="VBoxContainer/VolumeSettings" instance=ExtResource("3_caaqu")]
+layout_mode = 2
+BusName = "Music"
+BusIndex = 1
+
+[node name="SFXSetting" parent="VBoxContainer/VolumeSettings" instance=ExtResource("3_caaqu")]
+layout_mode = 2
+BusName = "SFX"
+BusIndex = 2
 
 [node name="ClearDataButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme = ExtResource("1_dyn6c")
+theme_override_styles/normal = ExtResource("4_mvwmf")
+theme_override_styles/hover = ExtResource("5_5b8uy")
+theme_override_styles/pressed = ExtResource("6_3r7nu")
 text = "Clear Data"
 
 [node name="BackButton" type="Button" parent="VBoxContainer"]
@@ -34,6 +59,9 @@ text = "Back
 [node name="ConfirmationDialog" type="ConfirmationDialog" parent="VBoxContainer"]
 title = "Clear Data?"
 initial_position = 2
+size = Vector2i(387, 100)
+unresizable = true
+always_on_top = true
 ok_button_text = "Yes"
 dialog_text = "Are you sure you want to clear ALL game data?"
 
