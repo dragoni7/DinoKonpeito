@@ -61,7 +61,7 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
         }
     }
 
-    public void RestoreAllFloor()
+    public async void RestoreAllFloor()
     {
         while (_destroyedPositions.Count > 0)
         {
@@ -83,6 +83,8 @@ partial class FloorManager : Node, ISingleInstance<FloorManager>
             tween.TweenProperty(floor, "position", closestPos, 0.3);
             tween.TweenProperty(hitbox, "monitorable", true, 0.3);
             tween.TweenProperty(hitbox, "monitoring", true, 0.3);
+
+            await ToSignal(GetTree().CreateTimer(0.1), "timeout");
         }
     }
 
