@@ -28,8 +28,11 @@ public partial class AudioManager : Node, ISingleInstance<AudioManager>
 
     private void OnKonpeitoHit(KonpeitoHitEvent e)
     {
-        _hitAudioPlayer.PitchScale = (float)GD.RandRange(0.8f, 1.2f);
-        _hitAudioPlayer.Play();
+        if (!e.GroupsHit.Contains("Floor"))
+        {
+            _hitAudioPlayer.PitchScale = (float)GD.RandRange(0.8f, 1.2f);
+            _hitAudioPlayer.Play();
+        }
     }
 
     private void OnPlayerPositionChanged(PlayerPositionChangedEvent e)

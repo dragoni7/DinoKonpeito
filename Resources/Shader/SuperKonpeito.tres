@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://condkg0fa66o7"]
+
+[ext_resource type="Shader" path="res://Scripts/Shader/SuperKonpeito.gdshader" id="1_sqga6"]
+
+[resource]
+shader = ExtResource("1_sqga6")
+shader_parameter/line_thickness = 12.0
+shader_parameter/sin_frequency = 1.0
+shader_parameter/sin_offset = 0.0
+shader_parameter/light_offset = 0.5

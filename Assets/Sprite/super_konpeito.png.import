@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c3adktr1pfd3y"
-path="res://.godot/imported/konpeito.png-35b707fe41aea74518d2155a2bfbadf6.ctex"
+uid="uid://kvotwfgigah5"
+path="res://.godot/imported/super_konpeito.png-6a76d5293700b2f116b717bb2d27e5c7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprite/konpeito.png"
-dest_files=["res://.godot/imported/konpeito.png-35b707fe41aea74518d2155a2bfbadf6.ctex"]
+source_file="res://Assets/Sprite/super_konpeito.png"
+dest_files=["res://.godot/imported/super_konpeito.png-6a76d5293700b2f116b717bb2d27e5c7.ctex"]
 
 [params]
 

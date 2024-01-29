@@ -7,5 +7,5 @@
 script = ExtResource("2_hpiw1")
 Name = "SlowingKonpeito"
 KonpeitoScene = ExtResource("1_h75xy")
-PickChance = 2
+PickChance = 3
 DefaultPicked = false

@@ -5,6 +5,9 @@ public partial class BackgroundManager : Node, ISingleInstance<BackgroundManager
     [Export]
     private PackedScene _backgroundScene;
 
+    [Export]
+    private ShaderMaterial _rainbowMaterial;
+
     private Background _background;
 
     public override void _Ready()
@@ -25,10 +28,36 @@ public partial class BackgroundManager : Node, ISingleInstance<BackgroundManager
         {
             _background.Layers[e.NewDifficulty - 1].Modulate = Colors.Transparent;
             _background.Layers[e.NewDifficulty - 1].Visible = true;
-            GetTree().CreateTween().TweenProperty(_background.Layers[e.NewDifficulty - 1], "modulate", Colors.White, 1.5);
-
-            ColorRect colorRect = _background.ColorLayer.GetNode<ColorRect>("ColorRect");
-            GetTree().CreateTween().TweenProperty(colorRect, "color", colorRect.Color.Darkened(0.25f), 1);
+            GetTree().CreateTween().TweenProperty(_background.Layers[e.NewDifficulty - 1], "modulate", Colors.White, 2);
         }
+
+        switch (e.NewDifficulty)
+        {
+            case 2:
+                {
+                    GetTree().CreateTween().TweenProperty(_background.ColorLayer, "modulate", SaturateColor(_background.ColorLayer.Modulate), 1);
+                    break;
+                }
+            case 4:
+                {
+                    GetTree().CreateTween().TweenProperty(_background.ColorLayer, "modulate", SaturateColor(_background.ColorLayer.Modulate), 1);
+                    break;
+                }
+            case 8:
+                {
+                    GetTree().CreateTween().TweenProperty(_background.ColorLayer, "modulate", _background.ColorLayer.Modulate.Darkened(0.5f), 1);
+                    break;
+                }
+            case 12:
+                {
+                    _background.ColorLayer.GetNode<Sprite2D>("ColorRect").Material = _rainbowMaterial;
+                    break;
+                }
+        }
+    }
+
+    private Color SaturateColor(Color color)
+    {
+        return Color.FromHsv(color.H, color.S += 0.5f, color.V);
     }
 }

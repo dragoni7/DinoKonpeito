@@ -1,8 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://c0y0ljqef66if"]
+[gd_scene load_steps=4 format=3 uid="uid://c0y0ljqef66if"]
 
 [ext_resource type="Script" path="res://Scripts/Gameplay/Manager/BackgroundManager.cs" id="1_kkeax"]
 [ext_resource type="PackedScene" uid="uid://cyblkad7fofrf" path="res://Scenes/UI/Background.tscn" id="2_jnkuu"]
+[ext_resource type="Material" uid="uid://dk63tsh3mq1r2" path="res://Resources/Shader/RainbowBackground.tres" id="3_4uoc6"]
 
 [node name="BackgroundManager" type="Node"]
 script = ExtResource("1_kkeax")
 _backgroundScene = ExtResource("2_jnkuu")
+_rainbowMaterial = ExtResource("3_4uoc6")

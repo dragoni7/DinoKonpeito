@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbv0pdwa502aa"]
+[gd_scene load_steps=5 format=3 uid="uid://dbv0pdwa502aa"]
+
+[ext_resource type="Texture2D" uid="uid://3d4cf2ea278i" path="res://Assets/Sprite/particle.png" id="1_hjns1"]
 
 [sub_resource type="Curve" id="Curve_jagay"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.749311, 0.499465), 0.0, 0.0, 0, 0, Vector2(1, 0.151872), 0.0, 0.0, 0, 0]
@@ -17,14 +19,13 @@ spread = 100.0
 initial_velocity_min = -500.0
 initial_velocity_max = 500.0
 gravity = Vector3(0, 98, 0)
-scale_min = 20.0
-scale_max = 20.0
 scale_curve = SubResource("CurveTexture_iw1c0")
 
 [node name="DestroyKonpeitoParticles" type="GPUParticles2D"]
 emitting = false
 amount = 4
 process_material = SubResource("ParticleProcessMaterial_avovb")
+texture = ExtResource("1_hjns1")
 lifetime = 0.3
 one_shot = true
 explosiveness = 1.0

@@ -29,7 +29,7 @@ public static class GameConsts
 
         public const float BaseHeadStepY = -12f;
 
-        public const float DifficultyHeadStepMultiplier = 1.05f;
+        public const float DifficultyHeadStepMultiplier = 1.04f;
     }
 
     public static class Difficulty

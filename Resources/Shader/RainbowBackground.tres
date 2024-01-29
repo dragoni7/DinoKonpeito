@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dk63tsh3mq1r2"]
+
+[ext_resource type="Shader" path="res://Scripts/Shader/RainbowBackground.gdshader" id="1_afoat"]
+
+[resource]
+shader = ExtResource("1_afoat")
+shader_parameter/strength = 0.2
+shader_parameter/speed = 0.1
+shader_parameter/angle = 30.0

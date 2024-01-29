@@ -1,47 +1,137 @@
-[gd_scene load_steps=4 format=3 uid="uid://cyblkad7fofrf"]
+[gd_scene load_steps=21 format=3 uid="uid://cyblkad7fofrf"]
 
-[ext_resource type="Texture2D" uid="uid://eimsrwpir5yy" path="res://icon.svg" id="1_bmk8o"]
 [ext_resource type="Script" path="res://Scripts/UI/Background.cs" id="1_o3dx1"]
-[ext_resource type="Texture2D" uid="uid://chync8fvk3nli" path="res://Assets/Backgrounds/background_.png" id="2_lbokj"]
+[ext_resource type="Texture2D" uid="uid://b8ycpjwi5h4vw" path="res://Assets/Backgrounds/Border.png" id="2_kprq1"]
+[ext_resource type="Texture2D" uid="uid://vn7m0i16kxpj" path="res://Assets/Backgrounds/Background 1.png" id="3_8w6kd"]
+[ext_resource type="Texture2D" uid="uid://8l2x2dxwn2lr" path="res://Assets/Backgrounds/Front Plushie 1.png" id="3_rh6qd"]
+[ext_resource type="Texture2D" uid="uid://qkjpjaxuvxaa" path="res://Assets/Backgrounds/star_layers/star 1.png" id="3_seg4f"]
+[ext_resource type="Texture2D" uid="uid://bug3g058ki0l1" path="res://Assets/Backgrounds/background_colored.png" id="3_y67vw"]
+[ext_resource type="Texture2D" uid="uid://dqfq86avln7fv" path="res://Assets/Backgrounds/star_layers/star 2.png" id="4_3s4hd"]
+[ext_resource type="Texture2D" uid="uid://c2n1epxc12rq4" path="res://Assets/Backgrounds/Front Plushie 2.png" id="4_4soxp"]
+[ext_resource type="Texture2D" uid="uid://x2aaml7e6kti" path="res://Assets/Backgrounds/Background 2.png" id="4_bdtk0"]
+[ext_resource type="Texture2D" uid="uid://b6wj46jksr02o" path="res://Assets/Backgrounds/star_layers/star 3.png" id="5_34mit"]
+[ext_resource type="Texture2D" uid="uid://daxyefxtabusu" path="res://Assets/Backgrounds/Candy.png" id="5_657vx"]
+[ext_resource type="Texture2D" uid="uid://cp2n1u5fapqgm" path="res://Assets/Backgrounds/Front Plushie 3.png" id="5_kfchl"]
+[ext_resource type="Texture2D" uid="uid://va6vvj662g3r" path="res://Assets/Backgrounds/star_layers/star 4.png" id="6_6b2p2"]
+[ext_resource type="Texture2D" uid="uid://b21ypjftweeuw" path="res://Assets/Backgrounds/Front Plushie 4.png" id="6_vxbm0"]
+[ext_resource type="Texture2D" uid="uid://c8ptpe65twcwf" path="res://Assets/Backgrounds/Front Plushie 5.png" id="7_7g8uw"]
+[ext_resource type="Texture2D" uid="uid://dvs5ev6nrvxqm" path="res://Assets/Backgrounds/star_layers/star 5.png" id="7_gei0w"]
+[ext_resource type="Texture2D" uid="uid://bd6lxxx147a72" path="res://Assets/Backgrounds/star_layers/star 6.png" id="8_owmi3"]
+[ext_resource type="Texture2D" uid="uid://cuyyeayse15we" path="res://Assets/Backgrounds/star_layers/star 7.png" id="9_tf1yt"]
+[ext_resource type="Texture2D" uid="uid://ddktk8l4drixs" path="res://Assets/Backgrounds/star_layers/star 8.png" id="10_2wnxk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e3o2y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_seg4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_3s4hd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_34mit")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6b2p2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_gei0w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_owmi3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_tf1yt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2wnxk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
 
 [node name="Background" type="ParallaxBackground" node_paths=PackedStringArray("ColorLayer", "Layers")]
 script = ExtResource("1_o3dx1")
 ColorLayer = NodePath("ColorLayer")
-Layers = [NodePath("ParallaxLayer"), NodePath("ParallaxLayer2"), NodePath("ParallaxLayer3")]
-
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("2_lbokj")
+Layers = [NodePath("ParallaxLayer"), NodePath("ParallaxLayer2"), NodePath("ParallaxLayer3"), NodePath("ParallaxLayer4"), NodePath("ParallaxLayer5"), NodePath("ParallaxLayer6"), NodePath("ParallaxLayer7"), NodePath("ParallaxLayer8"), NodePath("ParallaxLayer9")]
 
 [node name="ColorLayer" type="ParallaxLayer" parent="."]
-visible = false
+modulate = Color(1, 0.980392, 0.996078, 1)
+position = Vector2(960, 540)
 
-[node name="ColorRect" type="ColorRect" parent="ColorLayer"]
-custom_minimum_size = Vector2(1920, 1080)
-offset_right = 1920.0
-offset_bottom = 1080.0
-size_flags_horizontal = 4
-color = Color(0.545098, 0.592157, 0.968627, 1)
+[node name="ColorRect" type="Sprite2D" parent="ColorLayer"]
+texture = ExtResource("3_y67vw")
 metadata/_edit_use_anchors_ = true
+
+[node name="ParallaxLayer9" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ParallaxLayer9"]
+position = Vector2(0, 64)
+sprite_frames = SubResource("SpriteFrames_e3o2y")
+autoplay = "default"
+frame_progress = 0.787471
+
+[node name="ParallaxLayer8" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer8"]
+texture = ExtResource("5_657vx")
+
+[node name="ParallaxLayer7" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer7"]
+texture = ExtResource("4_bdtk0")
+
+[node name="ParallaxLayer6" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer6"]
+texture = ExtResource("3_8w6kd")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="."]
 visible = false
-position = Vector2(198, 494)
+position = Vector2(960, 476)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer"]
-texture = ExtResource("1_bmk8o")
+texture = ExtResource("7_7g8uw")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="."]
 visible = false
-position = Vector2(642, 489)
+position = Vector2(960, 476)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
-texture = ExtResource("1_bmk8o")
+texture = ExtResource("6_vxbm0")
 
 [node name="ParallaxLayer3" type="ParallaxLayer" parent="."]
 visible = false
-position = Vector2(1044, 494)
+position = Vector2(960, 476)
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
-texture = ExtResource("1_bmk8o")
+texture = ExtResource("5_kfchl")
+
+[node name="ParallaxLayer4" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+texture = ExtResource("4_4soxp")
+
+[node name="ParallaxLayer5" type="ParallaxLayer" parent="."]
+visible = false
+position = Vector2(960, 476)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5"]
+texture = ExtResource("3_rh6qd")
+
+[node name="Border" type="TextureRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("2_kprq1")
